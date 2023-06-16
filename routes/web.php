@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,14 +29,17 @@ Route::get('/', function () {
 // });
 
 Route::group([
-    'middleware' => ['auth', 'role:admin']
+    'middleware' => ['auth', 'role:admin,donatur']
 ], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group([
-    'middleware' => ['auth', 'role:donatur']
-], function () {
+    Route::group([
+        'middleware' => ['auth', 'role:admin']
+    ], function () {
+    });
+
+    Route::group([
+        'middleware' => ['auth', 'role:donatur']
+    ], function () {
+    });
 });
