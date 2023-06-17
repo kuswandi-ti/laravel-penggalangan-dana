@@ -9,7 +9,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="pb-3 mt-3 mb-3 user-panel d-flex">
             <div class="image">
                 <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                     alt="User Image">
@@ -26,7 +26,8 @@
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -38,7 +39,8 @@
                         auth()->user()->hasRole('donatur'))
                     <li class="nav-header">MASTER</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="{{ route('category.index') }}"
+                            class="nav-link {{ request()->is('category*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cube"></i>
                             <p>
                                 Kategori

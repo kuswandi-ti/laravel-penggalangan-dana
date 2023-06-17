@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::group([
     Route::group([
         'middleware' => ['auth', 'role:admin']
     ], function () {
+        Route::resource('/category', CategoryController::class); // Untuk route dengan resource, Controller tidak boleh berbentuk array
     });
 
     Route::group([

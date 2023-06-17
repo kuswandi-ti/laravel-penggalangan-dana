@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="{{ asset('template/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('template/plugins/summernote/summernote-bs4.min.css') }}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('template/plugins/toastr/toastr.min.css') }}">
 
     @stack('style')
 </head>
@@ -54,9 +58,9 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
+                    <div class="mb-2 row">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
+                            <h1 class="m-0">@yield('title')</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -119,6 +123,10 @@
     <script src="{{ asset('template/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('template/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('template/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- Toastr -->
+    <script src="{{ asset('template/plugins/toastr/toastr.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('template/dist/js/adminlte.js') }}"></script>
 
