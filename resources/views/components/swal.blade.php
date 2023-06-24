@@ -22,7 +22,7 @@
         </script>
     @endif
 
-    @if ($message = Session::get('error'))
+    {{-- @if ($message = Session::get('error'))
         <script>
             Toast.fire({
                 icon: 'error',
@@ -56,5 +56,5 @@
                 title: 'Please check the form below for errors'
             })
         </script>
-    @endif
+    @endif --}}
 @endpush

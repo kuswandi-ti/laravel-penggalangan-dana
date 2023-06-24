@@ -3,7 +3,7 @@
 @section('title', 'Projek')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Projek</li>
+    <li class="breadcrumb-item active">List Data Projek</li>
 @endsection
 
 @section('content')
@@ -11,9 +11,12 @@
         <div class="col-lg-12">
             <x-card>
                 <x-slot name="header">
-                    <button onclick="addForm(`{{ route('campaign.store') }}`)" class="btn btn-primary">
-                        <i class="fas fa-plus-circle"></i> Tambah
-                    </button>
+                    <h3 class="card-title">List Data Projek</h3>
+                    <div class="card-tools">
+                        <button onclick="addForm(`{{ route('campaign.store') }}`)" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Tambah Data Projek
+                        </button>
+                    </div>
                 </x-slot>
 
                 <div class="d-flex justify-content-between">

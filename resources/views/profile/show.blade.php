@@ -1,45 +1,55 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
+@section('title', 'Profil')
+@section('breadcrumb')
+    @parent
+    <li class="breadcrumb-item active">Edit Data Profil</li>
+@endsection
 
-                <x-section-border />
-            @endif
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <x-card>
+                <x-slot name="header">
+                    <h3 class="card-title">Edit Data Profil</h3>
+                </x-slot>
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+                <div class="row">
+                    <div class="col-5 col-sm-3">
+                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
+                            aria-orientation="vertical">
+                            <a class="nav-link @if (request('tab') != 'password') active @endif"
+                                href="{{ route('profile.show') }}">
+                                Profil
+                            </a>
+                            <a class="nav-link @if (request('tab') == 'password') active @endif"
+                                href="{{ route('profile.show') }}?tab=password">
+                                Password
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-7 col-sm-9">
+                        <div class="tab-content" id="vert-tabs-tabContent">
+                            <div class="text-left tab-pane fade @if (request('tab') != 'password') show active @endif">
+                                <form action="{{ route('user-profile-information.update') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    @includeIf('profile.update-profile-information-form')
+                                </form>
+                            </div>
+                            <div class="tab-pane fade @if (request('tab') == 'password') show active @endif">
+                                <form action="{{ route('user-password.update') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    @includeIf('profile.update-password-form')
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
+            </x-card>
         </div>
     </div>
-</x-app-layout>
+@endsection

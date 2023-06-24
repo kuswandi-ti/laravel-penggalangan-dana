@@ -3,7 +3,7 @@
 @section('title', 'Kategori')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Kategori</li>
+    <li class="breadcrumb-item active">List Data Kategori</li>
 @endsection
 
 @section('content')
@@ -11,9 +11,12 @@
         <div class="col-lg-12">
             <x-card>
                 <x-slot name="header">
-                    <a href="{{ route('category.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus-circle"></i> Tambah
-                    </a>
+                    <h3 class="card-title">List Data Kategori</h3>
+                    <div class="card-tools">
+                        <a href="{{ route('category.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Tambah Data Kategori
+                        </a>
+                    </div>
                 </x-slot>
 
                 <form class="mb-3 d-flex justify-content-between">

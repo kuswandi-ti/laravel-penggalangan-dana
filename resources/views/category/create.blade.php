@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Kategori')
+@section('title', 'Kategori')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('category.index') }}"></a> Kategori</li>
-    <li class="breadcrumb-item active">Tambah</li>
+    <li class="breadcrumb-item"><a href="{{ route('category.index') }}">List Data Kategori</a></li>
+    <li class="breadcrumb-item active">Tambah Data Kategori</li>
 @endsection
 
 @section('content')
@@ -13,6 +13,9 @@
             <form action="{{ route('category.store') }}" method="POST">
                 @csrf
                 <x-card>
+                    <x-slot name="header">
+                        <h3 class="card-title">Tambah Data Kategori</h3>
+                    </x-slot>
                     <div class="form-group">
                         <label for="name">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
@@ -24,10 +27,10 @@
                         @enderror
                     </div>
                     <x-slot name="footer">
-                        <a href="/category" class="btn btn-warning">
+                        <a href="/category" class="btn btn-default">
                             <i class="fas fa-chevron-circle-left"></i> Kembali
                         </a>
-                        <button type="reset" class="btn btn-dark">
+                        <button type="reset" class="btn btn-warning">
                             <i class="fas fa-ban"></i> Reset
                         </button>
                         <button type="submit" class="btn btn-primary">

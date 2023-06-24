@@ -143,7 +143,14 @@
     </div>
 
     <x-slot name="footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary" onclick="submitForm(this.form)">Simpan</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            <i class="fas fa-chevron-circle-left"></i> Kembali
+        </button>
+        <button type="reset" class="btn btn-warning">
+            <i class="fas fa-ban"></i> Reset
+        </button>
+        <button type="button" class="btn btn-primary" onclick="submitForm(this.form)">
+            <i class="fas fa-save"></i> Simpan
+        </button>
     </x-slot>
 </x-form-modal>
