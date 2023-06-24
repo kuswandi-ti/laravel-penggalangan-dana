@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('short_description');
             $table->longtext('body');
             $table->integer('view_cont')->default(0);
-            $table->enum('status', ['Public', 'Pending', 'Archieve'])->default('Pending');
+            $table->enum('status', ['publish', 'pending', 'archieve'])->default('pending');
             $table->integer('amount')->default(0);
             $table->integer('goal')->default(0);
             $table->datetime('end_date');
