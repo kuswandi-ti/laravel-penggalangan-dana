@@ -2,4 +2,3 @@ TODO :
 =========
 1. Validasi di multiple select2.
    Alternatif menggunakan single select2
-2. Hapus image di storage
