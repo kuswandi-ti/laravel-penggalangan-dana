@@ -64,13 +64,25 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="form-group">
             <label for="keyword">Kata Kunci Pencarian <span class="text-danger">*</span></label>
             <input type="text" class="form-control @error('keyword') is-invalid @enderror" name="keyword"
                 id="keyword" value="{{ old('keyword') ?? (!empty($setting->keyword) ? $setting->keyword : '') }}"
                 placeholder="Enter keyword" required>
             @error('keyword')
+                <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="work_hours">Jam Kerja</label>
+            <input type="text" class="form-control @error('work_hours') is-invalid @enderror" name="work_hours"
+                id="work_hours"
+                value="{{ old('work_hours') ?? (!empty($setting->work_hours) ? $setting->work_hours : '') }}"
+                placeholder="Enter work hours" required>
+            @error('work_hours')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>

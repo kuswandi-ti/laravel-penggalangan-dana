@@ -32,6 +32,7 @@ class SettingController extends Controller
             'postal_code' => 'required',
             'city' => 'required',
             'province' => 'required',
+            'province' => 'nullable',
         ];
 
         if ($request->has('tab') && $request->tab == 'logo') {
@@ -39,6 +40,16 @@ class SettingController extends Controller
                 'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
                 'path_image_header' => 'nullable|mimes:png,jpg,jpeg|max:2048',
                 'path_image_footer' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            ];
+        }
+
+        if ($request->has('tab') && $request->tab == 'social_media') {
+            $rules = [
+                'instagram_link' => 'nullable|url',
+                'twitter_link' => 'nullable|url',
+                'fanpage_link' => 'nullable|url',
+                'google_plus_link' => 'nullable|url',
+                'youtube_link' => 'nullable|url',
             ];
         }
 
