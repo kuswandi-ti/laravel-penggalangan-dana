@@ -29,8 +29,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         }
 
         if (isset($input['path_image'])) {
-            if (Storage::disk('public')->exists($user->path_image)) {
-                Storage::disk('public')->delete($user->path_image);
+            if (!empty($user->path_image)) {
+                if (Storage::disk('public')->exists($user->path_image)) {
+                    Storage::disk('public')->delete($user->path_image);
+                }
             }
             $input['path_image'] = upload('user', $input['path_image'], 'user');
         }

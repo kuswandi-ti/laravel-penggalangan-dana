@@ -174,8 +174,10 @@ class CampaignController extends Controller
         $data = $request->except('path_image', 'slug', 'categories', 'user_id');
         $data['slug'] = Str::slug($request->title);
         if ($request->hasFile('path_image')) {
-            if (Storage::disk('public')->exists($campaign->path_image)) {
-                Storage::disk('public')->delete($campaign->path_image);
+            if (!empty($campaign->path_image)) {
+                if (Storage::disk('public')->exists($campaign->path_image)) {
+                    Storage::disk('public')->delete($campaign->path_image);
+                }
             }
             $data['path_image'] = upload('campaign', $request->file('path_image'), 'campaign');
         }

@@ -2,9 +2,13 @@
     <div class="col-lg-12">
         <div class="form-group">
             <div class="mb-3 text-center">
-                <img class="img-fluid img-circle preview-path_image"
-                    src="{{ url('storage/' . auth()->user()->path_image ?? 'https://cdn1.iconfinder.com/data/icons/photo-camera/154/cancel-photo-camera-cam-digital-shot-512.png') }}"
-                    alt="User profile picture" width="200">
+                @if (!empty(auth()->user()->path_image))
+                    <img class="img-fluid img-circle preview-path_image"
+                        src="{{ url('storage/' . auth()->user()->path_image) }}" alt="User profile picture" width="200">
+                @else
+                    <img class="img-fluid img-circle preview-path_image" src="{{ url(env('NO_IMAGE_CIRCLE')) }}"
+                        alt="User profile picture" width="200">
+                @endif
             </div>
             <div class="mb-3 custom-file">
                 <input type="file" class="custom-file-input" id="path_image" name="path_image"
@@ -20,7 +24,7 @@
         <div class="form-group">
             <label for="name">Nama <span class="text-danger">*</span></label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
-                value="{{ old('name') ?? auth()->user()->name }}" placeholder="Enter full name">
+                value="{{ old('name') ?? auth()->user()->name }}" placeholder="Enter full name" required>
             @error('name')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
