@@ -39,30 +39,13 @@
                     <div class="col-8 col-sm-10">
                         <div class="tab-content" id="vert-tabs-tabContent">
                             <div class="text-left tab-pane fade @if (request('tab') == '') show active @endif">
-                                <form action="{{ route('setting.update', !empty($setting->id) ? $setting->id : '') }}"
-                                    method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    @includeIf('setting.general')
-                                </form>
+                                @includeIf('setting.general')
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'logo') show active @endif">
-                                <form
-                                    action="{{ route('setting.update', !empty($setting->id) ? $setting->id : '') }}?tab=logo"
-                                    method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    @includeIf('setting.logo')
-                                </form>
+                                @includeIf('setting.logo')
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'social_media') show active @endif">
-                                <form
-                                    action="{{ route('setting.update', !empty($setting->id) ? $setting->id : '') }}?tab=social_media"
-                                    method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    @includeIf('setting.social_media')
-                                </form>
+                                @includeIf('setting.social_media')
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'bank') show active @endif">
                                 @includeIf('setting.bank')

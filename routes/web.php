@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SettingController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserProfileInformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::group([
     'middleware' => ['auth', 'role:admin,donatur']
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('profile.show');
 
     Route::group([
         'middleware' => ['auth', 'role:admin']

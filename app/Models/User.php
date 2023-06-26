@@ -64,4 +64,11 @@ class User extends Authenticatable
     {
         return $this->role->name == $role;
     }
+
+    public function bank_users()
+    {
+        return $this->belongsToMany(Bank::class, 'bank_users', 'setting_id')
+            ->withPivot('account', 'name')
+            ->withTimestamps();
+    }
 }

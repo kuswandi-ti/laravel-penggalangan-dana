@@ -14,6 +14,6 @@ class Setting extends MyModel
     {
         return $this->belongsToMany(Bank::class, 'bank_settings', 'setting_id')
             ->withPivot('account', 'name')
-            ->withTimestamps();;
+            ->withTimestamps();
     }
 }
