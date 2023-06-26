@@ -15,4 +15,11 @@ class UserProfileInformationController extends Controller
             'bank' => Bank::all()->pluck('name', 'id'),
         ]);
     }
+
+    public function bank_destroy(Request $request, $id)
+    {
+        $request->user()->bank_users()->detach($id);
+
+        return redirect()->back()->with('success', 'Data Bank Terdaftar berhasil diperbaharui.');
+    }
 }

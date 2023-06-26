@@ -23,7 +23,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guarded = []; // Supaya semua field bisa otomatis diisi semua, tidak usah menggunakan fillable
+    protected $guarded = ['id']; // Supaya semua field bisa otomatis diisi semua, tidak usah menggunakan fillable
 
     /**
      * The attributes that should be hidden for serialization.
@@ -67,8 +67,8 @@ class User extends Authenticatable
 
     public function bank_users()
     {
-        return $this->belongsToMany(Bank::class, 'bank_users', 'setting_id')
-            ->withPivot('account', 'name')
+        return $this->belongsToMany(Bank::class, 'bank_users', 'user_id')
+            ->withPivot('account_number', 'account_name')
             ->withTimestamps();
     }
 }

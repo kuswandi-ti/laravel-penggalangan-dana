@@ -13,7 +13,7 @@ class Setting extends MyModel
     public function bank_settings()
     {
         return $this->belongsToMany(Bank::class, 'bank_settings', 'setting_id')
-            ->withPivot('account', 'name')
+            ->withPivot('account_number', 'account_name')
             ->withTimestamps();
     }
 }

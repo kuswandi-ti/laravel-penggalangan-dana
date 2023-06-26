@@ -57,14 +57,14 @@ class SettingController extends Controller
         if ($request->has('tab') && $request->tab == 'bank') {
             $rules = [
                 'bank_id' => 'required|exists:banks,id|unique:bank_settings,bank_id',
-                'account' => 'required|unique:bank_settings,account',
-                'name' => 'required',
+                'account_number' => 'required|unique:bank_settings,account_number',
+                'account_name' => 'required',
             ];
         }
 
         $this->validate($request, $rules);
 
-        $data = $request->except('path_image', 'path_image_header', 'path_image_footer', 'tab', 'bank_id', 'account', 'name');
+        $data = $request->except('path_image', 'path_image_header', 'path_image_footer', 'tab', 'bank_id', 'account_number', 'account_name');
 
         if ($request->hasFile('path_image')) {
             if (!empty($setting->path_image)) {
@@ -96,7 +96,7 @@ class SettingController extends Controller
         $setting->update($data);
 
         if ($request->has('tab') && $request->tab == 'bank') {
-            $setting->bank_settings()->attach($request->bank_id, $request->only('account', 'name'));
+            $setting->bank_settings()->attach($request->bank_id, $request->only('account_number', 'account_name'));
         }
 
         return redirect()->back()->with('success', 'Data Setting berhasil diupdate.');

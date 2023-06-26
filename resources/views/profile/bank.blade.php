@@ -1,5 +1,4 @@
-<form action="{{ route('setting.update', !empty($user->id) ? $user->id : '') }}?tab=bank" method="POST"
-    enctype="multipart/form-data">
+<form action="{{ route('user-profile-information.update') }}?tab=bank" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -24,20 +23,22 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="account">Nomor Rekening <span class="text-danger">*</span></label>
-                <input type="text" class="form-control @error('account') is-invalid @enderror" name="account"
-                    id="account" value="{{ old('account') }}" placeholder="Enter bank account number" required>
-                @error('account')
+                <label for="account_number">Nomor Rekening <span class="text-danger">*</span></label>
+                <input type="text" class="form-control @error('account_number') is-invalid @enderror"
+                    name="account_number" id="account_number" value="{{ old('account_number') }}"
+                    placeholder="Enter bank account number" required>
+                @error('account_number')
                     <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="name">Nama Rekening <span class="text-danger">*</span></label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                    id="name" value="{{ old('name') }}" placeholder="Enter bank account name" required>
-                @error('name')
+                <label for="account_name">Nama Rekening <span class="text-danger">*</span></label>
+                <input type="text" class="form-control @error('account_name') is-invalid @enderror"
+                    name="account_name" id="account_name" value="{{ old('account_name') }}"
+                    placeholder="Enter bank account name" required>
+                @error('account_name')
                     <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
@@ -56,14 +57,14 @@
     </div>
 </form>
 
-<div class="row mt-3">
+<div class="mt-3 row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><strong>Daftar Bank</strong></h3>
             </div>
 
-            <div class="card-body table-responsive p-0">
+            <div class="p-0 card-body table-responsive">
                 <x-table class="text-nowrap">
                     <x-slot name="thead">
                         <th class="text-center">No</th>
@@ -72,16 +73,14 @@
                         <th class="text-center">Nomor Rekening</th>
                         <th class="text-center"><i class="fas fa-cog"></i></th>
                     </x-slot>
-                    @forelse ($setting->bank_settings as $key => $item)
+                    @forelse ($user->bank_users as $key => $item)
                         <tr>
                             <td class="text-center">{{ $key + 1 }}</td>
                             <td class="text-center">{{ $item->name }}</td>
-                            <td>{{ $item->pivot->name }}</td>
-                            <td class="text-center">{{ $item->pivot->account }}</td>
+                            <td>{{ $item->pivot->account_name }}</td>
+                            <td class="text-center">{{ $item->pivot->account_number }}</td>
                             <td class="text-center">
-                                <form
-                                    action="{{ route('setting.bank.destroy', ['setting' => $setting->id, 'id' => $item->id]) }}"
-                                    method="POST">
+                                <form action="{{ route('profile.bank.destroy', ['id' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-link text-danger"

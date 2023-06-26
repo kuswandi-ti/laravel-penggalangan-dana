@@ -37,6 +37,7 @@ Route::group([
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('profile.show');
+    Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('profile.bank.destroy');
 
     Route::group([
         'middleware' => ['auth', 'role:admin']

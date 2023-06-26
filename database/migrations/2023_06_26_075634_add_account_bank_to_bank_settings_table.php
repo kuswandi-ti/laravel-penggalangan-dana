@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('bank_settings', function (Blueprint $table) {
-            $table->string('account')->after('setting_id');
-            $table->string('name')->after('account');
+            $table->string('account_number')->after('setting_id');
+            $table->string('account_name')->after('account');
         });
     }
 
@@ -24,8 +24,8 @@ return new class extends Migration
     {
         Schema::table('bank_settings', function (Blueprint $table) {
             $table->dropColumn([
-                'account',
-                'name',
+                'account_number',
+                'account_name',
             ]);
         });
     }

@@ -18,14 +18,26 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update(User $user, array $input)
     {
-        $validated = Validator::make($input, [
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'path_image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ]);
+        ];
+
+        if ($input['tab'] == 'bank') {
+            $rules = [
+                'bank_id' => 'required|exists:banks,id|unique:bank_users,bank_id',
+                'account_number' => 'required|unique:bank_users,account_number',
+                'account_name' => 'required',
+            ];
+        }
+
+        $validated = Validator::make($input, $rules);
 
         if ($validated->fails()) {
-            return back()->withErrors($validated->errors());
+            return back()
+                ->withInput()
+                ->withErrors($validated->errors());
         }
 
         if (isset($input['path_image'])) {
@@ -38,6 +50,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         }
 
         $user->update($input);
+
+        if ($input['tab'] == 'bank') {
+            $user->bank_users()->attach($input['bank_id'], [
+                'account_number' => $input['account_number'],
+                'account_name' => $input['account_name'],
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Data Profil berhasil diupdate.');
     }
