@@ -63,39 +63,41 @@
                 <h3 class="card-title"><strong>Daftar Bank</strong></h3>
             </div>
 
-            <x-table>
-                <x-slot name="thead">
-                    <th class="text-center">No</th>
-                    <th class="text-center">Bank</th>
-                    <th>Nama</th>
-                    <th class="text-center">Nomor Rekening</th>
-                    <th class="text-center"><i class="fas fa-cog"></i></th>
-                </x-slot>
-                @forelse ($setting->bank_settings as $key => $item)
-                    <tr>
-                        <td class="text-center">{{ $key + 1 }}</td>
-                        <td class="text-center">{{ $item->name }}</td>
-                        <td>{{ $item->pivot->name }}</td>
-                        <td class="text-center">{{ $item->pivot->account }}</td>
-                        <td class="text-center">
-                            <form
-                                action="{{ route('setting.bank.destroy', ['setting' => $setting->id, 'id' => $item->id]) }}"
-                                method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-link text-danger"
-                                    onclick="return confirm('Yakin akan menghapus data ?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center text-danger">Tidak ada data</td>
-                    </tr>
-                @endforelse
-            </x-table>
+            <div class="card-body table-responsive p-0">
+                <x-table>
+                    <x-slot name="thead">
+                        <th class="text-center">No</th>
+                        <th class="text-center">Bank</th>
+                        <th>Nama</th>
+                        <th class="text-center">Nomor Rekening</th>
+                        <th class="text-center"><i class="fas fa-cog"></i></th>
+                    </x-slot>
+                    @forelse ($setting->bank_settings as $key => $item)
+                        <tr>
+                            <td class="text-center">{{ $key + 1 }}</td>
+                            <td class="text-center">{{ $item->name }}</td>
+                            <td>{{ $item->pivot->name }}</td>
+                            <td class="text-center">{{ $item->pivot->account }}</td>
+                            <td class="text-center">
+                                <form
+                                    action="{{ route('setting.bank.destroy', ['setting' => $setting->id, 'id' => $item->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-link text-danger"
+                                        onclick="return confirm('Yakin akan menghapus data ?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">Tidak ada data</td>
+                        </tr>
+                    @endforelse
+                </x-table>
+            </div>
         </div>
     </div>
 </div>
