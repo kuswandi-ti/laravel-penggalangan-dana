@@ -71,6 +71,7 @@
         </button>
     </div>
 </div>
+
 <x-swal />
 
 @includeIf('includes.datepicker')

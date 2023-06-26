@@ -30,6 +30,10 @@
                                 href="{{ route('setting.index') }}?tab=social_media">
                                 <i class="nav-icon fas fa-share-alt"></i> Social Media
                             </a>
+                            <a class="nav-link @if (request('tab') == 'bank') active @endif"
+                                href="{{ route('setting.index') }}?tab=bank">
+                                <i class="nav-icon fas fa-university"></i> Bank
+                            </a>
                         </div>
                     </div>
                     <div class="col-8 col-sm-10">
@@ -59,6 +63,9 @@
                                     @method('PUT')
                                     @includeIf('setting.social_media')
                                 </form>
+                            </div>
+                            <div class="tab-pane fade @if (request('tab') == 'bank') show active @endif">
+                                @includeIf('setting.bank')
                             </div>
                         </div>
                     </div>

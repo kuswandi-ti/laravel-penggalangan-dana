@@ -4,7 +4,7 @@
             <div class="mb-3 text-center">
                 @if (!empty(auth()->user()->path_image))
                     <img class="img-fluid img-circle preview-path_image"
-                        src="{{ url('storage/' . auth()->user()->path_image) }}" alt="User profile picture" width="200">
+                        src="{{ url('storage' . auth()->user()->path_image) }}" alt="User profile picture" width="200">
                 @else
                     <img class="img-fluid img-circle preview-path_image" src="{{ url(env('NO_IMAGE_CIRCLE')) }}"
                         alt="User profile picture" width="200">

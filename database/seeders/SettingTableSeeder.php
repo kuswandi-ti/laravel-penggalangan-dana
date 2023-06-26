@@ -23,6 +23,7 @@ class SettingTableSeeder extends Seeder
             'postal_code' => '16820',
             'city' => 'Bogor',
             'province' => 'Jawa Barat',
+            'work_hours' => 'Senin - Jum\'at, 08:00 s/d 17:00',
         ]);
     }
 }

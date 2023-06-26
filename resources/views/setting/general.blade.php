@@ -5,7 +5,7 @@
             <input type="text" class="form-control @error('owner_name') is-invalid @enderror" name="owner_name"
                 id="owner_name"
                 value="{{ old('owner_name') ?? (!empty($setting->owner_name) ? $setting->owner_name : '') }}"
-                placeholder="Enter owner name" required>
+                placeholder="Enter owner name">
             @error('owner_name')
                 <span class="invalid-feedback">{{ $message }}</span>
             @enderror
@@ -90,13 +90,16 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="form-group">
             <label for="about">Tentang</label>
-            <textarea class="form-control" name="about" id="about" rows="3" placeholder="Enter about">{{ old('about') ?? (!empty($setting->about) ? $setting->about : '') }}</textarea>
+            <textarea class="form-control summernote" name="about" id="about" rows="3" placeholder="Enter about">{{ old('about') ?? (!empty($setting->about) ? $setting->about : '') }}</textarea>
         </div>
     </div>
-    <div class="col-lg-6">
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
         <div class="form-group">
             <label for="address">Alamat</label>
             <textarea class="form-control" name="address" id="address" rows="3" placeholder="Enter address">{{ old('address') ?? (!empty($setting->address) ? $setting->address : '') }}</textarea>
@@ -152,4 +155,7 @@
         </button>
     </div>
 </div>
+
 <x-swal />
+
+@includeIf('includes.summernote')

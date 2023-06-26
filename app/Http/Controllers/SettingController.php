@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,8 @@ class SettingController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        return view('setting.index', compact(['setting']));
+        $bank = Bank::all()->pluck('name', 'id');
+        return view('setting.index', compact(['setting', 'bank']));
     }
 
     /**
@@ -32,7 +34,6 @@ class SettingController extends Controller
             'postal_code' => 'required',
             'city' => 'required',
             'province' => 'required',
-            'province' => 'nullable',
         ];
 
         if ($request->has('tab') && $request->tab == 'logo') {
@@ -53,9 +54,17 @@ class SettingController extends Controller
             ];
         }
 
+        if ($request->has('tab') && $request->tab == 'bank') {
+            $rules = [
+                'bank_id' => 'required|exists:banks,id|unique:bank_settings,bank_id',
+                'account' => 'required|unique:bank_settings,account',
+                'name' => 'required',
+            ];
+        }
+
         $this->validate($request, $rules);
 
-        $data = $request->except('path_image', 'path_image_header', 'path_image_footer', 'tab');
+        $data = $request->except('path_image', 'path_image_header', 'path_image_footer', 'tab', 'bank_id', 'account', 'name');
 
         if ($request->hasFile('path_image')) {
             if (!empty($setting->path_image)) {
@@ -86,6 +95,17 @@ class SettingController extends Controller
 
         $setting->update($data);
 
+        if ($request->has('tab') && $request->tab == 'bank') {
+            $setting->bank_settings()->attach($request->bank_id, $request->only('account', 'name'));
+        }
+
         return redirect()->back()->with('success', 'Data Setting berhasil diupdate.');
+    }
+
+    public function bank_destroy(Setting $setting, $id)
+    {
+        $setting->bank_settings()->detach($id);
+
+        return redirect()->back()->with('success', 'Data Bank Terdaftar berhasil diperbaharui.');
     }
 }

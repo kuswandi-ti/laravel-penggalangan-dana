@@ -9,7 +9,8 @@
     <title>{{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
     </title>
 
-    <link rel="icon" href="{{ url('storage/' . $setting->path_image ?? '') }}" type="image/*">
+    <link rel="icon" href="{{ url('storage' . (!empty($setting->path_image) ? $setting->path_image : '') ?? '') }}"
+        type="image/*">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
