@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('backend.layouts.app')
 
 @section('title', 'Profil')
 @section('breadcrumb')
@@ -18,8 +18,8 @@
                     <div class="col-5 col-sm-3">
                         <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link @if (request('tab') == '') active @endif"
-                                href="{{ route('profile.show') }}">
+                            <a class="nav-link @if (request('tab') == 'profil') active @endif"
+                                href="{{ route('profile.show') }}?tab=profil">
                                 <i class="nav-icon fas fa-user-circle"></i> Profil
                             </a>
                             <a class="nav-link @if (request('tab') == 'password') active @endif"
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-7 col-sm-9">
                         <div class="tab-content" id="vert-tabs-tabContent">
-                            <div class="text-left tab-pane fade @if (request('tab') == '') show active @endif">
+                            <div class="text-left tab-pane fade @if (request('tab') == 'profil') show active @endif">
                                 @includeIf('profile.update-profile-information-form')
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'password') show active @endif">

@@ -46,7 +46,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                     Storage::disk('public')->delete($user->path_image);
                 }
             }
-            $input['path_image'] = upload('user', $input['path_image'], 'user');
+            $input['path_image'] = upload('images/user', $input['path_image'], 'user');
         }
 
         $user->update($input);

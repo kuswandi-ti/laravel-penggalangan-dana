@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\CampaignController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserProfileInformationController;
+use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\CampaignController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\UserProfileInformationController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +21,9 @@ use App\Http\Controllers\UserProfileInformationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::middleware([
 //     'auth:sanctum',
@@ -31,6 +34,10 @@ Route::get('/', function () {
 //         return view('dashboard');
 //     })->name('dashboard');
 // });
+
+Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
+Route::get('/contact', [ContactController::class, 'index'])->name('frontend.contact');
+Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
 
 Route::group([
     'middleware' => ['auth', 'role:admin,donatur']
