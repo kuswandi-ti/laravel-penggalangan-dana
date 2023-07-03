@@ -13,7 +13,5 @@
 
     @includeIf('frontend.layouts.partials.quotes')
 
-    @includeIf('frontend.layouts.partials.upcoming_events')
-
-    @includeIf('frontend.layouts.partials.footer')
+    {{-- @includeIf('frontend.layouts.partials.upcoming_events') --}}
 @endsection

@@ -37,11 +37,11 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group text-center">
+                    <div class="text-center form-group">
                         <label for="name">Image</label>
                         <div class="mb-3">
-                            @if (!empty($banks->path_image))
-                                <img class="img-fluid preview-path_image" src="{{ url('storage/' . $banks->path_image) }}"
+                            @if (!empty($bank->path_image))
+                                <img class="img-fluid preview-path_image" src="{{ url('storage' . $bank->path_image) }}"
                                     width="200">
                             @else
                                 <img class="img-fluid preview-path_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}"

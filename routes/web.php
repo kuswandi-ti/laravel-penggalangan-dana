@@ -2,14 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BankController;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\AboutController;
-use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CampaignController;
 use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\UserProfileInformationController;
+use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\CampaignController as FrontendCampaignController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,7 @@ use App\Http\Controllers\Backend\UserProfileInformationController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
+Route::get('/campaigns', [FrontendCampaignController::class, 'index'])->name('frontend.campaign');
 Route::get('/contact', [ContactController::class, 'index'])->name('frontend.contact');
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
 

@@ -1,9 +1,9 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Projek')
+@section('title', 'Program')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">List Data Projek</li>
+    <li class="breadcrumb-item active">List Data Program</li>
 @endsection
 
 @section('content')
@@ -11,18 +11,18 @@
         <div class="col-lg-12">
             <x-card>
                 <x-slot name="header">
-                    <h3 class="card-title">List Data Projek</h3>
+                    <h3 class="card-title">List Data Program</h3>
                     <div class="card-tools">
                         <button onclick="addForm(`{{ route('campaign.store') }}`)" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> Tambah Data Projek
+                            <i class="fas fa-plus-circle"></i> Tambah Data Program
                         </button>
                     </div>
                 </x-slot>
 
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
-                        <div class="form-group mr-3">
-                            <label for="statuscampaign">Status Projek</label>
+                        <div class="mr-3 form-group">
+                            <label for="statuscampaign">Status Program</label>
                             <select class="custom-select" name="statuscampaign" id="statuscampaign" style="width: 100%;">
                                 <option disabled selected>Pilih status...</option>
                                 <option value="publish">Publish</option>
@@ -31,7 +31,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="typecampaign">Tipe Projek</label>
+                            <label for="typecampaign">Tipe Program</label>
                             <select class="custom-select" name="typecampaign" id="typecampaign" style="width: 100%;">
                                 <option disabled selected>Pilih tipe...</option>
                                 <option value="general">General</option>
@@ -223,14 +223,14 @@
             })
         }
 
-        function addForm(url, title = 'Tambah Data Projek') {
+        function addForm(url, title = 'Tambah Data Program') {
             $(form_modal_id).modal('show');
             $(`${form_modal_id} .modal-title`).text(title);
             $(`${form_modal_id} form`).attr('action', url);
             resetForm(`${form_modal_id} form`);
         }
 
-        function editForm(url, title = 'Edit Data Projek') {
+        function editForm(url, title = 'Edit Data Program') {
             $.get(url)
                 .done(response => {
                     $(form_modal_id).modal('show');

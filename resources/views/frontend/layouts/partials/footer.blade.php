@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-    <div class="footer-bottom">
+    {{-- <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -137,6 +137,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </footer>
 <!-- Footer Section end here -->

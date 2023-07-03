@@ -61,7 +61,7 @@
                             class="nav-link {{ request()->is('campaign*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-th-large"></i>
                             <p>
-                                Projek
+                                Program
                             </p>
                         </a>
                     </li>

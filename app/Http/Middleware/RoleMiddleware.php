@@ -17,9 +17,14 @@ class RoleMiddleware
     {
         $user = auth()->user();
 
-        if (in_array($user->role->name, $roles)) {
-            return $next($request);
+        if (empty($user->email_verified_at)) {
+            auth()->logout();
+            return redirect()->route('login')->with('warning', 'Silahkan erifikasi email terlebih dahulu.');
+        } else {
+            if (in_array($user->role->name, $roles)) {
+                return $next($request);
+            }
+            return redirect()->route('dashboard');
         }
-        return redirect()->route('dashboard');
     }
 }

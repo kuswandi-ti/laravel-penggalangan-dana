@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Hafsa Home</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
+    </title>
 
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/frontend/assets/images/x-icon/01.png') }}">
@@ -63,23 +65,6 @@
                                     <i class="fas fa-map-marker-alt"></i> Beverley, New York 224 US
                                 </li>
                             </ul>
-                            {{-- <ul class="social-icons lab-ul d-flex">
-                                <li>
-                                    <a href="#"><i class="fab fa-facebook-messenger"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-vimeo-v"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-skype"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-wifi"></i></a>
-                                </li>
-                            </ul> --}}
                         </div>
                     </div>
                     <div class="header-bottom">
@@ -89,16 +74,12 @@
                                     <li>
                                         <a href="{{ route('frontend.home') }}">Home</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('frontend.campaign') }}">Program</a>
+                                    </li>
                                     <li><a href="{{ route('frontend.contact') }}">Kontak</a></li>
                                     <li>
                                         <a href="{{ route('frontend.about') }}">Tentang Kami</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">Bantuan</a>
-                                        <ul class="submenu">
-                                            <li> <a href="programs.html">Programs</a></li>
-                                            <li><a href="program-single.html">Program Single</a></li>
-                                        </ul>
                                     </li>
                                     <li>
                                         <a href="{{ route('login') }}">Log In</a>
@@ -132,8 +113,10 @@
     @includeIf('frontend.layouts.partials.footer')
 
     <!-- scrollToTop start here -->
-    <a href="#" class="scrollToTop"><i class="icofont-bubble-up"></i><span class="pluse_1"></span><span
-            class="pluse_2"></span></a>
+    <a href="#" class="scrollToTop">
+        <i class="icofont-bubble-up"></i>
+        <span class="pluse_1"></span><span class="pluse_2"></span>
+    </a>
     <!-- scrollToTop ending here -->
 
     <script src="{{ asset('template/frontend/assets/js/jquery.js') }}"></script>

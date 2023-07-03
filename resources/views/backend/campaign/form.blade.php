@@ -1,6 +1,6 @@
 <x-form-modal modal_size='modal-lg'>
     <x-slot name='title'>
-        Tambah Data Projek
+        Tambah Data Program
     </x-slot>
 
     @method('POST')
@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="title">Judul <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Masukkan judul projek"
+                <input type="text" class="form-control" name="title" id="title" placeholder="Masukkan judul program"
                     required>
             </div>
         </div>
@@ -32,7 +32,8 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="short_description">Short Description <span class="text-danger">*</span></label>
-                <textarea class="form-control" name="short_description" id="short_description" rows="3" required></textarea>
+                <textarea class="form-control" name="short_description" id="short_description" rows="3"
+                    placeholder="Isikan deskripsi singkat" required></textarea>
             </div>
         </div>
     </div>
@@ -52,7 +53,7 @@
                 <label for="publish_date">Tanggal Publish <span class="text-danger">*</span></label>
                 <div class="input-group datetimepicker" id="publish_date" data-target-input="nearest">
                     <input type="text" name="publish_date" class="form-control datetimepicker-input"
-                        data-target="#publish_date" required>
+                        data-target="#publish_date" placeholder="Pilih tanggal publish" required>
                     <div class="input-group-append" data-target="#publish_date" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -76,7 +77,8 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="goal">Goal <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" name="goal" id="goal" required>
+                <input type="number" class="form-control" name="goal" id="goal"
+                    placeholder="Masukkan nominal goal" required>
             </div>
         </div>
         <div class="col-md-6">
@@ -84,7 +86,7 @@
                 <label for="end_date">Tanggal Selesai <span class="text-danger">*</span></label>
                 <div class="input-group datetimepicker" id="end_date" data-target-input="nearest">
                     <input type="text" name="end_date" class="form-control datetimepicker-input"
-                        data-target="#end_date" required>
+                        data-target="#end_date" placeholder="Pilih tanggal selesai" required>
                     <div class="input-group-append" data-target="#end_date" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -97,7 +99,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="note">Note</label>
-                <textarea class="form-control" name="note" id="note" rows="3"></textarea>
+                <textarea class="form-control" name="note" id="note" rows="3" placeholder="Isikan note program"></textarea>
             </div>
         </div>
     </div>
@@ -129,9 +131,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="type">Tipe Projek <span class="text-danger">*</span></label>
+                <label for="type">Tipe Program <span class="text-danger">*</span></label>
                 <select class="custom-select" name="type" id="type" style="width: 100%;" required>
-                    <option disabled selected>Pilih tipe projek...</option>
+                    <option disabled selected>Pilih tipe program...</option>
                     <option value="general">General</option>
                     <option value="urgent">Urgent</option>
                     <option value="feature">Feature</option>
