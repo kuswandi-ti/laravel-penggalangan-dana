@@ -44,4 +44,28 @@ class Campaign extends MyModel
 
         return $color;
     }
+
+    public function type_color()
+    {
+        $color = '';
+
+        switch ($this->type) {
+            case 'general':
+                $color = 'success';
+                break;
+
+            case 'urgent':
+                $color = 'danger';
+                break;
+
+            case 'feature':
+                $color = 'dark';
+                break;
+
+            default:
+                break;
+        }
+
+        return $color;
+    }
 }
