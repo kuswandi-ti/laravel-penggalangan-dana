@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('bank_settings', function (Blueprint $table) {
             $table->string('account_number')->after('setting_id');
-            $table->string('account_name')->after('account');
+            $table->string('account_name')->after('account_number');
         });
     }
 

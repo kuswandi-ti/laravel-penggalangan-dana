@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
-            $table->string('path_image');
+            $table->string('path_image')->nullable();
             $table->timestamps();
         });
     }
