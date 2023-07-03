@@ -36,9 +36,17 @@
                     </a>
                 </li>
 
-                @if (auth()->user()->hasRole('admin') ||
-                        auth()->user()->hasRole('donatur'))
+                @if (auth()->user()->hasRole('admin'))
                     <li class="nav-header">MASTER</li>
+                    <li class="nav-item">
+                        <a href="{{ route('bank.index') }}"
+                            class="nav-link {{ request()->is('bank*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-university"></i>
+                            <p>
+                                Bank
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('category.index') }}"
                             class="nav-link {{ request()->is('category*') ? 'active' : '' }}">
@@ -75,9 +83,7 @@
                             </p>
                         </a>
                     </li>
-                @endif
 
-                @if (auth()->user()->hasRole('admin'))
                     <li class="nav-header">INFORMASI</li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -121,8 +127,8 @@
                     </li>
                 @endif
 
-                <li class="nav-header">PENGATURAN</li>
                 @if (auth()->user()->hasRole('admin'))
+                    <li class="nav-header">PENGATURAN</li>
                     <li class="nav-item">
                         <a href="{{ route('setting.index') }}"
                             class="nav-link {{ request()->is('setting*') ? 'active' : '' }}">
