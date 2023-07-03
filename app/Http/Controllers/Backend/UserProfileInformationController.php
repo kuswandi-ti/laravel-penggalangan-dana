@@ -10,7 +10,7 @@ class UserProfileInformationController extends Controller
 {
     public function show(Request $request)
     {
-        return view('profile.show', [
+        return view('backend.profile.show', [
             'request' => $request,
             'user' => $request->user(),
             'bank' => Bank::all()->pluck('name', 'id'),

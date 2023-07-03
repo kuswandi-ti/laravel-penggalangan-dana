@@ -35,13 +35,13 @@
                     <div class="col-7 col-sm-9">
                         <div class="tab-content" id="vert-tabs-tabContent">
                             <div class="text-left tab-pane fade @if (request('tab') == 'profil') show active @endif">
-                                @includeIf('profile.update-profile-information-form')
+                                @includeIf('backend.profile.update-profile-information-form')
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'password') show active @endif">
-                                @includeIf('profile.update-password-form')
+                                @includeIf('backend.profile.update-password-form')
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'bank') show active @endif">
-                                @includeIf('profile.bank')
+                                @includeIf('backend.profile.bank')
                             </div>
                         </div>
                     </div>

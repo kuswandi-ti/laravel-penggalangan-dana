@@ -63,7 +63,7 @@
                                     <i class="fas fa-map-marker-alt"></i> Beverley, New York 224 US
                                 </li>
                             </ul>
-                            <ul class="social-icons lab-ul d-flex">
+                            {{-- <ul class="social-icons lab-ul d-flex">
                                 <li>
                                     <a href="#"><i class="fab fa-facebook-messenger"></i></a>
                                 </li>
@@ -79,7 +79,7 @@
                                 <li>
                                     <a href="#"><i class="fas fa-wifi"></i></a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <div class="header-bottom">
@@ -99,6 +99,9 @@
                                             <li> <a href="programs.html">Programs</a></li>
                                             <li><a href="program-single.html">Program Single</a></li>
                                         </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('login') }}">Log In</a>
                                     </li>
                                 </ul>
                                 <div class="prayer-time d-none d-lg-block">
