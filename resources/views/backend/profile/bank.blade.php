@@ -69,7 +69,7 @@
                     <x-slot name="thead">
                         <th class="text-center">No</th>
                         <th class="text-center">Bank</th>
-                        <th>Nama</th>
+                        <th>Nama Rekening</th>
                         <th class="text-center">Nomor Rekening</th>
                         <th class="text-center"><i class="fas fa-cog"></i></th>
                     </x-slot>
