@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('title', 'Home')
+
 @section('content')
     @includeIf('frontend.layouts.partials.about_history')
 

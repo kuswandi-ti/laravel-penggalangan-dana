@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 
+@section('title', 'Program')
+
 @section('content')
     <div class="program-section padding-tb padding-b">
         <div class="container">
