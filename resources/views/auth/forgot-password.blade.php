@@ -1,39 +1,46 @@
-{{-- <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('auth.layouts')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+@section('title', 'Log In')
+@section('class_body', 'register-page')
+@section('class_box', 'register-box')
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <x-validation-errors class="mb-4" />
-
+@section('content')
+    <div class="card-body">
+        <p class="register-box-msg">
+            Lupa password Anda? Tidak masalah. Beri tahu kami alamat email Anda dan kami akan mengirimkan
+            email berisi tautan pengaturan ulang password yang memungkinkan Anda memilih password yang baru.
+        </p>
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
-
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <div class="mb-3 input-group">
+                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                    value="{{ old('email') }}" placeholder="Email">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
+            <div class="mt-3 row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Kirim Email Pengaturan Ulang Password
+                    </button>
+                </div>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout> --}}
+        <p class="mt-3 mb-1 text-center">
+            <a href="{{ route('login') }}">Log In</a>
+        </p>
+    </div>
+@endsection
 
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,33 +59,40 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="card card-outline card-primary">
-            <div class="card-header text-center">
+            <div class="text-center card-header">
                 <a href="{{ route('frontend.home') }}" class="h1"><b>Admin</b>LTE</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">
-                    {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                    Lupa password Anda? Tidak masalah. Beri tahu kami alamat email Anda dan kami akan mengirimkan
+                    email berisi tautan pengaturan ulang password yang memungkinkan Anda memilih password yang baru.
                 </p>
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" id="email" class="form-control"
-                            value="{{ old('email') }}" placeholder="Email">
+                    <div class="mb-3 input-group">
+                        <input type="email" name="email" id="email"
+                            class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                            placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    <div class="row mt-3">
+                    <div class="mt-3 row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">
-                                {{ __('Email Password Reset Link') }}
+                                Kirim Email Pengaturan Ulang Password
                             </button>
                         </div>
                     </div>
                 </form>
-                <p class="mb-1 mt-3 text-center">
+                <p class="mt-3 mb-1 text-center">
                     <a href="{{ route('login') }}">Log In</a>
                 </p>
             </div>
@@ -90,4 +104,4 @@
     <script src="{{ asset('template/backend/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
 </body>
 
-</html>
+</html> --}}

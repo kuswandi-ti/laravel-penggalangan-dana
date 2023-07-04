@@ -1,36 +1,64 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('auth.layouts')
 
-        <x-validation-errors class="mb-4" />
+@section('title', 'Log In')
+@section('class_body', 'register-page')
+@section('class_box', 'register-box')
 
+@section('content')
+    <div class="card-body">
+        <p class="login-box-msg">Reset Password</p>
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
-
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <div class="mb-3 input-group">
+                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                    value="{{ old('email', $request->email) }}" placeholder="Email">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <div class="mb-3 input-group">
+                <input type="password" name="password" id="password"
+                    class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            <div class="mb-3 input-group">
+                <input type="password" name="password_confirmation" id="password_confirmation"
+                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                    placeholder="Password Confirmation">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+                @error('password_confirmation')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+            <div class="mt-3 row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+                </div>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+@endsection
