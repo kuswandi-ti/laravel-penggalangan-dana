@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Dashboard (Not Admin)</li>
+    <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 
 @section('content')

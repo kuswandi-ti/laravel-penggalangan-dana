@@ -40,6 +40,7 @@ use App\Http\Controllers\Frontend\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
 Route::get('/campaigns', [FrontendCampaignController::class, 'index'])->name('frontend.campaign');
+Route::get('/campaigns/1', [FrontendCampaignController::class, 'detail'])->name('frontend.campaign.detail');
 Route::get('/contact', [ContactController::class, 'index'])->name('frontend.contact');
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
 

@@ -14,4 +14,12 @@ class CampaignController extends Controller
         ];
         return view('frontend.pages.campaigns', $data);
     }
+
+    public function detail()
+    {
+        $data = [
+            'title' => 'Program Detail',
+        ];
+        return view('frontend.pages.campaigns_detail', $data);
+    }
 }

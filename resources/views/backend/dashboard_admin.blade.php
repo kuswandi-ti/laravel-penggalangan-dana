@@ -1,9 +1,9 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard (Admin)')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Dashboard</li>
+    <li class="breadcrumb-item active">Dashboard (Admin)</li>
 @endsection
 
 @section('content')

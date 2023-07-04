@@ -6,7 +6,7 @@
             <h4 class="ph-title">{{ $title }}</h4>
             <ul class="lab-ul">
                 <li><a href="{{ route('frontend.home') }}">Home</a></li>
-                <li><a class="active">{{ $title }}</a></li>
+                <li><a href="{{ route('frontend.campaign') }}" class="active">Program</a></li>
             </ul>
         </div>
     </div>
