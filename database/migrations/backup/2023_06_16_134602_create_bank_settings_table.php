@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreign('bank_id')->references('id')->on('banks')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('setting_id')->unsigned();
             $table->foreign('setting_id')->references('id')->on('settings')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('account_number');
-            $table->string('account_name');
             $table->timestamps();
         });
     }
