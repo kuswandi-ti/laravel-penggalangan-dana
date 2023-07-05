@@ -3,7 +3,7 @@
 @section('title', 'Edit Banner')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('banner.index') }}"></a> Banner</li>
+    <li class="breadcrumb-item"><a href="{{ route('banner.index') }}">List Data Banner</a></li>
     <li class="breadcrumb-item active">Edit</li>
 @endsection
 
@@ -42,10 +42,10 @@
                         <div class="mb-3">
                             @if (!empty($banner->banner_image))
                                 <img class="img-fluid preview-banner_image"
-                                    src="{{ url('storage' . $banner->banner_image) }}" width="200">
+                                    src="{{ url('storage' . $banner->banner_image) }}" width="500">
                             @else
                                 <img class="img-fluid preview-banner_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}"
-                                    width="200">
+                                    width="500">
                             @endif
                         </div>
                         <div class="mb-3 custom-file">

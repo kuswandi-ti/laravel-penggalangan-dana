@@ -74,25 +74,27 @@
                         <th class="text-center">Nomor Rekening</th>
                         <th class="text-center"><i class="fas fa-cog"></i></th>
                     </x-slot>
-                    @if (!empty($setting->bank_settings))
-                        <tr>
-                            <td class="text-center">{{ $key + 1 }}</td>
-                            <td class="text-center">{{ $item->name }}</td>
-                            <td>{{ $item->pivot->account_name }}</td>
-                            <td class="text-center">{{ $item->pivot->account_number }}</td>
-                            <td class="text-center">
-                                <form
-                                    action="{{ route('setting.bank.destroy', ['setting' => $setting->id, 'id' => $item->id]) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-link text-danger"
-                                        onclick="return confirm('Yakin akan menghapus data ?')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                    @if ($setting->bank_settings->count())
+                        @foreach ($setting->bank_settings as $key => $item)
+                            <tr>
+                                <td class="text-center">{{ $key + 1 }}</td>
+                                <td class="text-center">{{ $item->name }}</td>
+                                <td>{{ $item->pivot->account_name }}</td>
+                                <td class="text-center">{{ $item->pivot->account_number }}</td>
+                                <td class="text-center">
+                                    <form
+                                        action="{{ route('setting.bank.destroy', ['setting' => $setting->id, 'id' => $item->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-link text-danger"
+                                            onclick="return confirm('Yakin akan menghapus data ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     @else
                         <tr>
                             <td colspan="5" class="text-center text-danger">Tidak ada data</td>

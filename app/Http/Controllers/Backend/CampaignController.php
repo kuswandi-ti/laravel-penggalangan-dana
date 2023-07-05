@@ -27,9 +27,6 @@ class CampaignController extends Controller
             ->when($request->has('statuscampaign') && $request->statuscampaign != "", function ($query) use ($request) {
                 $query->where('status', $request->statuscampaign);
             })
-            ->when($request->has('typecampaign') && $request->typecampaign != "", function ($query) use ($request) {
-                $query->where('type', $request->typecampaign);
-            })
             ->when(
                 $request->has('startdate') && $request->startdate != "" &&
                     $request->has('enddate') && $request->enddate != "",
@@ -49,9 +46,6 @@ class CampaignController extends Controller
             ->editColumn('status', function ($query) {
                 return '<span class="bagde badge-' . $query->status_color() . '">' . $query->status . '</span>';
             })
-            ->editColumn('type', function ($query) {
-                return '<span class="bagde badge-' . $query->type_color() . '">' . $query->type . '</span>';
-            })
             ->addColumn('author', function ($query) {
                 return $query->user->name;
             })
@@ -70,7 +64,7 @@ class CampaignController extends Controller
                     </button>
                 ';
             })
-            ->rawColumns(['path_image', 'short_description', 'status', 'type', 'author', 'action'])
+            ->rawColumns(['path_image', 'short_description', 'status', 'author', 'action'])
             ->escapeColumns([])
             ->make(true);
     }
@@ -99,7 +93,6 @@ class CampaignController extends Controller
             'end_date' => 'required|date_format:Y-m-d H:i',
             'note' => 'nullable',
             'receiver' => 'required',
-            'type' => 'required|in:general,urgent,feature',
             'path_image' => 'required|mimes:png,jpg,jpeg,bmp|max:2048',
         ]);
 
@@ -170,7 +163,6 @@ class CampaignController extends Controller
             'end_date' => 'required|date_format:Y-m-d H:i',
             'note' => 'nullable',
             'receiver' => 'required',
-            'type' => 'required|in:general,urgent,feature',
             'path_image' => 'nullable|mimes:png,jpg,jpeg,bmp|max:2048',
         ]);
 

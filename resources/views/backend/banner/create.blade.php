@@ -38,15 +38,15 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group text-center">
+                    <div class="text-center form-group">
                         <label for="banner_image">Image Banner</label>
                         <div class="mb-3">
                             @if (!empty($banner->banner_image))
                                 <img class="img-fluid preview-banner_image"
-                                    src="{{ url('storage/' . $banks->banner_image) }}" width="200">
+                                    src="{{ url('storage/' . $banks->banner_image) }}" width="500">
                             @else
                                 <img class="img-fluid preview-banner_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}"
-                                    width="200">
+                                    width="500">
                             @endif
                         </div>
                         <div class="mb-3 custom-file">

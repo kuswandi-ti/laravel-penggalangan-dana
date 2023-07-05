@@ -27,7 +27,7 @@
                 <x-table>
                     <x-slot name="thead">
                         <th width="5%" style="text-align:center;">No</th>
-                        <th width="25%" style="text-align:center;">Judul Banner</th>
+                        <th width="25%">Judul Banner</th>
                         <th>Deskripsi Banner</th>
                         <th width="15%" style="text-align:center;"><i class="fas fa-cog"></i></th>
                     </x-slot>
@@ -38,7 +38,7 @@
                                 <td style="text-align:center;">
                                     <x-row-number-table :key="$key" :model="$banners" />
                                 </td>
-                                <td style="text-align:center;">{{ $banner->banner_title }}</td>
+                                <td>{{ $banner->banner_title }}</td>
                                 <td>{{ $banner->banner_description }}</td>
                                 <td style="text-align:center;">
                                     <form action="{{ route('banner.destroy', $banner->id) }}" method="POST">

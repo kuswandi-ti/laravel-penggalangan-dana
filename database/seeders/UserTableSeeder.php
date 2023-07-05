@@ -16,8 +16,8 @@ class UserTableSeeder extends Seeder
         $user = User::factory(5)->create();
 
         $user = User::first();
-        $user->name = 'Administrator';
-        $user->email = 'admin@mail.com';
+        $user->name = 'Kuswandi';
+        $user->email = 'kuswandi.ti@gmail.com';
         $user->role_id = 1;
         $user->save();
     }

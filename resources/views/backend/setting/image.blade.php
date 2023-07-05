@@ -6,7 +6,6 @@
     <div class="row">
         <div class="text-center col-lg-12">
             <label>Logo</label>
-            <p>(Best Size 221 x 57 px)</p>
             <div class="form-group">
                 <div class="mb-3 text-center">
                     @if (!empty($setting->path_image_logo))

@@ -84,14 +84,16 @@ class SettingController extends Controller
         }
 
         // Update Data
-        $setting->update($data);
+        $query = $setting->update($data);
 
-        // Table Bank
-        if ($request->has('tab') && $request->tab == 'bank') {
-            $setting->bank_settings()->attach($request->bank_id, $request->only('account_number', 'account_name'));
+        if ($query) {
+            // Table Bank
+            if ($request->has('tab') && $request->tab == 'bank') {
+                $setting->bank_settings()->attach($request->bank_id, $request->only('account_number', 'account_name'));
+            }
+
+            return redirect()->back()->with('success', 'Data Setting berhasil diupdate.');
         }
-
-        return redirect()->back()->with('success', 'Data Setting berhasil diupdate.');
     }
 
     public function bank_destroy(Setting $setting, $id)

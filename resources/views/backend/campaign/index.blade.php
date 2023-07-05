@@ -30,15 +30,6 @@
                                 <option value="archieve">Diarsipkan</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="typecampaign">Tipe Program</label>
-                            <select class="custom-select" name="typecampaign" id="typecampaign" style="width: 100%;">
-                                <option disabled selected>Pilih tipe...</option>
-                                <option value="general">General</option>
-                                <option value="urgent">Urgent</option>
-                                <option value="feature">Feature</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="d-flex">
                         <div class="mx-3 form-group">
@@ -71,7 +62,6 @@
                         <th>Deskripsi</th>
                         <th style="text-align:center;">Tgl Publish</th>
                         <th style="text-align:center;">Status</th>
-                        <th style="text-align:center;">Tipe</th>
                         <th style="text-align:center;">Author</th>
                         <th width="15%" style="text-align:center;"><i class="fas fa-cog"></i></th>
                     </x-slot>
@@ -102,7 +92,6 @@
                 url: '{{ route('campaign.data') }}',
                 data: function(d) {
                     d.statuscampaign = $('[name=statuscampaign]').val();
-                    d.typecampaign = $('[name=typecampaign]').val();
                     d.startdate = $('[name=startdate]').val();
                     d.enddate = $('[name=enddate]').val();
                 }
@@ -124,9 +113,6 @@
                 data: 'status',
                 searchable: false,
             }, {
-                data: 'type',
-                searchable: false,
-            }, {
                 data: 'author',
             }, {
                 data: 'action',
@@ -140,10 +126,6 @@
         });
 
         $('[name=statuscampaign]').on('change', function() {
-            table.ajax.reload()
-        })
-
-        $('[name=typecampaign]').on('change', function() {
             table.ajax.reload()
         })
 

@@ -14,9 +14,9 @@ class SettingTableSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'email' => 'support@sekawan.com',
-            'owner_name' => 'Kuswandi',
-            'company_name' => 'PT. Sekawan',
+            'email' => 'support@sko.com',
+            'owner_name' => 'Mr. Kuswandi',
+            'company_name' => 'PT. SKO',
             'short_description' => '-',
             'keyword' => 'sosial',
             'phone' => '081298694640',

@@ -31,7 +31,7 @@ class BankTableSeeder extends Seeder
             ),
         );
 
-        collect($bank)->map(function($item) {
+        collect($bank)->map(function ($item) {
             Bank::query()
                 ->updateOrCreate(
                     ['code' => $item['code']],

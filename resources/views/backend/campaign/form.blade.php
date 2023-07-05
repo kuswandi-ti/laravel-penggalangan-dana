@@ -130,15 +130,6 @@
                     <label for="lainnya" class="custom-control-label font-weight-normal">Lainnya</label>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="type">Tipe Program <span class="text-danger">*</span></label>
-                <select class="custom-select" name="type" id="type" style="width: 100%;" required>
-                    <option disabled selected>Pilih tipe program...</option>
-                    <option value="general">General</option>
-                    <option value="urgent">Urgent</option>
-                    <option value="feature">Feature</option>
-                </select>
-            </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
