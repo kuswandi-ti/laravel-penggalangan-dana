@@ -1,135 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>
+        {{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
     </title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/frontend/assets/images/x-icon/01.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/frontend/images/logo.png') }}">
 
-    <link rel="stylesheet" href="{{ asset('template/frontend/assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/frontend/assets/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/frontend/assets/css/icofont.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/frontend/assets/css/lightcase.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/frontend/assets/css/swiper.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/frontend/assets/css/style.css') }}">
-
-    @stack('styles')
+    <!-- CSS FILES -->
+    <link href="{{ asset('template/frontend/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/frontend/css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/frontend/css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
+    <!--
+    TemplateMo 581 Kind Heart Charity
+    https://templatemo.com/tm-581-kind-heart-charity
+    -->
 </head>
 
 <body>
-    <!-- preloader start here -->
-    <div class="preloader">
-        <div class="preloader-inner">
-            <div class="preloader-icon">
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-    <!-- preloader ending here -->
+    @includeIf('frontend.layouts.partials.header')
 
-    <!-- Header Section Starts Here -->
-    <header class="header-3 pattern-1">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-xl-3 col-12">
-                    <div class="flex-wrap mobile-menu-wrapper d-flex align-items-center justify-content-between">
-                        <div class="header-bar d-lg-none">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="{{ asset('template/frontend/assets/images/logo/01.png') }}" alt="logo">
-                            </a>
-                        </div>
-                        <div class="ellepsis-bar d-lg-none">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-12">
-                    <div class="header-top">
-                        <div class="header-top-area">
-                            <ul class="left lab-ul">
-                                <li>
-                                    <i class="icofont-ui-call"></i> <span>+800-123-4567 6587</span>
-                                </li>
-                                <li>
-                                    <i class="fas fa-map-marker-alt"></i> Beverley, New York 224 US
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="header-bottom">
-                        <div class="header-wrapper">
-                            <div class="menu-area justify-content-between w-100">
-                                <ul class="menu lab-ul">
-                                    <li>
-                                        <a href="{{ route('frontend.home') }}">Home</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('frontend.campaign') }}">Program</a>
-                                    </li>
-                                    <li><a href="{{ route('frontend.contact') }}">Kontak</a></li>
-                                    <li>
-                                        <a href="{{ route('frontend.about') }}">Tentang Kami</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('login') }}">Log In</a>
-                                    </li>
-                                </ul>
-                                <div class="prayer-time d-none d-lg-block">
-                                    <a href="#" class="prayer-time-btn">
-                                        Donasi
-                                    </a>
-                                    <a href="#" class="prayer-time-btn">
-                                        Galang Dana
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section Ends Here-->
+    @includeIf('frontend.layouts.partials.navbar')
 
-    @if (Route::is('frontend.home'))
-        @includeIf('frontend.layouts.partials.banner')
-    @else
-        @includeIf('frontend.layouts.partials.page_header')
-    @endif
-
-    @yield('content')
+    <main>
+        @if (Route::is('frontend.home'))
+            @yield('content')
+        @else
+            @includeIf('frontend.layouts.partials.page_title')
+            @yield('content')
+        @endif
+    </main>
 
     @includeIf('frontend.layouts.partials.footer')
 
-    <!-- scrollToTop start here -->
-    <a href="#" class="scrollToTop">
-        <i class="icofont-bubble-up"></i>
-        <span class="pluse_1"></span><span class="pluse_2"></span>
-    </a>
-    <!-- scrollToTop ending here -->
-
-    <script src="{{ asset('template/frontend/assets/js/jquery.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/fontawesome.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/waypoints.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/swiper.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/circularProgressBar.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/lightcase.js') }}"></script>
-    <script src="{{ asset('template/frontend/assets/js/functions.js') }}"></script>
-
-    @stack('scripts')
+    <!-- JAVASCRIPT FILES -->
+    <script src="{{ asset('template/frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/frontend/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('template/frontend/js/counter.js') }}"></script>
+    <script src="{{ asset('template/frontend/js/custom.js') }}"></script>
 </body>
 
 </html>

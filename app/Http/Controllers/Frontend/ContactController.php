@@ -9,9 +9,6 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $data = [
-            'title' => 'Kontak',
-        ];
-        return view('frontend.pages.contact', $data);
+        return view('frontend.pages.contact');
     }
 }

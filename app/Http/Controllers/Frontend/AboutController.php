@@ -9,9 +9,6 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $data = [
-            'title' => 'Tentang Kami',
-        ];
-        return view('frontend.pages.about', $data);
+        return view('frontend.pages.about');
     }
 }

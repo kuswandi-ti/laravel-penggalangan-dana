@@ -1,142 +1,85 @@
-<!-- Footer Section start here -->
-<footer class="footer-section"
-    style="background-image: url({{ asset('template/frontend/assets/images/bg-images/footer-bg.png') }});">
-    <div class="footer-top">
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-12 mb-4">
+                <img src="{{ asset('template/frontend/images/logo.png') }}" class="logo img-fluid" alt="">
+            </div>
+
+            <div class="col-lg-2 col-md-6 col-12">
+                <h5 class="site-footer-title mb-3">Quick Links</h5>
+                <p class="text-white d-flex mb-2">
+                    <a href="#" class="site-footer-link">
+                        Our Story
+                    </a>
+                </p>
+                <p class="text-white d-flex mb-2">
+                    <a href="#" class="site-footer-link">
+                        Causes
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <h5 class="site-footer-title mb-3">Newsletter Form</h5>
+                <form class="custom-form" action="#" method="get" role="form">
+                    <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
+                        class="form-control" placeholder="Email Address" required>
+                    <div class="col-lg-12 col-12">
+                        <button type="submit" class="form-control">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12 mx-auto">
+                <h5 class="site-footer-title mb-3">Contact Infomation</h5>
+                <p class="text-white d-flex mb-2">
+                    <i class="bi-telephone me-2"></i>
+                    <a href="tel: 120-240-9600" class="site-footer-link">
+                        120-240-9600
+                    </a>
+                </p>
+                <p class="text-white d-flex">
+                    <i class="bi-envelope me-2"></i>
+                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                        donate@charity.org
+                    </a>
+                </p>
+                <p class="text-white d-flex mt-3">
+                    <i class="bi-geo-alt me-2"></i>
+                    Akershusstranda 20, 0150 Oslo, Norway
+                </p>
+                <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-footer-bottom">
         <div class="container">
-            <div class="row g-3 justify-content-center g-lg-0">
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="footer-top-item lab-item">
-                        <div class="lab-inner">
-                            <div class="lab-thumb">
-                                <img src="{{ asset('template/frontend/assets/images/footer/footer-top/01.png') }}"
-                                    alt="Phone-icon">
-                            </div>
-                            <div class="lab-content">
-                                <span>Phone Number : +88019 339 702 520</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-7 col-12">
+                    <p class="copyright-text mb-0">Copyright © 2036 <a href="#">Kind Heart</a> Charity Org.
+                        Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a></p>
                 </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="footer-top-item lab-item">
-                        <div class="lab-inner">
-                            <div class="lab-thumb">
-                                <img src="{{ asset('template/frontend/assets/images/footer/footer-top/02.png') }}"
-                                    alt="email-icon">
-                            </div>
-                            <div class="lab-content">
-                                <span>Email : admin@Hafsa.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="footer-top-item lab-item">
-                        <div class="lab-inner">
-                            <div class="lab-thumb">
-                                <img src="{{ asset('template/frontend/assets/images/footer/footer-top/03.png') }}"
-                                    alt="location-icon">
-                            </div>
-                            <div class="lab-content">
-                                <span>Address : 30 North West New York 240</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+                    <ul class="social-icon">
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-twitter"></a>
+                        </li>
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-facebook"></a>
+                        </li>
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-instagram"></a>
+                        </li>
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-linkedin"></a>
+                        </li>
+                        <li class="social-icon-item">
+                            <a href="https://youtube.com/templatemo" class="social-icon-link bi-youtube"></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer-middle padding-tb tri-shape-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="footer-middle-item-wrapper">
-                        <div class="mb-5 footer-middle-item mb-lg-0">
-                            <div class="fm-item-title">
-                                <h5>About Hafsa</h5>
-                            </div>
-                            <div class="fm-item-content">
-                                <p class="mb-4">Energistically coordinate highly efficient procesr
-                                    partnerships befor revolutionar growth strategie
-                                    improvement</p>
-                                <img src="{{ asset('template/frontend/assets/images/footer/footer-middle/01.jpg') }}"
-                                    alt="about-image" class="footer-abt-img">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="footer-middle-item-wrapper">
-                        <div class="mb-5 footer-middle-item mb-lg-0">
-                            <div class="fm-item-title">
-                                <h5>our Recent news</h5>
-                            </div>
-                            <div class="fm-item-content">
-                                <div class="fm-item-widget lab-item">
-                                    <div class="lab-inner">
-                                        <div class="lab-thumb">
-                                            <a href="#"> <img
-                                                    src="{{ asset('template/frontend/assets/images/footer/footer-middle/02.jpg') }}"
-                                                    alt="footer-widget-img"></a>
-                                        </div>
-                                        <div class="lab-content">
-                                            <h6><a href="#">Enable Seamin Matera Forin And Our
-                                                    Orthonal Create Vortals.</a></h6>
-                                            <p>July 23, 2021</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="fm-item-widget lab-item">
-                                    <div class="lab-inner">
-                                        <div class="lab-thumb">
-                                            <a href="#"><img
-                                                    src="{{ asset('template/frontend/assets/images/footer/footer-middle/03.jpg') }}"
-                                                    alt="footer-widget-img"></a>
-                                        </div>
-                                        <div class="lab-content">
-                                            <h6><a href="#">Dynamca Network Otuitive Catays For
-                                                    Plagiarize Mindshare After</a></h6>
-                                            <p>July 23, 2021</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="footer-middle-item-wrapper">
-                        <div class="mb-5 footer-middle-item-3 mb-lg-0">
-                            <div class="fm-item-title">
-                                <h5>OUR NEWSLETTER</h5>
-                            </div>
-                            <div class="fm-item-content">
-                                <p>Hafsa is a nonproﬁt organization supported
-                                    by community leaders</p>
-                                <form>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Enter email">
-                                    </div>
-                                    <button type="submit" class="lab-btn">Send Massage <i
-                                            class="icofont-paper-plane"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center footer-bottom-content">
-                        <p>&copy;2021 <a href="index.html">Hafsa</a> -Best For Charity HTML Template.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 </footer>
-<!-- Footer Section end here -->
