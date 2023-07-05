@@ -74,7 +74,7 @@
                         <th class="text-center">Nomor Rekening</th>
                         <th class="text-center"><i class="fas fa-cog"></i></th>
                     </x-slot>
-                    @forelse ($setting->bank_settings as $key => $item)
+                    @if (!empty($setting->bank_settings))
                         <tr>
                             <td class="text-center">{{ $key + 1 }}</td>
                             <td class="text-center">{{ $item->name }}</td>
@@ -93,11 +93,11 @@
                                 </form>
                             </td>
                         </tr>
-                    @empty
+                    @else
                         <tr>
                             <td colspan="5" class="text-center text-danger">Tidak ada data</td>
                         </tr>
-                    @endforelse
+                    @endif
                 </x-table>
             </div>
         </div>
