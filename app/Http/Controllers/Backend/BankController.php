@@ -36,25 +36,21 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'code' => 'required|unique:banks,code',
-                'name' => 'required',
-                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
-            ]);
+        $this->validate($request, [
+            'code' => 'required|unique:banks,code',
+            'name' => 'required',
+            'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+        ]);
 
-            $data = $request->only('code', 'name');
-            $data['path_image'] = upload('images/bank', $request->file('path_image'), 'bank');
+        $data = $request->only('code', 'name');
+        $data['path_image'] = upload('images/bank', $request->file('path_image'), 'bank');
 
-            $query = Bank::create($data);
+        $query = Bank::create($data);
 
-            if ($query) {
-                return redirect()->route('bank.index')->with('success', 'Data Bank berhasil ditambahkan.');
-            } else {
-                return redirect()->route('bank.index')->with('error', 'Data Bank gagal ditambahkan.');
-            }
-        } catch (\Throwable $th) {
-            return redirect()->route('bank.index')->with('error', $th->getMessage());
+        if ($query) {
+            return redirect()->route('bank.index')->with('success', 'Data Bank berhasil ditambahkan.');
+        } else {
+            return redirect()->route('bank.index')->with('error', 'Data Bank gagal ditambahkan.');
         }
     }
 

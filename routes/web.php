@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BankController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CampaignController;
@@ -56,13 +57,15 @@ Route::group([
     Route::group([
         'middleware' => ['auth', 'role:admin']
     ], function () {
+        // Master
         Route::resource('/category', CategoryController::class); // Untuk route dengan resource, Controller tidak boleh berbentuk array
         Route::resource('/bank', BankController::class); // Untuk route dengan resource, Controller tidak boleh berbentuk array
-
         Route::get('/campaign/data', [CampaignController::class, 'data'])->name('campaign.data');
         Route::get('/campaign/detail/{id}', [CampaignController::class, 'detail'])->name('campaign.detail');
         Route::resource('/campaign', CampaignController::class)->except('create', 'edit');
 
+        // Pengaturan
+        Route::resource('/banner', BannerController::class);
         Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
         Route::put('/setting/{setting}', [SettingController::class, 'update'])->name('setting.update');
         Route::delete('/setting/{setting}/bank/{id}', [SettingController::class, 'bank_destroy'])->name('setting.bank.destroy');

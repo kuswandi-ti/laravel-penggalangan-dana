@@ -17,7 +17,7 @@
                         <h3 class="card-title">Tambah Data Bank</h3>
                     </x-slot>
                     <div class="form-group">
-                        <label for="code">Kode Bank</label>
+                        <label for="code">Kode Bank <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('code') is-invalid @enderror" name="code"
                             id="code" placeholder="Masukkan kode bank" value='{{ old('code') }}'>
                         @error('code')
@@ -27,7 +27,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="name">Nama Bank</label>
+                        <label for="name">Nama Bank <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                             id="name" placeholder="Masukkan nama bank" value='{{ old('name') }}'>
                         @error('name')

@@ -34,10 +34,6 @@
                                 href="{{ route('setting.index') }}?tab=bank">
                                 <i class="nav-icon fas fa-university"></i> Bank
                             </a>
-                            <a class="nav-link @if (request('tab') == 'banner') active @endif"
-                                href="{{ route('setting.index') }}?tab=banner">
-                                <i class="nav-icon fas fa-flag"></i> Banner
-                            </a>
                         </div>
                     </div>
                     <div class="col-8 col-sm-10">
@@ -53,9 +49,6 @@
                             </div>
                             <div class="tab-pane fade @if (request('tab') == 'bank') show active @endif">
                                 @includeIf('backend.setting.bank')
-                            </div>
-                            <div class="tab-pane fade @if (request('tab') == 'banner') show active @endif">
-                                @includeIf('backend.setting.banner')
                             </div>
                         </div>
                     </div>
