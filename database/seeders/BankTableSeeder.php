@@ -18,19 +18,16 @@ class BankTableSeeder extends Seeder
             array(
                 'name' => 'BANK BRI',
                 'code' => '002',
-                // 'path_image' => '/img/bank/bri.png',
             ),
             1 =>
             array(
                 'name' => 'BANK BNI',
                 'code' => '009',
-                // 'path_image' => '/img/bank/bni.png',
             ),
             2 =>
             array(
                 'name' => 'BANK BCA',
                 'code' => '014',
-                // 'path_image' => '/img/bank/bca.png',
             ),
         );
 
@@ -41,7 +38,6 @@ class BankTableSeeder extends Seeder
                     [
                         'code' => $item['code'],
                         'name' => $item['name'],
-                        // 'path_image' => $item['path_image'],
                     ],
                 );
         });
