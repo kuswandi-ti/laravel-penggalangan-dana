@@ -3,13 +3,13 @@
 @section('title', 'Kontak')
 
 @section('content')
-    <section class="contact-section section-padding">
+    <section class="section-padding section-bg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-12 mb-5">
+                <div class="mb-5 col-lg-6 col-12">
                     <div class="contact-info-wrap">
                         <h2>Get in touch</h2>
-                        <div class="contact-image-wrap d-flex flex-wrap">
+                        <div class="flex-wrap contact-image-wrap d-flex">
                             <img src="{{ asset('template/frontend/images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg') }}"
                                 class="img-fluid avatar-image" alt="">
                             <div class="d-flex flex-column justify-content-center ms-3">
@@ -19,11 +19,11 @@
                         </div>
                         <div class="contact-info">
                             <h5 class="mb-3">Contact Infomation</h5>
-                            <p class="d-flex mb-2">
+                            <p class="mb-2 d-flex">
                                 <i class="bi-geo-alt me-2"></i>
                                 Akershusstranda 20, 0150 Oslo, Norway
                             </p>
-                            <p class="d-flex mb-2">
+                            <p class="mb-2 d-flex">
                                 <i class="bi-telephone me-2"></i>
 
                                 <a href="tel: 120-240-9600">
@@ -36,7 +36,7 @@
                                     donate@charity.org
                                 </a>
                             </p>
-                            <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+                            <a href="#" class="mt-3 custom-btn btn">Get Direction</a>
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserProfileInformationController;
-use App\Http\Controllers\Frontend\CampaignController as FrontendCampaignController;
+use App\Http\Controllers\Frontend\DonationController;
 
 
 /*
@@ -41,8 +41,9 @@ use App\Http\Controllers\Frontend\CampaignController as FrontendCampaignControll
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
-Route::get('/campaigns', [FrontendCampaignController::class, 'index'])->name('frontend.campaigns');
-Route::get('/campaigns/1', [FrontendCampaignController::class, 'detail'])->name('frontend.campaigns.detail');
+Route::get('/donation', [DonationController::class, 'index'])->name('frontend.donation');
+Route::get('/donation/create', [DonationController::class, 'create'])->name('frontend.donation.create');
+Route::get('/donation/1', [DonationController::class, 'detail'])->name('frontend.donation.detail');
 Route::get('/news', [NewsController::class, 'index'])->name('frontend.news');
 Route::get('/contact', [ContactController::class, 'index'])->name('frontend.contact');
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
@@ -76,3 +77,7 @@ Route::group([
     ], function () {
     });
 });
+
+Route::get('/campaign', function () {
+    return view('frontend.pages.campaign.index');
+})->name('frontend.campaign.index');

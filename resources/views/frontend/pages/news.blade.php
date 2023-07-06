@@ -3,7 +3,7 @@
 @section('title', 'Berita')
 
 @section('content')
-    <section class="news-section section-padding">
+    <section class="section-padding section-bg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-12">
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="news-block-info">
-                            <div class="d-flex mt-2">
+                            <div class="mt-2 d-flex">
                                 <div class="news-block-date">
                                     <p>
                                         <i class="bi-calendar4 custom-icon me-1"></i>
@@ -34,7 +34,7 @@
                                     </p>
                                 </div>
 
-                                <div class="news-block-author mx-5">
+                                <div class="mx-5 news-block-author">
                                     <p>
                                         <i class="bi-person custom-icon me-1"></i>
                                         By Admin
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            <div class="news-block-title mb-2">
+                            <div class="mb-2 news-block-title">
                                 <h4><a href="news-detail.html" class="news-block-title-link">Clothing donation to urban
                                         area</a></h4>
                             </div>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
 
-                    <div class="news-block mt-3">
+                    <div class="mt-3 news-block">
                         <div class="news-block-top">
                             <a href="news-detail.html">
                                 <img src="{{ asset('template/frontend/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="news-block-info">
-                            <div class="d-flex mt-2">
+                            <div class="mt-2 d-flex">
                                 <div class="news-block-date">
                                     <p>
                                         <i class="bi-calendar4 custom-icon me-1"></i>
@@ -92,7 +92,7 @@
                                     </p>
                                 </div>
 
-                                <div class="news-block-author mx-5">
+                                <div class="mx-5 news-block-author">
                                     <p>
                                         <i class="bi-person custom-icon me-1"></i>
                                         By Admin
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <div class="news-block-title mb-2">
+                            <div class="mb-2 news-block-title">
                                 <h4><a href="news-detail.html" class="news-block-title-link">Food donation area</a></h4>
                             </div>
 
@@ -139,7 +139,7 @@
                         </div>
 
                         <div class="news-block-info">
-                            <div class="d-flex mt-2">
+                            <div class="mt-2 d-flex">
                                 <div class="news-block-date">
                                     <p>
                                         <i class="bi-calendar4 custom-icon me-1"></i>
@@ -147,7 +147,7 @@
                                     </p>
                                 </div>
 
-                                <div class="news-block-author mx-5">
+                                <div class="mx-5 news-block-author">
                                     <p>
                                         <i class="bi-person custom-icon me-1"></i>
                                         By Admin
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
 
-                            <div class="news-block-title mb-2">
+                            <div class="mb-2 news-block-title">
                                 <h4><a href="news-detail.html" class="news-block-title-link">Clothing donation to urban
                                         area</a></h4>
                             </div>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
 
-                    <div class="news-block mt-3">
+                    <div class="mt-3 news-block">
                         <div class="news-block-top">
                             <a href="news-detail.html">
                                 <img src="{{ asset('template/frontend/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
@@ -197,7 +197,7 @@
                         </div>
 
                         <div class="news-block-info">
-                            <div class="d-flex mt-2">
+                            <div class="mt-2 d-flex">
                                 <div class="news-block-date">
                                     <p>
                                         <i class="bi-calendar4 custom-icon me-1"></i>
@@ -205,7 +205,7 @@
                                     </p>
                                 </div>
 
-                                <div class="news-block-author mx-5">
+                                <div class="mx-5 news-block-author">
                                     <p>
                                         <i class="bi-person custom-icon me-1"></i>
                                         By Admin
@@ -220,7 +220,7 @@
                                 </div>
                             </div>
 
-                            <div class="news-block-title mb-2">
+                            <div class="mb-2 news-block-title">
                                 <h4><a href="news-detail.html" class="news-block-title-link">Food donation area</a></h4>
                             </div>
 

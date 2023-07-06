@@ -25,6 +25,10 @@
     TemplateMo 581 Kind Heart Charity
     https://templatemo.com/tm-581-kind-heart-charity
     -->
+
+    @stack('style_vendor')
+
+    @stack('style')
 </head>
 
 <body>
@@ -49,6 +53,10 @@
     <script src="{{ asset('template/frontend/js/jquery.sticky.js') }}"></script>
     <script src="{{ asset('template/frontend/js/counter.js') }}"></script>
     <script src="{{ asset('template/frontend/js/custom.js') }}"></script>
+
+    @stack('scripts_vendor')
+
+    @stack('scripts')
 </body>
 
 </html>

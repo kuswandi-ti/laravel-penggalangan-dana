@@ -232,7 +232,7 @@
                             </div>
                             @if (!empty($campaign->path_image))
                                 <img class="img-fluid preview-path_image"
-                                    src="{{ url('storage' . $campaign->path_image) }}" style="display: none;">
+                                    src="{{ url('storage' . $campaign->path_image) }}">
                             @else
                                 <img class="img-fluid preview-path_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}">
                             @endif

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light shadow-lg">
+<nav class="shadow-lg navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ route('frontend.home') }}">
             <img src="{{ asset('template/frontend/images/logo.png') }}" class="logo img-fluid" alt="Kind Heart Charity">
@@ -24,8 +24,8 @@
                         href="{{ route('frontend.about') }}">Tentang Kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('frontend.campaigns') ? 'active' : 'inactive' }}"
-                        href="{{ route('frontend.campaigns') }}">Program</a>
+                    <a class="nav-link {{ request()->routeIs('frontend.donation') ? 'active' : 'inactive' }}"
+                        href="{{ route('frontend.donation') }}">Donasi Program</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('frontend.news') ? 'active' : 'inactive' }}"
@@ -36,7 +36,8 @@
                         href="{{ route('frontend.contact') }}">Kontak</a>
                 </li>
                 <li class="nav-item ms-3">
-                    <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Donasi</a>
+                    <a class="nav-link custom-btn custom-border-btn btn"
+                        href="{{ route('frontend.campaign.index') }}">Galang Dana</a>
                 </li>
             </ul>
         </div>

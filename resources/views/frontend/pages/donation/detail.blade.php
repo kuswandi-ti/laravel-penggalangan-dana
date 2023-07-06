@@ -3,7 +3,7 @@
 @section('title', 'Judul Program')
 
 @section('content')
-    <section class="news-section section-padding">
+    <section class="section-padding section-bg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-12">
@@ -102,7 +102,8 @@
                     </div>
                     <form class="custom-form subscribe-form" style="padding: 0px;">
                         <div class="col-lg-12 col-12">
-                            <button type="submit" class="form-control">Donasi Sekarang</button>
+                            <a class="nav-link custom-btn btn" href="{{ route('frontend.donation.create') }}">Donasi
+                                Sekarang</a>
                         </div>
                     </form>
 
