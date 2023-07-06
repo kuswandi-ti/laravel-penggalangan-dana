@@ -1,10 +1,10 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Bank')
+@section('title', 'Bank')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('bank.index') }}"></a> Bank</li>
-    <li class="breadcrumb-item active">Edit</li>
+    <li class="breadcrumb-item"><a href="{{ route('bank.index') }}"></a> List Data Bank</li>
+    <li class="breadcrumb-item active">Edit Data Bank</li>
 @endsection
 
 @section('content')
@@ -15,6 +15,9 @@
                 @method('PUT')
 
                 <x-card>
+                    <x-slot name="header">
+                        <h3 class="card-title">Edit Data Bank</h3>
+                    </x-slot>
                     <div class="form-group">
                         <label for="code">Kode Bank</label>
                         <input type="text" class="form-control @error('code') is-invalid @enderror" name="code"

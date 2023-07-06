@@ -13,6 +13,9 @@
                 <x-slot name="header">
                     <h3 class="card-title">List Data Program</h3>
                     <div class="card-tools">
+                        {{-- <button onclick="addForm(`{{ route('campaign.store') }}`)" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Tambah Data Program
+                        </button> --}}
                         <a href="{{ route('campaign.create') }}" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> Tambah Data Program
                         </a>
@@ -69,6 +72,8 @@
             </x-card>
         </div>
     </div>
+
+    {{-- @includeIf('backend.campaign.form') --}}
 @endsection
 
 <x-swal />
@@ -80,6 +85,7 @@
 
 @push('scripts')
     <script>
+        let form_modal_id = '#modal-form';
         let table;
 
         table = $('.table').DataTable({
@@ -129,6 +135,133 @@
         $('.datepicker').on('change.datetimepicker', function() {
             table.ajax.reload()
         })
+
+        function resetForm(selector) {
+            $(selector)[0].reset();
+            $('.summernote').summernote('code', '')
+            $('.select2').trigger('change');
+            $('.form-control, .custom-select, .custom-checkbox, .custom-radio, .select2, .custom-file-input, .custom-control-input, .note-editor')
+                .removeClass('is-invalid');
+            $('.invalid-feedback').remove();
+        }
+
+        function loopForm(originalForm) {
+            for (field in originalForm) {
+                if ($(`[name=${field}]`).attr('type') != 'file') {
+                    if ($(`[name=${field}]`).hasClass('summernote')) {
+                        $(`[name=${field}]`).summernote('code', originalForm[field]);
+                    } else if ($(`[name=${field}]`).attr('type') == 'radio') {
+                        $(`[name=${field}]`).filter(`[value="${originalForm[field]}"]`).prop('checked', true)
+                    } else {
+                        $(`[name=${field}]`).val(originalForm[field]);
+                    }
+
+                    $('.select2').trigger('change');
+                } else {
+                    $(`.preview-${field}`)
+                        .attr('src', `storage/${originalForm[field]}`)
+                        .show()
+                }
+            }
+        }
+
+        function loopErrors(errors) {
+            $('.invalid-feedback').remove();
+            $('.form-control, .custom-select, .custom-checkbox, .custom-radio, .select2, .custom-file-input, .custom-control-input, .note-editor')
+                .removeClass('is-invalid');
+
+            if (errors == undefined) {
+                return;
+            }
+
+            for (error in errors) {
+                $(`[name=${error}]`).addClass('is-invalid');
+
+                if ($(`[name=${error}]`).hasClass('select2')) {
+                    $(`<span class="error invalid-feedback">${errors[error][0]}</span>`)
+                        .insertAfter($(`[name=${error}]`).next());
+                } else if ($(`[name=${error}]`).hasClass('summernote')) {
+                    $('.note-editor').addClass('is-invalid')
+                    $(`<span class="error invalid-feedback">${errors[error][0]}</span>`)
+                        .insertAfter($(`[name=${error}]`).next());
+                } else if ($(`[name=${error}]`).hasClass('custom-control-input')) {
+                    $(`<span class="error invalid-feedback">${errors[error][0]}</span>`)
+                        .insertAfter($(`[name=${error}]`).next());
+                } else {
+                    // Untuk pengecekan bertipe array pada input kategori
+                    if ($(`[name=${error}]`).length == 0) {
+                        $(`[name="${error}[]"]`).addClass('is-invalid');
+                        $(`<span class="error invalid-feedback">${errors[error][0]}</span>`)
+                            .insertAfter($(`[name="${error}[]"]`).next());
+                    } else {
+                        $(`<span class="error invalid-feedback">${errors[error][0]}</span>`)
+                            .insertAfter($(`[name=${error}]`));
+                    }
+                }
+            }
+        }
+
+        function showAlert(message, type) {
+            Toast.fire({
+                icon: `${type}`,
+                title: `${message}`,
+            })
+        }
+
+        function addForm(url, title = 'Tambah Data Program') {
+            $(form_modal_id).modal('show');
+            $(`${form_modal_id} .modal-title`).text(title);
+            $(`${form_modal_id} form`).attr('action', url);
+            resetForm(`${form_modal_id} form`);
+        }
+
+        function editForm(url, title = 'Edit Data Program') {
+            $.get(url)
+                .done(response => {
+                    $(form_modal_id).modal('show');
+                    $(`${form_modal_id} .modal-title`).text(title);
+                    $(`${form_modal_id} form`).attr('action', url);
+                    $(`${form_modal_id} [name=_method]`).val('PUT');
+
+                    resetForm(`${form_modal_id} form`);
+                    loopForm(response.data);
+
+                    let selectedCategories = []
+                    response.data.categories.forEach(item => {
+                        selectedCategories.push(item.id)
+                    });
+                    $('#categories')
+                        .val(selectedCategories)
+                        .trigger('change')
+                })
+                .fail(errors => {
+                    showAlert(errors.response.message, 'error');
+                    return;
+                });
+        }
+
+        function submitForm(originalForm) {
+            $.post({
+                    url: $(originalForm).attr('action'),
+                    data: new FormData(originalForm),
+                    dataType: 'json',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                })
+                .done(response => {
+                    $(form_modal_id).modal('hide');
+                    showAlert(response.message, 'success');
+                    table.ajax.reload();
+                })
+                .fail(errors => {
+                    if (errors.status = 422) {
+                        loopErrors(errors.responseJSON.errors);
+                        return;
+                    }
+                    showAlert(errors.responseJSON.message, 'error');
+                });
+        }
 
         function deleteData(url) {
             if (confirm('Yakin akan menghapus data ?')) {

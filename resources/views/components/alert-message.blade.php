@@ -36,7 +36,7 @@
 
 @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Please check the form below for errors</strong>
+        <strong>Silahkan cek error berikut :</strong>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
         @endforeach

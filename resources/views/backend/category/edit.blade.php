@@ -1,10 +1,10 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Kategori')
+@section('title', 'Kategori')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('category.index') }}"></a> Kategori</li>
-    <li class="breadcrumb-item active">Edit</li>
+    <li class="breadcrumb-item"><a href="{{ route('category.index') }}"></a> List Data Kategori</li>
+    <li class="breadcrumb-item active">Edit Data Kategori</li>
 @endsection
 
 @section('content')
@@ -15,6 +15,9 @@
                 @method('PUT')
 
                 <x-card>
+                    <x-slot name="header">
+                        <h3 class="card-title">Edit Data Kategori</h3>
+                    </x-slot>
                     <div class="form-group">
                         <label for="name">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"

@@ -12,6 +12,7 @@
         <div class="col-lg-12">
             <form action="{{ route('category.store') }}" method="POST">
                 @csrf
+                <x-alert-message />
                 <x-card>
                     <x-slot name="header">
                         <h3 class="card-title">Tambah Data Kategori</h3>
@@ -19,7 +20,7 @@
                     <div class="form-group">
                         <label for="name">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                            id="name" placeholder="Masukkan nama kategori" value='{{ old('name') }}' required>
+                            id="name" placeholder="Masukkan nama kategori" value='{{ old('name') }}'>
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}

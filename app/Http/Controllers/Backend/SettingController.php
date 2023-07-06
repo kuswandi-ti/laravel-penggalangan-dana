@@ -6,6 +6,7 @@ use App\Models\Bank;
 use App\Models\Banner;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,8 @@ class SettingController extends Controller
         $setting = Setting::first();
         $bank = Bank::all()->pluck('name', 'id');
         $banner = Banner::all();
-        return view('backend.setting.index', compact(['setting', 'bank', 'banner']));
+        $bank_setting = DB::table('bank_settings')->get();
+        return view('backend.setting.index', compact(['setting', 'bank', 'banner', 'bank_setting']));
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 
 class CategoryController extends Controller
 {
@@ -36,16 +37,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:categories,name'
-        ]);
+        try {
+            $this->validate($request, [
+                'name' => 'required|unique:categories,name'
+            ]);
 
-        $data = $request->only('name');
-        $data['slug'] = Str::slug($request->name);
+            $data = $request->only('name');
+            $data['slug'] = Str::slug($request->name);
 
-        Category::create($data);
+            $query = Category::create($data);
 
-        return redirect()->route('category.index')->with('success', 'Data Kategori berhasil ditambahkan.');
+            if ($query) {
+                return redirect()->route('category.index')->with('success', 'Data Kategori berhasil ditambahkan.');
+            } else {
+                return redirect()->route('category.index')->with('error', 'Data Kategori gagal ditambahkan.');
+            }
+        } catch (Exception $e) {
+            return back()->withError($e->getMessage)->withInput();
+        } catch (QueryException $qe) {
+            return back()->withError($qe->getMessage());
+        }
     }
 
     /**

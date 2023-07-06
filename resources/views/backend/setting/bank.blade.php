@@ -74,7 +74,7 @@
                         <th class="text-center">Nomor Rekening</th>
                         <th class="text-center"><i class="fas fa-cog"></i></th>
                     </x-slot>
-                    @if ($setting->bank_settings->count())
+                    @if ($bank_setting->count())
                         @foreach ($setting->bank_settings as $key => $item)
                             <tr>
                                 <td class="text-center">{{ $key + 1 }}</td>

@@ -49,6 +49,21 @@ class CampaignController extends Controller
             ->addColumn('author', function ($query) {
                 return $query->user->name;
             })
+            // ->addColumn('action', function ($query) {
+            //     return '
+            //         <a href="' . route('campaign.detail', $query->id) . '" class="btn btn-link text-dark">
+            //             <i class="fas fa-search-plus"></i>
+            //         </a>
+            //         <button onclick="editForm(`' . route('campaign.show', $query->id) . '`)"
+            //             class="btn btn-link text-primary">
+            //             <i class="fas fa-edit"></i>
+            //         </button>
+            //         <button class="btn btn-link text-danger"
+            //             onclick="deleteData(`' . route('campaign.destroy', $query->id) . '`)">
+            //             <i class="fas fa-trash"></i>
+            //         </button>
+            //     ';
+            // })
             ->addColumn('action', function ($query) {
                 return '
                     <a href="' . route('campaign.detail', $query->id) . '" class="btn btn-link text-dark">
@@ -80,6 +95,44 @@ class CampaignController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'title' => 'required|min:8',
+    //         'categories' => 'required|array',
+    //         'short_description' => 'required',
+    //         'body' => 'required|min:8',
+    //         'publish_date' => 'required|date_format:Y-m-d H:i',
+    //         'status' => 'required|in:publish,pending,archieve',
+    //         'goal' => 'required|integer',
+    //         'end_date' => 'required|date_format:Y-m-d H:i',
+    //         'note' => 'nullable',
+    //         'receiver' => 'required',
+    //         'path_image' => 'required|mimes:png,jpg,jpeg,bmp|max:2048',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'errors' => $validator->errors(),
+    //         ], 422);
+    //     }
+
+    //     $data = $request->except('path_image', 'slug', 'categories', 'user_id');
+    //     $data['slug'] = Str::slug($request->title);
+    //     $data['path_image'] = upload('images/campaign', $request->file('path_image'), 'campaign');
+    //     $data['user_id'] = auth()->id();
+
+    //     $campaign = Campaign::create($data);
+
+    //     $campaign = Campaign::orderBy('id', 'DESC')->first();
+    //     $campaign->category_campaign()->attach($request->categories);
+
+    //     return response()->json([
+    //         'data' => $campaign,
+    //         'message' => 'Projek berhasil ditambahkan.',
+    //     ]);
+    // }
+
     public function store(Request $request)
     {
         try {
@@ -196,6 +249,47 @@ class CampaignController extends Controller
         } catch (QueryException $qe) {
             return back()->withError($qe->getMessage());
         }
+
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|min:8',
+        //     'categories' => 'required|array',
+        //     'short_description' => 'required',
+        //     'body' => 'required|min:8',
+        //     'publish_date' => 'required|date_format:Y-m-d H:i',
+        //     'status' => 'required|in:publish,pending,archieve',
+        //     'goal' => 'required|integer',
+        //     'end_date' => 'required|date_format:Y-m-d H:i',
+        //     'note' => 'nullable',
+        //     'receiver' => 'required',
+        //     'path_image' => 'nullable|mimes:png,jpg,jpeg,bmp|max:2048',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'errors' => $validator->errors(),
+        //     ], 422);
+        // }
+
+        // $data = $request->except('path_image', 'slug', 'categories', 'user_id');
+        // $data['slug'] = Str::slug($request->title);
+        // if ($request->hasFile('path_image')) {
+        //     if (!empty($campaign->path_image)) {
+        //         if (Storage::disk('public')->exists($campaign->path_image)) {
+        //             Storage::disk('public')->delete($campaign->path_image);
+        //         }
+        //     }
+        //     $data['path_image'] = upload('images/campaign', $request->file('path_image'), 'campaign');
+        // }
+        // $data['user_id'] = auth()->id();
+
+        // $campaign->update($data);
+
+        // $campaign->category_campaign()->sync($request->categories);
+
+        // return response()->json([
+        //     'data' => $campaign,
+        //     'message' => 'Projek berhasil diperbaharui.',
+        // ]);
     }
 
     /**
@@ -233,5 +327,27 @@ class CampaignController extends Controller
                 'message' => 'Proses hapus data gagal !!!'
             ], 500);
         }
+
+        // try {
+        //     $detach = $campaign->category_campaign()->detach();
+        //     if ($detach) {
+        //         $query = $campaign->delete();
+        //         if ($query) {
+        //             if (Storage::disk('public')->exists($campaign->path_image)) {
+        //                 Storage::disk('public')->delete($campaign->path_image);
+        //             }
+        //             return response()->json([
+        //                 'data' => null,
+        //                 'message' => 'Projek berhasil dihapus.',
+        //             ]);
+        //         }
+        //     }
+        // } catch (\Throwable $th) {
+        //     return response()->json([
+        //         'success' => false,
+        //         // 'message' => $th->getMessage()
+        //         'message' => 'Proses hapus data gagal !!!'
+        //     ], 500);
+        // }
     }
 }
