@@ -18,6 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/frontend/images/logo.png') }}">
 
     <!-- CSS FILES -->
+    <link href="{{ asset('template/backend/dist/css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/frontend/css/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('template/frontend/css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
@@ -27,6 +28,12 @@
     -->
 
     @stack('style_vendor')
+
+    <style>
+        .select2 {
+            max-width: 100%;
+        }
+    </style>
 
     @stack('style')
 </head>
@@ -55,6 +62,31 @@
     <script src="{{ asset('template/frontend/js/custom.js') }}"></script>
 
     @stack('scripts_vendor')
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.custom-file-input').on('change', function() {
+            let filename = $(this)
+                .val()
+                .split('\\')
+                .pop()
+            $(this)
+                .next('.custom-file-label')
+                .addClass('selected')
+                .html(filename)
+        })
+
+        function preview(target, image) {
+            $(target)
+                .attr('src', window.URL.createObjectURL(image))
+                .show()
+        }
+    </script>
 
     @stack('scripts')
 </body>

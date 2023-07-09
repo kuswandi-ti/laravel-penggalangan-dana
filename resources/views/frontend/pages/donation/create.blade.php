@@ -20,11 +20,11 @@
 
                         <div class="row">
                             <div class="col-lg-2 col-md-6 col-12">
-                                <p class="text-light" style="font-size: 40pt"><strong>Rp. </strong></p>
+                                <p class="text-light" style="font-size: 30pt"><strong>Rp. </strong></p>
                             </div>
                             <div class="col-lg-10 col-md-6 col-12">
-                                <input type="text" name="last-name" id="last-name" class="form-control text-dark"
-                                    placeholder="0" style="font-size: 30pt; font-weight: bold;">
+                                <input type="number" name="last-name" id="last-name" class="form-control text-dark"
+                                    placeholder="0" style="font-size: 30pt; font-weight: bold; height:70px;">
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-12 form-check-group form-check-group-donation-frequency">
                                 <p class="h4 text-light"><strong>Donatur</strong></p>
-                                <select class="form-control text-dark">
+                                <select class="form-control text-dark" style="height:50px;">
                                     <option>sdfsdfsdf</option>
                                     <option>sdfsdfsdf</option>
                                     <option>sdfsdfsdf</option>
@@ -48,8 +48,7 @@
                                     placeholder="Tulis dukungan atau do'a untuk penggalangan dana ini. Contoh : Semoga cepet sembuh, ya..."></textarea>
                             </div>
                         </div>
-
-                        <button type="submit" class="form-control">Lanjut ke Pembayaran</button>
+                        <button type="button" class="btn btn-block custom-btn">Lanjut ke Pembayaran</button>
                     </form>
                 </div>
 

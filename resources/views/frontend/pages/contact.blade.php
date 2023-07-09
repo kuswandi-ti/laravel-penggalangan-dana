@@ -59,7 +59,7 @@
                         <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
                             placeholder="Jackdoe@gmail.com" required>
                         <textarea name="message" rows="5" class="form-control" id="message" placeholder="What can we help you?"></textarea>
-                        <button type="submit" class="form-control">Send Message</button>
+                        <button type="button" class="btn btn-block custom-btn">Send Message</button>
                     </form>
                 </div>
             </div>

@@ -12,52 +12,69 @@
             <div class="row">
                 <div class="col-lg-12 col-12">
                     <div class="p-4 mb-5 bg-white shadow-sm">
-                        <div id="stepper1" class="bs-stepper linear">
+                        <div class="bs-stepper linear">
                             <div class="bs-stepper-header" role="tablist">
-                                <div class="step active" data-target="#test-l-1">
-                                    <button type="button" class="step-trigger" role="tab" id="stepper1trigger1"
-                                        aria-controls="test-l-1" aria-selected="true">
+                                <div class="step active" data-target="#judul-part">
+                                    <button type="button" class="step-trigger" role="tab" id="judul-part-trigger"
+                                        aria-controls="judul-part" aria-selected="true">
                                         <span class="bs-stepper-circle">1</span>
-                                        <span class="bs-stepper-label">Email</span>
+                                        <span class="bs-stepper-label">Judul</span>
                                     </button>
                                 </div>
                                 <div class="bs-stepper-line"></div>
-                                <div class="step" data-target="#test-l-2">
-                                    <button type="button" class="step-trigger" role="tab" id="stepper1trigger2"
-                                        aria-controls="test-l-2" aria-selected="false" disabled="disabled">
+                                <div class="step" data-target="#detail-part">
+                                    <button type="button" class="step-trigger" role="tab" id="detail-part-trigger"
+                                        aria-controls="detail-part" aria-selected="false" disabled="disabled">
                                         <span class="bs-stepper-circle">2</span>
-                                        <span class="bs-stepper-label">Password</span>
+                                        <span class="bs-stepper-label">Detail</span>
                                     </button>
                                 </div>
                                 <div class="bs-stepper-line"></div>
-                                <div class="step" data-target="#test-l-3">
-                                    <button type="button" class="step-trigger" role="tab" id="stepper1trigger3"
-                                        aria-controls="test-l-3" aria-selected="false" disabled="disabled">
+                                <div class="step" data-target="#foto-part">
+                                    <button type="button" class="step-trigger" role="tab" id="foto-part-trigger"
+                                        aria-controls="foto-part" aria-selected="false" disabled="disabled">
                                         <span class="bs-stepper-circle">3</span>
-                                        <span class="bs-stepper-label">Validate</span>
+                                        <span class="bs-stepper-label">Foto</span>
+                                    </button>
+                                </div>
+                                <div class="bs-stepper-line"></div>
+                                <div class="step" data-target="#deskripsi-part">
+                                    <button type="button" class="step-trigger" role="tab" id="deskripsi-part-trigger"
+                                        aria-controls="deskripsi-part" aria-selected="false" disabled="disabled">
+                                        <span class="bs-stepper-circle">4</span>
+                                        <span class="bs-stepper-label">Deskripsi</span>
+                                    </button>
+                                </div>
+                                <div class="bs-stepper-line"></div>
+                                <div class="step" data-target="#konfirmasi-part">
+                                    <button type="button" class="step-trigger" role="tab" id="konfirmasi-part-trigger"
+                                        aria-controls="konfirmasi-part" aria-selected="false" disabled="disabled">
+                                        <span class="bs-stepper-circle">5</span>
+                                        <span class="bs-stepper-label">Konfirmasi</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="bs-stepper-content">
                                 <form onsubmit="return false">
-                                    <div id="test-l-1" role="tabpanel" class="bs-stepper-pane active dstepper-block"
-                                        aria-labelledby="stepper1trigger1">
+                                    <div id="judul-part" role="tabpanel" class="bs-stepper-pane active dstepper-block"
+                                        aria-labelledby="judul-part-trigger">
                                         @includeIf('frontend.pages.campaign.step.judul')
                                     </div>
-                                    <div id="test-l-2" role="tabpanel" class="bs-stepper-pane"
-                                        aria-labelledby="stepper1trigger2">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                                placeholder="Password">
-                                        </div>
-                                        <button class="btn btn-primary" onclick="stepper1.previous()">Previous</button>
-                                        <button class="btn btn-primary" onclick="stepper1.next()">Next</button>
+                                    <div id="detail-part" role="tabpanel" class="bs-stepper-pane"
+                                        aria-labelledby="detail-part-trigger">
+                                        @includeIf('frontend.pages.campaign.step.detail')
                                     </div>
-                                    <div id="test-l-3" role="tabpanel" class="text-center bs-stepper-pane"
-                                        aria-labelledby="stepper1trigger3">
-                                        <button class="mt-5 btn btn-primary" onclick="stepper1.previous()">Previous</button>
-                                        <button type="submit" class="mt-5 btn btn-primary">Submit</button>
+                                    <div id="foto-part" role="tabpanel" class="bs-stepper-pane"
+                                        aria-labelledby="foto-part-trigger">
+                                        @includeIf('frontend.pages.campaign.step.foto')
+                                    </div>
+                                    <div id="deskripsi-part" role="tabpanel" class="bs-stepper-pane"
+                                        aria-labelledby="deskripsi-part-trigger">
+                                        @includeIf('frontend.pages.campaign.step.deskripsi')
+                                    </div>
+                                    <div id="konfirmasi-part" role="tabpanel" class="bs-stepper-pane"
+                                        aria-labelledby="konfirmasi-part-trigger">
+                                        @includeIf('frontend.pages.campaign.step.konfirmasi')
                                     </div>
                                 </form>
                             </div>
@@ -70,66 +87,17 @@
 @endsection
 
 @push('scripts_vendor')
+    <script src="{{ asset('template/backend/plugins/moment/moment.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
 @endpush
+
+@includeIf('includes.select2', ['placeholder' => 'Pilih Kategori'])
+@includeIf('includes.datepicker')
 
 @push('scripts')
     <script>
         $(document).ready(function() {
             window.stepper = new Stepper($('.bs-stepper')[0])
-        })
-
-        var stepper1
-        var stepper2
-        var stepper3
-        var stepper4
-        var stepperForm
-
-        document.addEventListener('DOMContentLoaded', function() {
-            stepper1 = new Stepper(document.querySelector('#stepper1'))
-            stepper2 = new Stepper(document.querySelector('#stepper2'), {
-                linear: false
-            })
-            stepper3 = new Stepper(document.querySelector('#stepper3'), {
-                linear: false,
-                animation: true
-            })
-            stepper4 = new Stepper(document.querySelector('#stepper4'))
-
-            var stepperFormEl = document.querySelector('#stepperForm')
-            stepperForm = new Stepper(stepperFormEl, {
-                animation: true
-            })
-
-            var btnNextList = [].slice.call(document.querySelectorAll('.btn-next-form'))
-            var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'))
-            var inputMailForm = document.getElementById('inputMailForm')
-            var inputPasswordForm = document.getElementById('inputPasswordForm')
-            var form = stepperFormEl.querySelector('.bs-stepper-content form')
-
-            btnNextList.forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    stepperForm.next()
-                })
-            })
-
-            stepperFormEl.addEventListener('show.bs-stepper', function(event) {
-                form.classList.remove('was-validated')
-                var nextStep = event.detail.indexStep
-                var currentStep = nextStep
-
-                if (currentStep > 0) {
-                    currentStep--
-                }
-
-                var stepperPan = stepperPanList[currentStep]
-
-                if ((stepperPan.getAttribute('id') === 'test-form-1' && !inputMailForm.value.length) ||
-                    (stepperPan.getAttribute('id') === 'test-form-2' && !inputPasswordForm.value.length)) {
-                    event.preventDefault()
-                    form.classList.add('was-validated')
-                }
-            })
         })
     </script>
 @endpush

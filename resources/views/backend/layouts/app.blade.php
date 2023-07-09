@@ -39,6 +39,10 @@
         .note-editor.is-invalid {
             border-color: var(--danger);
         }
+
+        .select2 {
+            max-width: 100%;
+        }
     </style>
 
     @stack('style')

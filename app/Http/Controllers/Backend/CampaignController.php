@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Exception;
 use App\Models\Campaign;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -113,7 +115,7 @@ class CampaignController extends Controller
             }
         } catch (Exception $e) {
             dd($request->all());
-            return back()->withError($e->getMessage)->withInput();
+            return back()->withError($e->getMessage())->withInput();
         } catch (QueryException $qe) {
             return back()->withError($qe->getMessage());
         }

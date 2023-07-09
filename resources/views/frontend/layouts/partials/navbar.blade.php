@@ -1,10 +1,10 @@
 <nav class="shadow-lg navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ route('frontend.home') }}">
-            <img src="{{ asset('template/frontend/images/logo.png') }}" class="logo img-fluid" alt="Kind Heart Charity">
+            <img src="{{ url('storage' . $setting->path_image_logo ?? '') }}" class="logo img-fluid">
             <span>
-                Kind Heart Charity
-                <small>Non-profit Organization</small>
+                {{ $setting->company_name }}
+                <small>{{ $setting->company_name }}</small>
             </span>
         </a>
 

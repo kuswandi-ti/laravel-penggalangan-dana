@@ -246,5 +246,5 @@
 
 @includeIf('includes.datatable')
 @includeIf('includes.summernote')
-@includeIf('includes.select2')
+@includeIf('includes.select2', ['placeholder' => 'Pilih Kategori'])
 @includeIf('includes.datepicker')

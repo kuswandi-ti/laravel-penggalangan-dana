@@ -25,7 +25,7 @@
 
                         <form class="custom-form subscribe-form" style="padding: 0px;">
                             <div class="col-lg-12 col-12">
-                                <button type="submit" class="form-control">Donasi Sekarang</button>
+                                <button type="button" class="btn btn-block custom-btn">Donasi Sekarang</button>
                             </div>
                         </form>
 
