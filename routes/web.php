@@ -48,12 +48,13 @@ use App\Http\Controllers\Frontend\{
 
 /* ========================================================================================= */
 /* FRONT END */
+
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
 
 Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('frontend.subscribe');
 
 Route::get('/donation', [DonationController::class, 'index'])->name('frontend.donation');
-Route::get('/donation/create', [DonationController::class, 'create'])->name('frontend.donation.create');
+Route::get('/donation/create/{id}', [DonationController::class, 'create'])->name('frontend.donation.create');
 Route::get('/donation/{id}', [DonationController::class, 'detail'])->name('frontend.donation.detail');
 
 Route::get('/news', [NewsController::class, 'index'])->name('frontend.news');

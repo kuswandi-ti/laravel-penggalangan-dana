@@ -1,4 +1,7 @@
 TODO :
 =========
-1. Validasi di multiple select2.
-   Alternatif menggunakan single select2
+1. Add visi di tabel settings
+2. CRUD visi di view setting
+3. Tampilkan visi di frontend
+4. Tampilak banner di frontend
+5. Total Founded & Donation di about page

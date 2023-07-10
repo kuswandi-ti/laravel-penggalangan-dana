@@ -10,17 +10,21 @@ class DonationController extends Controller
 {
     public function index()
     {
-        $campaigns = Campaign::orderBy('publish_date', 'DESC')->get();
+        $campaigns = Campaign::orderBy('publish_date', 'desc')
+            ->paginate(3)
+            ->withQueryString();
         return view('frontend.pages.donation.index', compact('campaigns'));
     }
 
-    public function create()
+    public function create($id)
     {
-        return view('frontend.pages.donation.create');
+        $campaign = Campaign::findOrFail($id);
+        return view('frontend.pages.donation.create', compact('campaign'));
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view('frontend.pages.donation.detail');
+        $campaign = Campaign::findOrFail($id);
+        return view('frontend.pages.donation.detail', compact('campaign'));
     }
 }

@@ -9,12 +9,17 @@
                 <div class="mx-auto col-lg-6 col-12">
                     <form class="custom-form contact-form site-footer" action="#" method="post" role="form">
                         <div class="flex-wrap contact-image-wrap d-flex">
-                            <img src="{{ asset('template/frontend/images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg') }}"
-                                class="mb-3 custom-text-box-image img-fluid" alt="">
+                            @if (!empty($campaign->path_image))
+                                <img src="{{ url('storage' . $campaign->path_image ?? '') }}"
+                                    class="mb-3 custom-text-box-image img-fluid" alt=""
+                                    style="width: 100%; max-height: 100%">
+                            @else
+                                <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="mb-3 custom-text-box-image img-fluid"
+                                    alt="" style="width: 100%; max-height: 100%">
+                            @endif
                             <div class="text-center d-flex flex-column">
                                 <p class="mb-0 h3 text-light">Anda akan berdonasi untuk :</p>
-                                <p class="mb-0 h2 text-light"><strong>Sedekah Bantuan Modal Usaha Untuk Pejuang
-                                        Nafkah</strong></p>
+                                <p class="mb-0 h2 text-light"><strong>{{ $campaign->title ?? '' }}</strong></p>
                             </div>
                         </div>
 

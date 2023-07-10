@@ -12,14 +12,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $campaigns = Campaign::orderBy('publish_date', 'DESC')->get();
+        $campaigns = Campaign::orderBy('publish_date', 'desc')
+            ->paginate(3)
+            ->withQueryString();
         return view('frontend.pages.home')->with('campaigns', $campaigns);
     }
 
     public function subscribe(Request $request)
     {
         $validated = Validator::make($request->only('email_subscribe'), [
-            'email_subscribe' => 'required|unique:subscribers,email',
+            'email_subscribe' => 'required|email|unique:subscribers,email',
         ]);
 
         if ($validated->fails()) {

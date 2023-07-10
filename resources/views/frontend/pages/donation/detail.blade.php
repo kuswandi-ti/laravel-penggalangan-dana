@@ -9,10 +9,15 @@
                 <div class="col-lg-8 col-12">
                     <div class="news-block">
                         <div class="news-block-top">
-                            <img src="{{ asset('template/frontend/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
-                                class="news-image img-fluid" alt="">
+                            @if (!empty($campaign->path_image))
+                                <img src="{{ url('storage' . $campaign->path_image ?? '') }}" class="news-image img-fluid"
+                                    alt="" style="width: 100%; max-height: 100%">
+                            @else
+                                <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="news-image img-fluid" alt=""
+                                    style="width: 100%; max-height: 100%">
+                            @endif
 
-                            <div class="news-category-block">
+                            {{-- <div class="news-category-block">
                                 <a href="#" class="category-block-link">
                                     Lifestyle,
                                 </a>
@@ -20,7 +25,7 @@
                                 <a href="#" class="category-block-link">
                                     Clothing Donation
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <form class="custom-form subscribe-form" style="padding: 0px;">
@@ -31,51 +36,27 @@
 
                         <div class="news-block-info">
                             <div class="mb-2 news-block-title">
-                                <h4>Clothing donation to urban area</h4>
+                                <h4>{{ $campaign->title ?? '' }}</h4>
                             </div>
 
                             <div class="mt-2 d-flex">
                                 <div class="news-block-date">
                                     <p>
                                         <i class="bi-calendar4 custom-icon me-1"></i>
-                                        October 12, 2036
+                                        {{ date_format_id($campaign->publish_date) ?? '' }}
                                     </p>
                                 </div>
                                 <div class="mx-5 news-block-author">
                                     <p>
                                         <i class="bi-person custom-icon me-1"></i>
-                                        By Admin
+                                        By {{ $campaign->user->name ?? '' }}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="news-block-body">
-                                <p><strong>Lorem Ipsum</strong> dolor sit amet, consectetur adipsicing kengan omeg
-                                    kohm tokito Professional charity theme based on Bootstrap</p>
-
-                                <p><strong>Sed leo</strong> nisl, This is a Bootstrap 5.2.2 CSS template for charity
-                                    organization websites. You can feel free to use it. Please tell your friends
-                                    about TemplateMo website. Thank you.</p>
-
-                                <blockquote>Sed leo nisl, posuere at molestie ac, suscipit auctor mauris. Etiam quis
-                                    metus elementum, tempor risus vel, condimentum orci.</blockquote>
+                                {!! $campaign->body ?? '' !!}
                             </div>
-
-                            <div class="mt-5 mb-4 row">
-                                <div class="mb-4 col-lg-6 col-12 mb-lg-0">
-                                    <img src="images/news/africa-humanitarian-aid-doctor.jpg"
-                                        class="news-detail-image img-fluid" alt="">
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <img src="images/news/close-up-happy-people-working-together.jpg"
-                                        class="news-detail-image img-fluid" alt="">
-                                </div>
-                            </div>
-
-                            <p>You are not allowed to redistribute this template ZIP file on any other template
-                                collection website. Please <a href="https://templatemo.com/contact" target="_blank">contact
-                                    TemplateMo</a> for more information.</p>
                         </div>
                     </div>
                 </div>
@@ -102,7 +83,8 @@
                     </div>
                     <form class="custom-form subscribe-form" style="padding: 0px;">
                         <div class="col-lg-12 col-12">
-                            <a class="nav-link custom-btn btn" href="{{ route('frontend.donation.create') }}">Donasi
+                            <a class="nav-link custom-btn btn"
+                                href="{{ route('frontend.donation.create', $campaign->id) }}">Donasi
                                 Sekarang</a>
                         </div>
                     </form>
