@@ -193,7 +193,6 @@ class CampaignController extends Controller
                 return redirect()->route('campaign.index')->with('error', 'Data Program gagal diperbaharui.');
             }
         } catch (Exception $e) {
-            dd($request->all());
             return back()->withError($e->getMessage)->withInput();
         } catch (QueryException $qe) {
             return back()->withError($qe->getMessage());

@@ -1,19 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\BankController;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\NewsController;
-use App\Http\Controllers\Backend\BannerController;
-use App\Http\Controllers\Frontend\AboutController;
-use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Backend\CampaignController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\UserProfileInformationController;
-use App\Http\Controllers\Frontend\DonationController;
 
+use App\Http\Controllers\Backend\{
+    BankController,
+    BannerController,
+    CampaignController,
+    CategoryController,
+    DashboardController,
+    SettingController,
+    UserProfileInformationController,
+};
+
+use App\Http\Controllers\Frontend\{
+    AboutController,
+    CampaignsController,
+    ContactController,
+    DonationController,
+    HomeController,
+    NewsController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +46,25 @@ use App\Http\Controllers\Frontend\DonationController;
 //     })->name('dashboard');
 // });
 
+/* ========================================================================================= */
+/* FRONT END */
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
-Route::post('/subscriber', [HomeController::class, 'subscriber'])->name('frontend.subscriber');
+
+Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('frontend.subscribe');
+
 Route::get('/donation', [DonationController::class, 'index'])->name('frontend.donation');
 Route::get('/donation/create', [DonationController::class, 'create'])->name('frontend.donation.create');
 Route::get('/donation/{id}', [DonationController::class, 'detail'])->name('frontend.donation.detail');
+
 Route::get('/news', [NewsController::class, 'index'])->name('frontend.news');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('frontend.contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('frontend.contact.store');
+
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
+
+Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
+/* ========================================================================================= */
 
 Route::group([
     'middleware' => ['auth', 'role:admin,donatur']
@@ -78,7 +95,3 @@ Route::group([
     ], function () {
     });
 });
-
-Route::get('/campaigns', function () {
-    return view('frontend.pages.campaign.index');
-})->name('frontend.campaign.index');

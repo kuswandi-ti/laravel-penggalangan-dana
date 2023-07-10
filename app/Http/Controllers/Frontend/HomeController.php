@@ -16,30 +16,33 @@ class HomeController extends Controller
         return view('frontend.pages.home')->with('campaigns', $campaigns);
     }
 
-    public function subscriber(Request $request)
+    public function subscribe(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|unique:subscribers,email',
+        $validated = Validator::make($request->only('email_subscribe'), [
+            'email_subscribe' => 'required|unique:subscribers,email',
         ]);
 
-        // $validated = Validator::make($request->all(), [
-        //     'email' => 'required|unique:subscribers,email',
-        // ]);
+        if ($validated->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => $validated->errors(),
+            ]);
+        }
 
-        // if ($validated->fails()) {
-        //     return back()->with([
-        //         'errors' => true,
-        //         'message' => $validated->errors(),
-        //     ]);
-        // }
+        $query = Subscriber::create([
+            'email' => $request->email_subscribe,
+        ]);
 
-        Subscriber::create($request->only('email'));
-
-        // return back()->with([
-        //     'errors' => false,
-        //     'message' => 'Subscribe berhasil ditambahkan.',
-        // ]);
-
-        return back()->with('success', 'Email Subscriber berhasil ditambahkan.');
+        if ($query) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Menambahkan data subscriber berhasil.'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Menambahkan data subscriber gagal.'
+            ]);
+        }
     }
 }

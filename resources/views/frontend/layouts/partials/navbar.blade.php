@@ -1,10 +1,14 @@
 <nav class="shadow-lg navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ route('frontend.home') }}">
-            <img src="{{ url('storage' . $setting->path_image_logo ?? '') }}" class="logo img-fluid">
+            @if (!empty($setting))
+                <img src="{{ url('storage' . $setting->path_image_logo ?? '') }}" class="logo img-fluid">
+            @else
+                <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="logo img-fluid">
+            @endif
             <span>
-                {{ $setting->company_name }}
-                <small>{{ $setting->company_name }}</small>
+                {{ $setting->company_name ?? '' }}
+                <small>{{ $setting->company_name ?? '' }}</small>
             </span>
         </a>
 
