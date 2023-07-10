@@ -17,15 +17,15 @@
                                     style="width: 100%; max-height: 100%">
                             @endif
 
-                            {{-- <div class="news-category-block">
-                                <a href="#" class="category-block-link">
-                                    Lifestyle,
-                                </a>
-
-                                <a href="#" class="category-block-link">
-                                    Clothing Donation
-                                </a>
-                            </div> --}}
+                            <div class="news-category-block">
+                                @if ($campaign->category_campaign)
+                                    @foreach ($campaign->category_campaign as $item)
+                                        <a class="category-block-link">
+                                            {{ $item->name }},
+                                        </a>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
 
                         <form class="custom-form subscribe-form" style="padding: 0px;">
