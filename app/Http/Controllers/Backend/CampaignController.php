@@ -84,41 +84,40 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'title' => 'required|min:8',
-                'categories' => 'required|array',
-                'short_description' => 'required',
-                'body' => 'required|min:8',
-                'publish_date' => 'required|date_format:Y-m-d H:i',
-                'status' => 'required|in:publish,pending,archieve',
-                'goal' => 'required|integer',
-                'end_date' => 'required|date_format:Y-m-d H:i',
-                'note' => 'nullable',
-                'receiver' => 'required',
-                'path_image' => 'required|mimes:png,jpg,jpeg,bmp|max:2048',
-            ]);
+        // try {
+        $this->validate($request, [
+            'title' => 'required|min:8',
+            'categories' => 'required|array',
+            'short_description' => 'required|max:255',
+            'body' => 'required|min:8',
+            'publish_date' => 'required|date_format:Y-m-d H:i',
+            'status' => 'required|in:publish,pending,archieve',
+            'goal' => 'required|integer',
+            'end_date' => 'required|date_format:Y-m-d H:i',
+            'note' => 'nullable',
+            'receiver' => 'required',
+            'path_image' => 'required|mimes:png,jpg,jpeg,bmp|max:2048',
+        ]);
 
-            $data = $request->except('path_image', 'slug', 'categories', 'user_id');
-            $data['slug'] = Str::slug($request->title);
-            $data['path_image'] = upload('images/campaign', $request->file('path_image'), 'campaign');
-            $data['user_id'] = auth()->id();
+        $data = $request->except('path_image', 'slug', 'categories', 'user_id');
+        $data['slug'] = Str::slug($request->title);
+        $data['path_image'] = upload('images/campaign', $request->file('path_image'), 'campaign');
+        $data['user_id'] = auth()->id();
 
-            $campaign = Campaign::create($data);
+        $campaign = Campaign::create($data);
 
-            if ($campaign) {
-                $campaign = Campaign::orderBy('id', 'DESC')->first();
-                $campaign->category_campaign()->attach($request->categories);
-                return redirect()->route('campaign.index')->with('success', 'Data Program berhasil ditambahkan.');
-            } else {
-                return redirect()->route('campaign.index')->with('error', 'Data Program gagal ditambahkan.');
-            }
-        } catch (Exception $e) {
-            dd($request->all());
-            return back()->withError($e->getMessage())->withInput();
-        } catch (QueryException $qe) {
-            return back()->withError($qe->getMessage());
+        if ($campaign) {
+            $campaign = Campaign::orderBy('id', 'DESC')->first();
+            $campaign->category_campaign()->attach($request->categories);
+            return redirect()->route('campaign.index')->with('success', 'Data Program berhasil ditambahkan.');
+        } else {
+            return redirect()->route('campaign.index')->with('error', 'Data Program gagal ditambahkan.');
         }
+        // } catch (Exception $e) {
+        //     return back()->withError($e->getMessage())->withInput();
+        // } catch (QueryException $qe) {
+        //     return back()->withError($qe->getMessage());
+        // }
     }
 
     /**
@@ -156,47 +155,47 @@ class CampaignController extends Controller
      */
     public function update(Request $request, Campaign $campaign)
     {
-        try {
-            $this->validate($request, [
-                'title' => 'required|min:8',
-                'categories' => 'required|array',
-                'short_description' => 'required',
-                'body' => 'required|min:8',
-                'publish_date' => 'required|date_format:Y-m-d H:i',
-                'status' => 'required|in:publish,pending,archieve',
-                'goal' => 'required|integer',
-                'end_date' => 'required|date_format:Y-m-d H:i',
-                'note' => 'nullable',
-                'receiver' => 'required',
-                'path_image' => 'nullable|mimes:png,jpg,jpeg,bmp|max:2048',
-            ]);
+        // try {
+        $this->validate($request, [
+            'title' => 'required|min:8',
+            'categories' => 'required|array',
+            'short_description' => 'required|max:255',
+            'body' => 'required|min:8',
+            'publish_date' => 'required|date_format:Y-m-d H:i',
+            'status' => 'required|in:publish,pending,archieve',
+            'goal' => 'required|integer',
+            'end_date' => 'required|date_format:Y-m-d H:i',
+            'note' => 'nullable',
+            'receiver' => 'required',
+            'path_image' => 'nullable|mimes:png,jpg,jpeg,bmp|max:2048',
+        ]);
 
-            $data = $request->except('path_image', 'slug', 'categories', 'user_id');
-            $data['slug'] = Str::slug($request->title);
-            $data['user_id'] = auth()->id();
+        $data = $request->except('path_image', 'slug', 'categories', 'user_id');
+        $data['slug'] = Str::slug($request->title);
+        $data['user_id'] = auth()->id();
 
-            if ($request->hasFile('path_image')) {
-                if (!empty($campaign->path_image)) {
-                    if (Storage::disk('public')->exists($campaign->path_image)) {
-                        Storage::disk('public')->delete($campaign->path_image);
-                    }
+        if ($request->hasFile('path_image')) {
+            if (!empty($campaign->path_image)) {
+                if (Storage::disk('public')->exists($campaign->path_image)) {
+                    Storage::disk('public')->delete($campaign->path_image);
                 }
-                $data['path_image'] = upload('images/campaign', $request->file('path_image'), 'campaign');
             }
-
-            $query = $campaign->update($data);
-
-            if ($campaign) {
-                $campaign->category_campaign()->sync($request->categories);
-                return redirect()->route('campaign.index')->with('success', 'Data Program berhasil diperbaharui.');
-            } else {
-                return redirect()->route('campaign.index')->with('error', 'Data Program gagal diperbaharui.');
-            }
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage)->withInput();
-        } catch (QueryException $qe) {
-            return back()->withError($qe->getMessage());
+            $data['path_image'] = upload('images/campaign', $request->file('path_image'), 'campaign');
         }
+
+        $query = $campaign->update($data);
+
+        if ($campaign) {
+            $campaign->category_campaign()->sync($request->categories);
+            return redirect()->route('campaign.index')->with('success', 'Data Program berhasil diperbaharui.');
+        } else {
+            return redirect()->route('campaign.index')->with('error', 'Data Program gagal diperbaharui.');
+        }
+        // } catch (Exception $e) {
+        //     return back()->withError($e->getMessage())->withInput();
+        // } catch (QueryException $qe) {
+        //     return back()->withError($qe->getMessage());
+        // }
     }
 
     /**

@@ -240,9 +240,9 @@
                     </div>
 
                     <x-slot name="footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <a href="/campaign" class="btn btn-default">
                             <i class="fas fa-chevron-circle-left"></i> Kembali
-                        </button>
+                        </a>
                         <button type="reset" class="btn btn-warning">
                             <i class="fas fa-ban"></i> Reset
                         </button>

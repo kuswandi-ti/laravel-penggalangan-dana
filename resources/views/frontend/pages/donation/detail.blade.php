@@ -63,22 +63,26 @@
 
                 <div class="mx-auto col-lg-4 col-12 mt-lg-0">
                     <h5>Status</h5>
-                    <span class="mb-4 h2"><strong>Rp. {{ amount_format_id(10000000) }}</strong></span><br>
-                    <span class="mb-5 h5">Terkumpul dari Rp. {{ amount_format_id(15000000) }}</span>
+                    <span class="mb-4 h2"><strong>Rp. {{ amount_format_id($campaign->amount ?? 0) }}</strong></span><br>
+                    <span class="mb-5 h5">Terkumpul dari Rp. {{ amount_format_id($campaign->goal ?? 0) }}</span>
+
+                    @php
+                        $persen_tercapai = ($campaign->amount / $campaign->goal) * 100;
+                    @endphp
 
                     <div class="mt-4 progress">
-                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-                            aria-valuemax="100" height="100"></div>
+                        <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="{{ $persen_tercapai }}"
+                            aria-valuemin="0" aria-valuemax="100" style="width: {{ $persen_tercapai }}%">
+                        </div>
                     </div>
                     <div class="my-2 d-flex align-items-center">
                         <p class="mb-0">
-                            <strong>7%</strong>
+                            <strong>{{ $persen_tercapai }}%</strong>
                             Tercapai
                         </p>
 
                         <p class="mb-0 ms-auto">
-                            <strong>3 bulan</strong>
-                            lagi
+                            <strong>{{ now()->diff(new DateTime($campaign->end_date))->days }}</strong> hari lagi
                         </p>
                     </div>
                     <form class="custom-form subscribe-form" style="padding: 0px;">

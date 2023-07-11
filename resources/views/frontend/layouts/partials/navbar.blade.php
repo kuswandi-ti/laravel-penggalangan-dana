@@ -20,23 +20,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('frontend.home') ? 'active' : 'inactive' }}"
+                    <a class="nav-link {{ request()->is('home*') ? 'active' : 'inactive' }}"
                         href="{{ route('frontend.home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('frontend.about') ? 'active' : 'inactive' }}"
+                    <a class="nav-link {{ request()->is('about*') ? 'active' : 'inactive' }}"
                         href="{{ route('frontend.about') }}">Tentang Kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('frontend.donation') ? 'active' : 'inactive' }}"
+                    <a class="nav-link {{ request()->is('donation*') ? 'active' : 'inactive' }}"
                         href="{{ route('frontend.donation') }}">Donasi Program</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('frontend.news') ? 'active' : 'inactive' }}"
+                    <a class="nav-link {{ request()->is('news*') ? 'active' : 'inactive' }}"
                         href="{{ route('frontend.news') }}">Berita</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : 'inactive' }}"
+                    <a class="nav-link {{ request()->is('contact*') ? 'active' : 'inactive' }}"
                         href="{{ route('frontend.contact') }}">Kontak</a>
                 </li>
                 <li class="nav-item ms-3">

@@ -54,7 +54,6 @@ Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
 Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('frontend.subscribe');
 
 Route::get('/donation', [DonationController::class, 'index'])->name('frontend.donation');
-Route::get('/donation/create/{id}', [DonationController::class, 'create'])->name('frontend.donation.create');
 Route::get('/donation/{id}', [DonationController::class, 'detail'])->name('frontend.donation.detail');
 
 Route::get('/news', [NewsController::class, 'index'])->name('frontend.news');
@@ -63,8 +62,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('frontend.cont
 Route::post('/contact', [ContactController::class, 'store'])->name('frontend.contact.store');
 
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
-
-Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
 /* ========================================================================================= */
 
 Route::group([
@@ -89,6 +86,12 @@ Route::group([
         Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
         Route::put('/setting/{setting}', [SettingController::class, 'update'])->name('setting.update');
         Route::delete('/setting/{setting}/bank/{id}', [SettingController::class, 'bank_destroy'])->name('setting.bank.destroy');
+
+        // Create Campaign
+        Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
+
+        // Create Donation
+        Route::get('/donation/create/{id}', [DonationController::class, 'create'])->name('frontend.donation.create');
     });
 
     Route::group([

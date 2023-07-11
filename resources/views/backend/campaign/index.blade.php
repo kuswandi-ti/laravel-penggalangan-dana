@@ -130,6 +130,13 @@
             table.ajax.reload()
         })
 
+        function showAlert(message, type) {
+            Toast.fire({
+                icon: `${type}`,
+                title: `${message}`,
+            })
+        }
+
         function deleteData(url) {
             if (confirm('Yakin akan menghapus data ?')) {
                 $.post(url, {

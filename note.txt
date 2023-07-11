@@ -5,3 +5,6 @@ TODO :
 3. Tampilkan visi di frontend (OK)
 4. Tampilak banner di frontend (OK)
 5. Total Founded & Donation di about page (OK)
+
+6. Progress bar di frontend detail campaign (OK)
+7. Edit create campaign menjadi 3 bagian. Detail, Foto, Konfirmasi
