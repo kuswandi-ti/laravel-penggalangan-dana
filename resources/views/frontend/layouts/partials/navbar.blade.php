@@ -7,8 +7,8 @@
                 <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="logo img-fluid">
             @endif
             <span>
-                {{ $setting->company_name ?? '' }}
-                <small>{{ $setting->company_name ?? '' }}</small>
+                {{ $setting->business_name ?? '' }}
+                <small>{{ $setting->short_description ?? '' }}</small>
             </span>
         </a>
 

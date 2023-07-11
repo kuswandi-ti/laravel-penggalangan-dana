@@ -17,6 +17,7 @@ class SettingTableSeeder extends Seeder
             'email' => 'support@sko.com',
             'owner_name' => 'Mr. Kuswandi',
             'company_name' => 'PT. SKO',
+            'business_name' => 'KitaBersatu',
             'short_description' => '-',
             'keyword' => 'sosial',
             'phone' => '081298694640',

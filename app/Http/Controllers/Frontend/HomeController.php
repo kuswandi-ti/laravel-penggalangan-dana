@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Banner;
 use App\Models\Campaign;
+use App\Models\Donation;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -15,7 +18,18 @@ class HomeController extends Controller
         $campaigns = Campaign::orderBy('publish_date', 'desc')
             ->paginate(3)
             ->withQueryString();
-        return view('frontend.pages.home')->with('campaigns', $campaigns);
+
+        $donatur_count = User::where('role_id', '=', 2)->count();
+        $donation_sum = Donation::sum('nominal');
+
+        $banners = Banner::orderBy('id', 'ASC')->get();
+
+        return view('frontend.pages.home', compact([
+            'donatur_count',
+            'donation_sum',
+            'campaigns',
+            'banners',
+        ]));
     }
 
     public function subscribe(Request $request)

@@ -9,32 +9,20 @@
                 <div class="p-0 col-lg-12 col-12">
                     <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ asset('template/frontend/images/slide/volunteer-helping-with-donation-box.jpg') }}"
-                                    class="carousel-image img-fluid" alt="...">
-                                <div class="carousel-caption d-flex flex-column justify-content-end">
-                                    <h1>be a Kind Heart</h1>
-                                    <p>Professional charity theme based on Bootstrap 5.2.2</p>
+                            @foreach ($banners as $item)
+                                <div class="carousel-item active">
+                                    @if (!empty($setting))
+                                        <img src="{{ url('storage' . $setting->banner_image ?? '') }}"
+                                            class="carousel-image img-fluid" alt="">
+                                    @else
+                                        <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="carousel-image img-fluid">
+                                    @endif
+                                    <div class="carousel-caption d-flex flex-column justify-content-end">
+                                        <h1>{{ $item->banner_title ?? '' }}</h1>
+                                        <p>{{ $item->banner_description ?? '' }}</p>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="{{ asset('template/frontend/images/slide/volunteer-selecting-organizing-clothes-donations-charity.jpg') }}"
-                                    class="carousel-image img-fluid" alt="...">
-                                <div class="carousel-caption d-flex flex-column justify-content-end">
-                                    <h1>Non-profit</h1>
-                                    <p>You can support us to grow more</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="{{ asset('template/frontend/images/slide/medium-shot-people-collecting-donations.jpg') }}"
-                                    class="carousel-image img-fluid" alt="...">
-                                <div class="carousel-caption d-flex flex-column justify-content-end">
-                                    <h1>Humanity</h1>
-                                    <p>Please tell your friends about our website</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
 
                         <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"
@@ -58,7 +46,7 @@
         <div class="container">
             <div class="row">
                 <div class="mx-auto text-center col-lg-10 col-12">
-                    <h2 class="mb-5">Selamat datang di {{ $setting->company_name ?? '' }}</h2>
+                    <h2 class="mb-5">Selamat datang di {{ $setting->business_name ?? '' }}</h2>
                 </div>
 
                 <div class="mb-4 col-lg-3 col-md-6 col-12 mb-lg-0">

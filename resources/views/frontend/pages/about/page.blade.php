@@ -9,8 +9,8 @@
             <div class="col-lg-6 col-12">
                 <div class="custom-text-box">
                     <h2 class="mb-2">Tentang Kami</h2>
-                    <h5 class="mb-3"><span class="text-secondary">{{ $setting->company_name ?? '' }}</span>,
-                        Organisasi Non Profit
+                    <h5 class="mb-3"><span class="text-secondary">{{ $setting->business_name ?? '' }}</span>,
+                        {{ $setting->short_description ?? '' }}
                     </h5>
                     <p class="mb-0">
                         {!! $setting->about ?? '' !!}
@@ -21,17 +21,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="custom-text-box mb-lg-0">
                             <h5 class="mb-3">Misi Kami</h5>
-                            <p>Sed leo nisl, posuere at molestie ac, suscipit auctor quis metus</p>
-                            <ul class="mt-2 custom-list">
-                                <li class="custom-list-item d-flex">
-                                    <i class="bi-check custom-text-box-icon me-2"></i>
-                                    Charity Theme
-                                </li>
-                                <li class="custom-list-item d-flex">
-                                    <i class="bi-check custom-text-box-icon me-2"></i>
-                                    Semantic HTML
-                                </li>
-                            </ul>
+                            {!! $setting->vision ?? '' !!}
                         </div>
                     </div>
 
@@ -39,18 +29,21 @@
                         <div class="flex-wrap custom-text-box d-flex d-lg-block mb-lg-0">
                             <div class="counter-thumb">
                                 <div class="d-flex">
-                                    <span class="counter-number" data-from="1" data-to="2009" data-speed="1000"></span>
+                                    <span class="counter-number" data-from="1" data-to="{{ $donatur_count ?? 0 }}"
+                                        data-speed="1000"></span>
                                     <span class="counter-number-text"></span>
                                 </div>
-                                <span class="counter-text">Founded</span>
+                                <span class="counter-text">Donatur</span>
                             </div>
 
                             <div class="mt-4 counter-thumb">
                                 <div class="d-flex">
-                                    <span class="counter-number" data-from="1" data-to="120" data-speed="1000"></span>
-                                    <span class="counter-number-text">B</span>
+                                    <span class="counter-number" data-from="1"
+                                        data-to="{{ amount_format_id($donation_sum ?? 0) / 1000000 }}"
+                                        data-speed="1000"></span>
+                                    <span class="counter-number-text">jt</span>
                                 </div>
-                                <span class="counter-text">Donations</span>
+                                <span class="counter-text">Donasi</span>
                             </div>
                         </div>
                     </div>

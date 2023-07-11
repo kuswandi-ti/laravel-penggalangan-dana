@@ -31,15 +31,17 @@ class SettingController extends Controller
     {
         // Rules General
         $rules = [
-            'email' => 'required|email',
             'owner_name' => 'required',
             'company_name' => 'required',
+            'business_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
             'short_description' => 'required',
             'keyword' => 'required',
-            'phone' => 'required',
             'postal_code' => 'required',
             'city' => 'required',
             'province' => 'required',
+            'contact_person_path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
         ];
 
         // Rules Image
@@ -57,6 +59,7 @@ class SettingController extends Controller
                 'fanpage_link' => 'nullable|url',
                 'google_plus_link' => 'nullable|url',
                 'youtube_link' => 'nullable|url',
+                'facebook_link' => 'nullable|url',
             ];
         }
 
@@ -73,16 +76,47 @@ class SettingController extends Controller
         $this->validate($request, $rules);
 
         // Set Data
-        $data = $request->except('tab', 'path_image_logo', 'bank_id', 'account_number', 'account_name', 'banner_title', 'banner_description', 'banner_image');
+        $data = $request->except([
+            'tab',
+            'contact_person_path_image',
+            'path_image_logo',
+            'path_image_business',
+            'bank_id',
+            'account_number',
+            'account_name',
+            'banner_title',
+            'banner_description',
+            'banner_image',
+        ]);
+
+        // Path Contact Person Image
+        if ($request->hasFile('contact_person_path_image')) {
+            if (!empty($setting->contact_person_path_image)) {
+                if (Storage::disk('public')->exists($setting->contact_person_path_image)) {
+                    Storage::disk('public')->delete($setting->contact_person_path_image);
+                }
+            }
+            $data['contact_person_path_image'] = upload('images/contact_person', $request->file('contact_person_path_image'), 'contact_person');
+        }
 
         // Path Image Logo
         if ($request->hasFile('path_image_logo')) {
-            if (!empty($setting->path_image)) {
+            if (!empty($setting->path_image_logo)) {
                 if (Storage::disk('public')->exists($setting->path_image_logo)) {
                     Storage::disk('public')->delete($setting->path_image_logo);
                 }
             }
             $data['path_image_logo'] = upload('images/setting', $request->file('path_image_logo'), 'logo');
+        }
+
+        // Path Image Business
+        if ($request->hasFile('path_image_business')) {
+            if (!empty($setting->path_image_business)) {
+                if (Storage::disk('public')->exists($setting->path_image_business)) {
+                    Storage::disk('public')->delete($setting->path_image_business);
+                }
+            }
+            $data['path_image_business'] = upload('images/business', $request->file('path_image_business'), 'business');
         }
 
         // Update Data

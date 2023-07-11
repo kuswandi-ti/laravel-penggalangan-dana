@@ -1,7 +1,7 @@
 TODO :
 =========
-1. Add visi di tabel settings
-2. CRUD visi di view setting
-3. Tampilkan visi di frontend
-4. Tampilak banner di frontend
-5. Total Founded & Donation di about page
+1. Add visi, business_name, facebook_link, long & lat di tabel settings (OK)
+2. Refactor view setting (backend) (OK)
+3. Tampilkan visi di frontend (OK)
+4. Tampilak banner di frontend (OK)
+5. Total Founded & Donation di about page (OK)

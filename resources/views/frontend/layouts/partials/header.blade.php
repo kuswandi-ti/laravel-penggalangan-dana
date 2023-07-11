@@ -16,14 +16,6 @@
             <div class="flex-wrap col-lg-3 col-12 d-flex justify-content-center">
                 <ul class="social-icon">
                     <li class="social-icon-item">
-                        <a href="{{ $setting->youtube_link ?? '' }}" class="social-icon-link bi-youtube"
-                            target="_blank"></a>
-                    </li>
-                    <li class="social-icon-item">
-                        <a href="{{ $setting->fanpage_link ?? '' }}" class="social-icon-link bi-facebook"
-                            target="_blank"></a>
-                    </li>
-                    <li class="social-icon-item">
                         <a href="{{ $setting->instagram_link ?? '' }}" class="social-icon-link bi-instagram"
                             target="_blank"></a>
                     </li>
@@ -33,6 +25,14 @@
                     </li>
                     <li class="social-icon-item">
                         <a href="{{ $setting->google_plus_link ?? '' }}" class="social-icon-link bi-google"
+                            target="_blank"></a>
+                    </li>
+                    <li class="social-icon-item">
+                        <a href="{{ $setting->youtube_link ?? '' }}" class="social-icon-link bi-youtube"
+                            target="_blank"></a>
+                    </li>
+                    <li class="social-icon-item">
+                        <a href="{{ $setting->facebook_link ?? '' }}" class="social-icon-link bi-facebook"
                             target="_blank"></a>
                     </li>
                     <li class="social-icon-item">
