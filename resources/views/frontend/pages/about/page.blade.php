@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="custom-text-box">
-                    <h2 class="mb-2">Misi {{ $setting->business_name ?? '' }}</h2>
+                    <h5 class="mb-2">Misi {{ $setting->business_name ?? '' }}</h5>
                     <p class="mb-0">
                         {!! $setting->vision ?? '' !!}
                     </p>
