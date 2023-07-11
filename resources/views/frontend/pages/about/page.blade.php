@@ -13,16 +13,14 @@
             <div class="col-lg-6 col-12">
                 <div class="custom-text-box">
                     <h2 class="mb-2">Tentang {{ $setting->business_name ?? '' }}</h2>
-                    <h5 class="mb-3"><span class="text-secondary">{{ $setting->business_name ?? '' }}</span>,
-                        {{ $setting->short_description ?? '' }}
+                    <h5 class="mb-3">{{ $setting->business_name ?? '' }},
+                        <span class="text-secondary">{{ $setting->short_description ?? '' }}</span>
                     </h5>
                     <p class="mb-0">
                         {!! $setting->about ?? '' !!}
                     </p>
-                </div>
 
-                <div class="custom-text-box">
-                    <h5 class="mb-2">Misi {{ $setting->business_name ?? '' }}</h5>
+                    <h5 class="mb-2 mt-5">Misi {{ $setting->business_name ?? '' }}</h5>
                     <p class="mb-0">
                         {!! $setting->vision ?? '' !!}
                     </p>
