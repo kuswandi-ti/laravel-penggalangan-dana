@@ -4,6 +4,18 @@
             <div class="mb-5 col-lg-6 col-12">
                 <div class="contact-info-wrap">
                     <h2>Informasi Kontak</h2>
+                    <div class="flex-wrap contact-image-wrap d-flex">
+                        @if (!empty($setting))
+                            <img src="{{ url('storage' . $setting->contact_person_path_image ?? '') }}"
+                                class="img-fluid avatar-image" alt="">
+                        @else
+                            <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="img-fluid avatar-image">
+                        @endif
+                        <div class="d-flex flex-column justify-content-center ms-3">
+                            <p class="mb-0">{{ $setting->contact_person_name ?? '' }}</p>
+                            <p class="mb-0"><strong>{{ $setting->contact_person_title ?? '' }}</strong></p>
+                        </div>
+                    </div>
                     <div class="contact-info">
                         <p class="mb-2 d-flex">
                             <i class="bi-geo-alt me-2"></i>
@@ -22,13 +34,14 @@
                                 {{ $setting->email ?? '' }}
                             </a>
                         </p>
-                        <a href="https://www.google.com/maps/place/Rumah+Kuswandi+-+Deka/@-6.436,107.0044753,17z/data=!3m1!4b1!4m6!3m5!1s0x2e699749293b165d:0x81c8ebb4b3dd5ff0!8m2!3d-6.436!4d107.0070502!16s%2Fg%2F11sgwp3lcb?entry=ttu"
-                            class="custom-btn btn mt-3" target="_blank">Peta Lokasi</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ $setting->longitude ?? '' }},{{ $setting->latitude ?? '' }}"
+                            class="mt-3 custom-btn btn" target="_blank">Peta Lokasi</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-12">
-                <form class="custom-form contact-form" action="{{ route('frontend.contact.store') }}" id="contact-form">
+                <form class="custom-form contact-form" action="{{ route('frontend.contact.store') }}"
+                    id="contact-form">
                     <h2>Form Kontak</h2>
                     <div class="alert alert-msg-contact alert-dismissible fade show" role="alert"
                         style="display:none">

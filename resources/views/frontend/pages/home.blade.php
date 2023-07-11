@@ -12,7 +12,7 @@
                             @foreach ($banners as $item)
                                 <div class="carousel-item active">
                                     @if (!empty($setting))
-                                        <img src="{{ url('storage' . $setting->banner_image ?? '') }}"
+                                        <img src="{{ url('storage' . $item->banner_image ?? '') }}"
                                             class="carousel-image img-fluid" alt="">
                                     @else
                                         <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="carousel-image img-fluid">

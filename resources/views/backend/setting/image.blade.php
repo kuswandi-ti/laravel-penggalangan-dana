@@ -32,10 +32,10 @@
                 <div class="mb-3 text-center">
                     @if (!empty($setting->path_image_business))
                         <img class="img-fluid preview-path_image_business"
-                            src="{{ url('storage/' . $setting->path_image_business) }}" width="200">
+                            src="{{ url('storage/' . $setting->path_image_business) }}" width="500">
                     @else
                         <img class="img-fluid preview-path_image_business" src="{{ url(env('NO_IMAGE_SQUARE')) }}"
-                            width="200">
+                            width="500">
                     @endif
                 </div>
                 <div class="mb-3 custom-file">
