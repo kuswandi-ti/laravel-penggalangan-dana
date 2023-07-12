@@ -7,7 +7,10 @@
         <div class="container">
             <div class="row">
                 <div class="mx-auto col-lg-6 col-12">
-                    <form class="custom-form contact-form site-footer" action="#" method="post" role="form">
+                    <form class="custom-form contact-form site-footer"
+                        action="{{ route('frontend.donation.checkout', $campaign->id) }}" method="post" role="form"
+                        id="donation-form">
+                        @csrf
                         <div class="flex-wrap contact-image-wrap d-flex">
                             @if (!empty($campaign->path_image))
                                 <img src="{{ url('storage' . $campaign->path_image ?? '') }}"
@@ -28,8 +31,14 @@
                                 <p class="text-light" style="font-size: 30pt"><strong>Rp. </strong></p>
                             </div>
                             <div class="col-lg-10 col-md-6 col-12">
-                                <input type="number" name="last-name" id="last-name" class="form-control text-dark"
-                                    placeholder="0" style="font-size: 30pt; font-weight: bold; height:70px;">
+                                <input type="number" name="nominal" id="nominal"
+                                    class="form-control text-dark @error('nominal') is-invalid @enderror" placeholder="0"
+                                    style="font-size: 30pt; font-weight: bold; height:70px;">
+                                @error('nominal')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
@@ -37,23 +46,30 @@
 
                         <div class="row">
                             <div class="col-lg-12 col-12 form-check-group form-check-group-donation-frequency">
-                                <p class="h4 text-light"><strong>Donatur</strong></p>
-                                <select class="form-control text-dark" style="height:50px;">
-                                    <option>sdfsdfsdf</option>
-                                    <option>sdfsdfsdf</option>
-                                    <option>sdfsdfsdf</option>
-                                </select>
+                                @if (auth()->user()->hasRole('admin'))
+                                    <p class="h4 text-light"><strong>Donatur</strong></p>
+                                    <select class="form-control text-dark" name="user_id" id="user_id"
+                                        style="height:50px;">
+                                        @foreach ($donatur as $key => $item)
+                                            <option value="{{ $key }}">
+                                                {{ $item }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="h4 text-light"><strong>No. Telp.</strong></p>
+                                    <input type="text" name="support" id="support" class="form-control"
+                                        placeholder="No. Telp.">
+                                @else
+                                    <input type="hidden" name="user_id" value="{{ auth()->id }}">
+                                @endif
 
-                                <p class="mb-5 h4 text-light"><strong>081298694640</strong></p>
-
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1" class="text-light"> Sembunyikan nama saya (Anonim)</label><br>
+                                <input type="checkbox" id="anonim" name="anonim" value="1">
+                                <label for="anonim" class="text-light"> Sembunyikan nama saya (Anonim)</label><br>
 
                                 <textarea name="message" rows="5" class="form-control text-dark" id="message"
                                     placeholder="Tulis dukungan atau do'a untuk penggalangan dana ini. Contoh : Semoga cepet sembuh, ya..."></textarea>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-block custom-btn">Lanjut ke Pembayaran</button>
+                        <button type="submit" class="btn btn-block custom-btn">Lanjut ke Pembayaran</button>
                     </form>
                 </div>
 

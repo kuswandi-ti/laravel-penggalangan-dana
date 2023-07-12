@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('anonim');
             $table->integer('nominal');
             $table->text('support')->nullable();
-            $table->enum('status', ['Confirm', 'Not Confirm']);
+            $table->enum('status', ['paid', 'not paid'])->default('not paid');
             $table->timestamps();
         });
     }
