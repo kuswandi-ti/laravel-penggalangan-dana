@@ -19,7 +19,7 @@ class HomeController extends Controller
             ->withQueryString();
 
         $donatur_count = User::where('role_id', '=', 2)->count();
-        $donation_sum = Campaign::sum('nominal');
+        $donation_sum = Campaign::sum('amount');
 
         $banners = Banner::orderBy('id', 'ASC')->get();
 

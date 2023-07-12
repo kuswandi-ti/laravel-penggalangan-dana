@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="short_description">Short Description <span class="text-danger">*</span></label>
+                                <label for="short_description">Deskripsi Singkat <span class="text-danger">*</span></label>
                                 <textarea class="form-control @error('short_description') is-invalid @enderror" name="short_description"
                                     id="short_description" rows="3" placeholder="Isikan Deskripsi Singkat Program">{{ old('short_description') }}</textarea>
                                 @error('short_description')
@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="body">Content / Body <span class="text-danger">*</span></label>
+                                <label for="body">Konten / Body <span class="text-danger">*</span></label>
                                 <textarea class="form-control summernote @error('body') is-invalid @enderror" name="body" id="body"
                                     rows="3">{{ old('body') }}</textarea>
                                 @error('body')

@@ -14,18 +14,10 @@
                     <div class="p-4 mb-5 bg-white shadow-sm">
                         <div class="bs-stepper linear">
                             <div class="bs-stepper-header" role="tablist">
-                                <div class="step active" data-target="#judul-part">
-                                    <button type="button" class="step-trigger" role="tab" id="judul-part-trigger"
-                                        aria-controls="judul-part" aria-selected="true">
-                                        <span class="bs-stepper-circle">1</span>
-                                        <span class="bs-stepper-label">Judul</span>
-                                    </button>
-                                </div>
-                                <div class="bs-stepper-line"></div>
-                                <div class="step" data-target="#detail-part">
+                                <div class="step active" data-target="#detail-part">
                                     <button type="button" class="step-trigger" role="tab" id="detail-part-trigger"
-                                        aria-controls="detail-part" aria-selected="false" disabled="disabled">
-                                        <span class="bs-stepper-circle">2</span>
+                                        aria-controls="detail-part" aria-selected="true">
+                                        <span class="bs-stepper-circle">1</span>
                                         <span class="bs-stepper-label">Detail</span>
                                     </button>
                                 </div>
@@ -33,44 +25,28 @@
                                 <div class="step" data-target="#foto-part">
                                     <button type="button" class="step-trigger" role="tab" id="foto-part-trigger"
                                         aria-controls="foto-part" aria-selected="false" disabled="disabled">
-                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-circle">2</span>
                                         <span class="bs-stepper-label">Foto</span>
-                                    </button>
-                                </div>
-                                <div class="bs-stepper-line"></div>
-                                <div class="step" data-target="#deskripsi-part">
-                                    <button type="button" class="step-trigger" role="tab" id="deskripsi-part-trigger"
-                                        aria-controls="deskripsi-part" aria-selected="false" disabled="disabled">
-                                        <span class="bs-stepper-circle">4</span>
-                                        <span class="bs-stepper-label">Deskripsi</span>
                                     </button>
                                 </div>
                                 <div class="bs-stepper-line"></div>
                                 <div class="step" data-target="#konfirmasi-part">
                                     <button type="button" class="step-trigger" role="tab" id="konfirmasi-part-trigger"
                                         aria-controls="konfirmasi-part" aria-selected="false" disabled="disabled">
-                                        <span class="bs-stepper-circle">5</span>
+                                        <span class="bs-stepper-circle">3</span>
                                         <span class="bs-stepper-label">Konfirmasi</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="bs-stepper-content">
                                 <form onsubmit="return false">
-                                    <div id="judul-part" role="tabpanel" class="bs-stepper-pane active dstepper-block"
-                                        aria-labelledby="judul-part-trigger">
-                                        @includeIf('frontend.pages.campaign.step.judul')
-                                    </div>
-                                    <div id="detail-part" role="tabpanel" class="bs-stepper-pane"
+                                    <div id="detail-part" role="tabpanel" class="bs-stepper-pane active dstepper-block"
                                         aria-labelledby="detail-part-trigger">
                                         @includeIf('frontend.pages.campaign.step.detail')
                                     </div>
                                     <div id="foto-part" role="tabpanel" class="bs-stepper-pane"
                                         aria-labelledby="foto-part-trigger">
                                         @includeIf('frontend.pages.campaign.step.foto')
-                                    </div>
-                                    <div id="deskripsi-part" role="tabpanel" class="bs-stepper-pane"
-                                        aria-labelledby="deskripsi-part-trigger">
-                                        @includeIf('frontend.pages.campaign.step.deskripsi')
                                     </div>
                                     <div id="konfirmasi-part" role="tabpanel" class="bs-stepper-pane"
                                         aria-labelledby="konfirmasi-part-trigger">

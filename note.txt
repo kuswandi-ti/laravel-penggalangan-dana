@@ -7,4 +7,4 @@ TODO :
 5. Total Founded & Donation di about page (OK)
 
 6. Progress bar di frontend detail campaign (OK)
-7. Edit create campaign menjadi 3 bagian. Detail, Foto, Konfirmasi
+7. Edit create campaign menjadi 3 bagian. Detail, Foto, Konfirmasi (OK)

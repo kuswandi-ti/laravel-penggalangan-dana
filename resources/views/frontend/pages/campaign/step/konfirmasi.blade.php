@@ -35,7 +35,7 @@
 </div>
 
 <div class="alert alert-primary">
-    Saya setuju dengan <strong>syarat & ketentuan</strong> donasi dari KitaBersatu
+    Saya setuju dengan <strong>syarat & ketentuan</strong> donasi dari <strong>{{ $setting->business_name }}</strong>
 </div>
 
 <div class="mt-3 form-group">
