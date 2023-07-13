@@ -64,7 +64,7 @@
                         <a class="d-block">
                             <img src="{{ asset('template/frontend/images/icons/heart.png') }}"
                                 class="featured-block-image img-fluid" alt="">
-                            <p class="featured-block-text">Kegiatan <br><strong>Keagamaan</strong></p>
+                            <p class="featured-block-text">Kegiatan <br><strong>Sosial</strong></p>
                         </a>
                     </div>
                 </div>

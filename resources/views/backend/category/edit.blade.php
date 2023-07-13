@@ -29,6 +29,23 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="path_image">Gambar Kategori</label>
+                        <div class="mb-3 text-center">
+                            @if (!empty($category->path_image))
+                                <img class="img-fluid preview-path_image" src="{{ url('storage' . $category->path_image) }}"
+                                    width="200">
+                            @else
+                                <img class="img-fluid preview-path_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}"
+                                    width="200">
+                            @endif
+                        </div>
+                        <div class="mb-3 custom-file">
+                            <input type="file" class="custom-file-input" id="path_image" name="path_image"
+                                onchange="preview('.preview-path_image', this.files[0])">
+                            <label class="custom-file-label" for="path_image">Choose file</label>
+                        </div>
+                    </div>
                     <x-slot name="footer">
                         <a href="/category" class="btn btn-warning">
                             <i class="fas fa-chevron-circle-left"></i> Kembali

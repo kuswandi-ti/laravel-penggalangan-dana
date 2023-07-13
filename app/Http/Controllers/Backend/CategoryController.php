@@ -39,11 +39,13 @@ class CategoryController extends Controller
     {
         try {
             $this->validate($request, [
-                'name' => 'required|unique:categories,name'
+                'name' => 'required|unique:categories,name',
+                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             ]);
 
             $data = $request->only('name');
             $data['slug'] = Str::slug($request->name);
+            $data['path_image'] = upload('images/category', $request->file('path_image'), 'category');
 
             $query = Category::create($data);
 
@@ -81,11 +83,20 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $this->validate($request, [
-            'name' => 'required|unique:categories,name,' . $category->id
+            'name' => 'required|unique:categories,name,' . $category->id,
+            'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
         ]);
 
         $data = $request->only('name');
         $data['slug'] = Str::slug($request->name);
+        if ($request->hasFile('path_image')) {
+            if (!empty($category->path_image)) {
+                if (Storage::disk('public')->exists($category->path_image)) {
+                    Storage::disk('public')->delete($category->path_image);
+                }
+            }
+            $data['path_image'] = upload('images/category', $request->file('path_image'), 'category');
+        }
 
         $category->update($data); // $category didapat dari parameter di fungsi update()
 
