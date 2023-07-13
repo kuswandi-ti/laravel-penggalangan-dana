@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
 use App\Models\Campaign;
+use App\Models\Donation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +23,7 @@ class DonationController extends Controller
         $campaign = Campaign::findOrFail($id);
         $donatur = User::with('role')
             ->whereRelation('role', 'name', '=', 'donatur')
-            ->get()->pluck('name', 'id');
+            ->get();
         return view('frontend.pages.donation.create', compact('campaign', 'donatur'));
     }
 
@@ -36,6 +37,70 @@ class DonationController extends Controller
     {
         $this->validate($request, [
             'nominal' => 'required',
+            'user_id' => 'required',
+            'anonim' => 'nullable|in:1,0',
+            'support' => 'nullable',
         ]);
+
+        $data = [];
+
+        $data['campaign_id'] = $id;
+        $data['user_id'] = $request->user_id;
+        $data['order_number'] = 'PX'. mt_rand(000000, 999999);
+        $data['anonim'] = $request->anonim ?? 0;
+        $data['nominal'] = str_replace('.', '', $request->nominal);
+        $data['support'] = $request->support;
+        $data['status'] = 'not paid';
+
+        $donation = Donation::create($data);
+
+        if ($donation) {
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.midtrans_server_key');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = config('midtrans.is_production');
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $donation->id,
+                    'order_number' => $donation->order_number,
+                    'gross_amount' => $donation->nominal,
+                ),
+                'customer_details' => array(
+                    'name' => $donation->user->name,
+                    'email' => $donation->user->email,
+                    'phone' => $donation->user->phone,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+            return redirect('/donation/'. $id .'/payment/'. $donation->order_number)
+                ->with([
+                    'success' => 'Data Pembayaran Berhasil Disimpan. Silahkan Lakukan Pembayaran.',
+                    'snap_token' => $snapToken,
+                ]);
+        } else {
+            return redirect('/donation/'. $id .'/payment/'. $donation->order_number)
+                ->with([
+                    'success' => 'Data Pembayaran Gagal Disimpan.',
+                ]);
+        }
+    }
+
+    public function payment($id, $order_number)
+    {
+        $campaign = Campaign::findOrFail($id);
+        $donation = Donation::where('order_number', $order_number)->first();
+
+        if (! $donation) {
+            abort(404);
+        }
+
+        return view('frontend.pages.donation.payment', compact('campaign', 'donation'));
     }
 }

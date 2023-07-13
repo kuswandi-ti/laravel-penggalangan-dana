@@ -91,9 +91,9 @@ Route::group([
         Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
 
         // Create Donation
-        Route::get('/donation/create/{id}', [DonationController::class, 'create'])->name('frontend.donation.create');
-        Route::post('/donation/checkout/{id}', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
-        Route::post('/donation/payment/{id}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
+        Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
+        Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
+        Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
     });
 
     Route::group([

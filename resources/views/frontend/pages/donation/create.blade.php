@@ -35,7 +35,7 @@
                                     class="form-control text-dark @error('nominal') is-invalid @enderror" placeholder="0"
                                     style="font-size: 30pt; font-weight: bold; height:70px;">
                                 @error('nominal')
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback mb-3">
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -48,32 +48,57 @@
                             <div class="col-lg-12 col-12 form-check-group form-check-group-donation-frequency">
                                 @if (auth()->user()->hasRole('admin'))
                                     <p class="h4 text-light"><strong>Donatur</strong></p>
-                                    <select class="form-control text-dark" name="user_id" id="user_id"
-                                        style="height:50px;">
-                                        @foreach ($donatur as $key => $item)
-                                            <option value="{{ $key }}">
-                                                {{ $item }}</option>
+                                    <select class="form-control text-dark @error('user_id') is-invalid @enderror"
+                                        name="user_id" id="user_id" style="height:50px;">
+                                        <option disabled selected>Pilih salah satu</option>
+                                        @foreach ($donatur as $item)
+                                            <option value="{{ $item->id }}" data-phone="{{ $item->phone }}"
+                                                {{ old('user_id') == $item->id ? 'selected' : '' }}>{{ $item->name }}
+                                            </option>
                                         @endforeach
                                     </select>
-                                    <p class="h4 text-light"><strong>No. Telp.</strong></p>
-                                    <input type="text" name="support" id="support" class="form-control"
-                                        placeholder="No. Telp.">
+                                    @error('user_id')
+                                        <div class="invalid-feedback mb-3">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+
+                                    <div class="form-group mb-2 phone" style="display: none;">
+                                        <p class="h4 text-light"><strong>No. Telp.</strong></p>
+                                        <label class="h4 text-light"></label>
+                                    </div>
                                 @else
                                     <input type="hidden" name="user_id" value="{{ auth()->id }}">
+                                    <div class="form-group mb-0">
+                                        <p class="h4 text-light"><strong>No. Telp.</strong></p>
+                                        <label class="h4 text-light">{{ auth()->user()->phone }}</label>
+                                    </div>
                                 @endif
 
-                                <input type="checkbox" id="anonim" name="anonim" value="1">
+                                <input type="checkbox" id="anonim" name="anonim" value="1"
+                                    {{ old('anonim') == 1 ? 'checked' : '' }}>
                                 <label for="anonim" class="text-light"> Sembunyikan nama saya (Anonim)</label><br>
 
-                                <textarea name="message" rows="5" class="form-control text-dark" id="message"
+                                <textarea name="support" rows="5" class="form-control text-dark" id="support"
                                     placeholder="Tulis dukungan atau do'a untuk penggalangan dana ini. Contoh : Semoga cepet sembuh, ya..."></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-block custom-btn">Lanjut ke Pembayaran</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $('[name=user_id]').on('change', function() {
+            let value = $(this).val();
+            let phone = $(`[name=user_id] option[value=${value}]`).data('phone')
+
+            $('.phone').show()
+            $('.phone label').text(phone);
+        });
+    </script>
+@endpush
