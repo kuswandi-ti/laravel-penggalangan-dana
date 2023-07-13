@@ -94,6 +94,7 @@ Route::group([
         Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
         Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
         Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
+        Route::post('/donation/callback_payment', [DonationController::class, 'callback_payment'])->name('frontend.donation.callback_payment');
     });
 
     Route::group([

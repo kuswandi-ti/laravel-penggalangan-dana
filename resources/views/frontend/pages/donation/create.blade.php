@@ -35,7 +35,7 @@
                                     class="form-control text-dark @error('nominal') is-invalid @enderror" placeholder="0"
                                     style="font-size: 30pt; font-weight: bold; height:70px;">
                                 @error('nominal')
-                                    <div class="invalid-feedback mb-3">
+                                    <div class="mb-3 invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -58,18 +58,18 @@
                                         @endforeach
                                     </select>
                                     @error('user_id')
-                                        <div class="invalid-feedback mb-3">
+                                        <div class="mb-3 invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
 
-                                    <div class="form-group mb-2 phone" style="display: none;">
+                                    <div class="mb-2 form-group phone" style="display: none;">
                                         <p class="h4 text-light"><strong>No. Telp.</strong></p>
                                         <label class="h4 text-light"></label>
                                     </div>
                                 @else
                                     <input type="hidden" name="user_id" value="{{ auth()->id }}">
-                                    <div class="form-group mb-0">
+                                    <div class="mb-0 form-group">
                                         <p class="h4 text-light"><strong>No. Telp.</strong></p>
                                         <label class="h4 text-light">{{ auth()->user()->phone }}</label>
                                     </div>

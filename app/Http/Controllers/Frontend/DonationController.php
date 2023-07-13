@@ -46,7 +46,7 @@ class DonationController extends Controller
 
         $data['campaign_id'] = $id;
         $data['user_id'] = $request->user_id;
-        $data['order_number'] = 'PX'. mt_rand(000000, 999999);
+        $data['order_number'] = 'PX' . mt_rand(000000, 999999);
         $data['anonim'] = $request->anonim ?? 0;
         $data['nominal'] = str_replace('.', '', $request->nominal);
         $data['support'] = $request->support;
@@ -71,7 +71,7 @@ class DonationController extends Controller
                     'gross_amount' => $donation->nominal,
                 ),
                 'customer_details' => array(
-                    'name' => $donation->user->name,
+                    'first_name' => $donation->user->name,
                     'email' => $donation->user->email,
                     'phone' => $donation->user->phone,
                 ),
@@ -79,13 +79,13 @@ class DonationController extends Controller
 
             $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-            return redirect('/donation/'. $id .'/payment/'. $donation->order_number)
+            return redirect('/donation/' . $id . '/payment/' . $donation->order_number)
                 ->with([
                     'success' => 'Data Pembayaran Berhasil Disimpan. Silahkan Lakukan Pembayaran.',
                     'snap_token' => $snapToken,
                 ]);
         } else {
-            return redirect('/donation/'. $id .'/payment/'. $donation->order_number)
+            return redirect('/donation/' . $id . '/payment/' . $donation->order_number)
                 ->with([
                     'success' => 'Data Pembayaran Gagal Disimpan.',
                 ]);
@@ -97,10 +97,26 @@ class DonationController extends Controller
         $campaign = Campaign::findOrFail($id);
         $donation = Donation::where('order_number', $order_number)->first();
 
-        if (! $donation) {
+        if (!$donation) {
             abort(404);
         }
 
         return view('frontend.pages.donation.payment', compact('campaign', 'donation'));
+    }
+
+    public function callback_payment(Request $request)
+    {
+        $serverKey = config('midtrans.midtrans_server_key');
+        $hash = hash('SHA512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+
+        if ($hash == $request->signature_key) {
+            if ($request->transaction_status == 'capture') {
+                /* Update data-data di database */
+                $donation = Donation::findOrFail($request->order_id);
+                $donation->update([
+                    'status' => 'paid',
+                ]);
+            }
+        }
     }
 }

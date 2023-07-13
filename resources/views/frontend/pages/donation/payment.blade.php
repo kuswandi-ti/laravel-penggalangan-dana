@@ -28,7 +28,7 @@
                             </div>
                         </div>
 
-                        <div class="row text-center">
+                        <div class="text-center row">
                             <div class="col-lg-12 col-12">
                                 <p class="h4 text-light"><strong>No. Order</strong></p>
                                 <span class="text-light" style="font-size: 30pt; font-weight: bold;">
@@ -39,7 +39,7 @@
 
                         <hr>
 
-                        <div class="row text-center">
+                        <div class="text-center row">
                             <div class="col-lg-12 col-12">
                                 <p class="h4 text-light"><strong>Jumlah Donasi</strong></p>
                                 <span class="text-light" style="font-size: 30pt; font-weight: bold;">
@@ -50,7 +50,7 @@
 
                         <hr>
 
-                        <div class="row text-center">
+                        <div class="text-center row">
                             <div class="col-lg-12 col-12">
                                 <p class="h4 text-light"><strong>Donatur</strong></p>
                                 <p class="text-light" style="font-size: 30pt; font-weight: bold;">
@@ -64,7 +64,7 @@
 
                         <hr>
 
-                        <div class="row text-center">
+                        <div class="text-center row">
                             <div class="col-lg-12 col-12">
                                 <input type="checkbox" id="anonim" name="anonim" value="1"
                                     {{ $donation->anonim == 1 ? 'checked' : '' }}>
@@ -84,7 +84,7 @@
 
                         <hr>
 
-                        <button type="submit" class="btn btn-block custom-btn">Lakukan Pembayaran</button>
+                        <button type="button" class="btn btn-block custom-btn" id="pay_button">Lakukan Pembayaran</button>
                     </form>
                 </div>
             </div>
@@ -94,5 +94,36 @@
 
 @push('scripts_vendor')
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{ config('midtrans.midtrans_client_id') }}"></script>
+        data-client-key="{{ config('midtrans.midtrans_client_key') }}"></script>
+@endpush
+
+@push('scripts')
+    <script>
+        // For example trigger on button clicked, or any time you need
+        var payButton = document.getElementById('pay_button');
+        payButton.addEventListener('click', function() {
+            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+            window.snap.pay("{{ Session::get('snap_token') }}", {
+                onSuccess: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment success!");
+                    console.log(result);
+                },
+                onPending: function(result) {
+                    /* You may add your own implementation here */
+                    alert("wating your payment!");
+                    console.log(result);
+                },
+                onError: function(result) {
+                    /* You may add your own implementation here */
+                    alert("payment failed!");
+                    console.log(result);
+                },
+                onClose: function() {
+                    /* You may add your own implementation here */
+                    alert('you closed the popup without finishing the payment');
+                }
+            })
+        });
+    </script>
 @endpush
