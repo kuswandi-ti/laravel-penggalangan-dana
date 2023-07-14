@@ -95,7 +95,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.subscriber.index') }}"
+                            class="nav-link {{ request()->is('admin/subscriber*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Subscriber

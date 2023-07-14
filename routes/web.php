@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\{
     ContactController as BackendContactController,
     DashboardController,
     SettingController,
+    SubscriberController,
     UserProfileInformationController,
 };
 
@@ -83,6 +84,9 @@ Route::group([
         Route::resource('/campaign', CampaignController::class);
         Route::get('/admin/contact/data', [BackendContactController::class, 'data'])->name('admin.contact.data');
         Route::resource('/admin/contact', BackendContactController::class);
+        Route::get('/admin/subscriber/data', [SubscriberController::class, 'data'])->name('admin.subscriber.data');
+        // Route::resource('/admin/subscriber', SubscriberController::class);
+        Route::resource('/admin/subscriber', SubscriberController::class, ['as' => 'admin']); // admin.subscriber.index
 
         // Pengaturan
         Route::resource('/banner', BannerController::class);
