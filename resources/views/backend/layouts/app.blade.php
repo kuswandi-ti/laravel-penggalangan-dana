@@ -16,20 +16,20 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('template/backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/template/backend/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet"
-        href="{{ asset('template/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+        href="{{ asset('public/template/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- SweetAlert2 -->
     <link rel="stylesheet"
-        href="{{ asset('template/backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+        href="{{ asset('public/template/backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 
     @stack('style_vendor')
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('template/backend/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/template/backend/dist/css/adminlte.min.css') }}">
 
     <style>
         .note-editor {
@@ -53,7 +53,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('template/backend/dist/img/AdminLTELogo.png') }}"
+            <img class="animation__shake" src="{{ asset('public/template/backend/dist/img/AdminLTELogo.png') }}"
                 alt="AdminLTELogo" height="60" width="60">
         </div>
 
@@ -102,26 +102,27 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="{{ asset('template/backend/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('template/backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('template/backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- overlayScrollbars -->
-    <script src="{{ asset('template/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}">
+    </script>
     <!-- SweetAlert2 -->
-    <script src="{{ asset('template/backend/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- Moment -->
-    <script src="{{ asset('template/backend/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/moment/moment.min.js') }}"></script>
 
     @stack('scripts_vendor')
 
     <!-- AdminLTE App -->
-    <script src="{{ asset('template/backend/dist/js/adminlte.js') }}"></script>
+    <script src="{{ asset('public/template/backend/dist/js/adminlte.js') }}"></script>
 
     <script>
         $.ajaxSetup({

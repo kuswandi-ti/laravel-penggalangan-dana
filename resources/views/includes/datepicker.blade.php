@@ -1,12 +1,13 @@
 @push('style_vendor')
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
-        href="{{ asset('template/backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+        href="{{ asset('public/template/backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
 @endpush
 
 @push('scripts_vendor')
     <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{{ asset('template/backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
+    <script
+        src="{{ asset('public/template/backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
     </script>
 @endpush
 

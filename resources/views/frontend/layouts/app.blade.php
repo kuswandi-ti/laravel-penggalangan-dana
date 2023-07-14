@@ -15,13 +15,13 @@
     </title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/frontend/images/logo.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/template/frontend/images/logo.png') }}">
 
     <!-- CSS FILES -->
-    <link href="{{ asset('template/backend/dist/css/adminlte.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/frontend/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/frontend/css/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/frontend/css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/backend/dist/css/adminlte.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/frontend/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/frontend/css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/frontend/css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
     <!--
     TemplateMo 581 Kind Heart Charity
     https://templatemo.com/tm-581-kind-heart-charity
@@ -55,11 +55,11 @@
     @includeIf('frontend.layouts.partials.footer')
 
     <!-- JAVASCRIPT FILES -->
-    <script src="{{ asset('template/frontend/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('template/frontend/js/jquery.sticky.js') }}"></script>
-    <script src="{{ asset('template/frontend/js/counter.js') }}"></script>
-    <script src="{{ asset('template/frontend/js/custom.js') }}"></script>
+    <script src="{{ asset('public/template/frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/template/frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/template/frontend/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('public/template/frontend/js/counter.js') }}"></script>
+    <script src="{{ asset('public/template/frontend/js/custom.js') }}"></script>
 
     @stack('scripts_vendor')
 

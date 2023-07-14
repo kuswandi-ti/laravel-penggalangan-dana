@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('home*') ? 'active' : 'inactive' }}"
+                    <a class="nav-link {{ request()->is('/') ? 'active' : 'inactive' }}"
                         href="{{ route('frontend.home') }}">Home</a>
                 </li>
                 <li class="nav-item">

@@ -9,8 +9,9 @@ TODO :
 6. Progress bar di frontend detail campaign (OK)
 7. Edit create campaign menjadi 3 bagian. Detail, Foto, Konfirmasi (OK)
 
-8. Create snap midtrans di halaman konfirmasi pembayaran
+8. Create snap midtrans di halaman konfirmasi pembayaran (OK)
 9. Jika pembayaran berhasil :
    - update tabel donations, field status = 'not paid' menjadi status = 'paid'
    - insert tabel payments
    - update tabel campaigns, field amount = menambahkan nominal dari payment
+10. Callback / hook di midtrans
