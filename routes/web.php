@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\{
     CategoryController,
     ContactController as BackendContactController,
     DashboardController,
+    DonaturController,
     SettingController,
     SubscriberController,
     UserProfileInformationController,
@@ -73,6 +74,9 @@ Route::group([
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('profile.show');
     Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('profile.bank.destroy');
 
+    // Create Campaign
+    Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
+
     Route::group([
         'middleware' => ['auth', 'role:admin']
     ], function () {
@@ -87,15 +91,13 @@ Route::group([
         Route::get('/admin/subscriber/data', [SubscriberController::class, 'data'])->name('admin.subscriber.data');
         // Route::resource('/admin/subscriber', SubscriberController::class);
         Route::resource('/admin/subscriber', SubscriberController::class, ['as' => 'admin']); // admin.subscriber.index
+        Route::resource('/donatur', DonaturController::class);
 
         // Pengaturan
         Route::resource('/banner', BannerController::class);
         Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
         Route::put('/setting/{setting}', [SettingController::class, 'update'])->name('setting.update');
         Route::delete('/setting/{setting}/bank/{id}', [SettingController::class, 'bank_destroy'])->name('setting.bank.destroy');
-
-        // Create Campaign
-        Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
 
         // Create Donation
         Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');

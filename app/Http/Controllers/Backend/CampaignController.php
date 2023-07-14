@@ -20,6 +20,11 @@ class CampaignController extends Controller
     public function index()
     {
         $categories = Category::orderBy('name')->get()->pluck('name', 'id');
+
+        if (auth()->user()->hasRole('donatur')) {
+            return view('frontend.pages.campaign.index', compact('categories'));
+        }
+
         return view('backend.campaign.index', compact('categories'));
     }
 

@@ -56,6 +56,10 @@
                             </p>
                         </a>
                     </li>
+                @endif
+
+                @if (auth()->user()->hasRole('admin') ||
+                        auth()->user()->hasRole('donatur'))
                     <li class="nav-item">
                         <a href="{{ route('campaign.index') }}"
                             class="nav-link {{ request()->is('campaign*') ? 'active' : '' }}">
@@ -65,10 +69,13 @@
                             </p>
                         </a>
                     </li>
+                @endif
 
+                @if (auth()->user()->hasRole('admin'))
                     <li class="nav-header">REFERENSI</li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="{{ route('donatur.index') }}"
+                            class="nav-link {{ request()->is('donatur*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-plus"></i>
                             <p>
                                 Donatur
