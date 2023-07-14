@@ -78,7 +78,8 @@ Route::group([
     Route::get('/campaigns', [CampaignsController::class, 'index'])->name('frontend.campaign.index');
 
     Route::group([
-        'middleware' => ['auth', 'role:admin']
+        'middleware' => ['auth', 'role:admin'],
+        'prefix' => 'admin'
     ], function () {
         // Master
         Route::resource('/category', CategoryController::class); // Untuk route dengan resource, Controller tidak boleh berbentuk array
