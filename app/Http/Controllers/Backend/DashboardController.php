@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Cashout;
 use App\Models\Contact;
 use App\Models\Campaign;
 use App\Models\Category;
@@ -19,8 +20,9 @@ class DashboardController extends Controller
             $jumlah_program_pending = Campaign::where('status', 'pending')->count();
             $jumlah_kontak_masuk = Contact::whereDate('created_at', date('Y-m-d'))->count();
             $total_donasi = Campaign::sum('amount');
-            $total_donasi_belum_dibayar = Donation::where('status', 'not paid');
-            $total_donasi_sudah_dibayar = Donation::where('status', 'paid');
+            $jumlah_donasi_belum_dibayar = Donation::where('status', 'not paid')->count();
+            $jumlah_donasi_sudah_dibayar = Donation::where('status', 'paid')->count();
+            $total_donasi_dicairkan = Cashout::where('status', 'success')->sum('cashout_amount');
 
             return view('backend.dashboard_admin', compact([
                 'jumlah_kategori',
@@ -28,8 +30,9 @@ class DashboardController extends Controller
                 'jumlah_program_pending',
                 'jumlah_kontak_masuk',
                 'total_donasi',
-                'total_donasi_belum_dibayar',
-                'total_donasi_sudah_dibayar',
+                'jumlah_donasi_belum_dibayar',
+                'jumlah_donasi_sudah_dibayar',
+                'total_donasi_dicairkan',
             ]));
         }
 

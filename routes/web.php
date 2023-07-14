@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\{
     BannerController,
     CampaignController,
     CategoryController,
+    ContactController as BackendContactController,
     DashboardController,
     SettingController,
     UserProfileInformationController,
@@ -80,6 +81,8 @@ Route::group([
         Route::get('/campaign/data', [CampaignController::class, 'data'])->name('campaign.data');
         Route::get('/campaign/detail/{id}', [CampaignController::class, 'detail'])->name('campaign.detail');
         Route::resource('/campaign', CampaignController::class);
+        Route::get('/admin/contact/data', [BackendContactController::class, 'data'])->name('admin.contact.data');
+        Route::resource('/admin/contact', BackendContactController::class);
 
         // Pengaturan
         Route::resource('/banner', BannerController::class);
