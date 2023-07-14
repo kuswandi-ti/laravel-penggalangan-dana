@@ -29,6 +29,9 @@ class CampaignController extends Controller
             ->when($request->has('statuscampaign') && $request->statuscampaign != "", function ($query) use ($request) {
                 $query->where('status', $request->statuscampaign);
             })
+            ->when($request->has('status') && $request->status != "", function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
             ->when(
                 $request->has('startdate') && $request->startdate != "" &&
                     $request->has('enddate') && $request->enddate != "",

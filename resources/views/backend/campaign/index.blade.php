@@ -25,9 +25,12 @@
                             <label for="statuscampaign">Status Program</label>
                             <select class="custom-select" name="statuscampaign" id="statuscampaign" style="width: 100%;">
                                 <option disabled selected>Pilih status...</option>
-                                <option value="publish">Publish</option>
-                                <option value="pending">Pending</option>
-                                <option value="archieve">Diarsipkan</option>
+                                <option value="publish" {{ request('status') == 'publish' ? 'selected' : '' }}>Publish
+                                </option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending
+                                </option>
+                                <option value="archieve" {{ request('status') == 'archieve' ? 'selected' : '' }}>Diarsipkan
+                                </option>
                             </select>
                         </div>
                     </div>

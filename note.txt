@@ -15,3 +15,5 @@ TODO :
    - insert tabel payments
    - update tabel campaigns, field amount = menambahkan nominal dari payment
 10. Callback / hook di midtrans
+
+11. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting

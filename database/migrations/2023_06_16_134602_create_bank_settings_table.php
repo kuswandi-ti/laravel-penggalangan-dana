@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('setting_id')->references('id')->on('settings')->onUpdate('cascade')->onDelete('cascade');
             $table->string('account_number');
             $table->string('account_name');
+            $table->boolean('is_main')->default(0);
             $table->timestamps();
         });
     }

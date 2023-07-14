@@ -7,6 +7,7 @@ use App\Models\Campaign;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Midtrans\CreateSnapTokenService;
 
 class DonationController extends Controller
 {
@@ -55,14 +56,14 @@ class DonationController extends Controller
         $donation = Donation::create($data);
 
         if ($donation) {
-            // Set your Merchant Server Key
-            \Midtrans\Config::$serverKey = config('midtrans.midtrans_server_key');
-            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-            \Midtrans\Config::$isProduction = config('midtrans.is_production');
-            // Set sanitization on (default)
-            \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
-            // Set 3DS transaction for credit card to true
-            \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
+            // // Set your Merchant Server Key
+            // \Midtrans\Config::$serverKey = config('midtrans.midtrans_server_key');
+            // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            // \Midtrans\Config::$isProduction = config('midtrans.is_production');
+            // // Set sanitization on (default)
+            // \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
+            // // Set 3DS transaction for credit card to true
+            // \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
 
             $params = array(
                 'transaction_details' => array(
@@ -70,6 +71,14 @@ class DonationController extends Controller
                     'order_number' => $donation->order_number,
                     'gross_amount' => $donation->nominal,
                 ),
+                'item_details' => [
+                    [
+                        'id' => $donation->id,
+                        'price' => $donation->nominal,
+                        'quantity' => 1,
+                        'name' => $donation->campaign->title,
+                    ],
+                ],
                 'customer_details' => array(
                     'first_name' => $donation->user->name,
                     'email' => $donation->user->email,
@@ -77,7 +86,10 @@ class DonationController extends Controller
                 ),
             );
 
-            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            // $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+            $snapService = new CreateSnapTokenService();
+            $snapToken = $snapService->getSnapToken($params);
 
             return redirect('/donation/' . $id . '/payment/' . $donation->order_number)
                 ->with([
