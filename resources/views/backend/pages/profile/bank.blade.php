@@ -80,7 +80,8 @@
                             <td>{{ $item->pivot->account_name }}</td>
                             <td class="text-center">{{ $item->pivot->account_number }}</td>
                             <td class="text-center">
-                                <form action="{{ route('profile.bank.destroy', ['id' => $item->id]) }}" method="POST">
+                                <form action="{{ route('backend.profile.bank.destroy', ['id' => $item->id]) }}"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-link text-danger"

@@ -20,7 +20,7 @@
                         <div class="custom-block">
                             <div class="custom-block-body">
                                 <h5 class="mb-3">
-                                    <a href="{{ url('/donation/' . $item->id) }}">
+                                    <a href="{{ url('/donation/' . $item->id) }}" class="text-justify">
                                         {{ Str::limit($item->title, 47, ' ...') }}
                                     </a>
                                 </h5>

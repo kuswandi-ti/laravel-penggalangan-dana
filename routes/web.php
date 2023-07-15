@@ -80,8 +80,6 @@ Route::group([
     Route::get('/setting', [SettingController::class, 'index'])->name('backend.setting.index');
     Route::put('/setting/{setting}', [SettingController::class, 'update'])->name('backend.setting.update');
     Route::delete('/setting/{setting}/bank/{id}', [SettingController::class, 'bank_destroy'])->name('backend.setting.bank.destroy');
-
-    Route::resource('/banner', BannerController::class, ['as' => 'backend']);
 });
 
 /* ========================================================================================= */
@@ -109,6 +107,7 @@ Route::group([
         ->only('index', 'create', 'edit'); // frontend.campaign.index
     Route::get('/campaign/data', [BackendCampaignController::class, 'data'])->name('backend.campaign.data');
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('backend.profile.show');
+    Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('backend.profile.bank.destroy');
     Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
     Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
     Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');

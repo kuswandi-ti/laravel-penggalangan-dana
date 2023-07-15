@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Program')
+@section('title', 'Donasi Program')
 
 @section('content')
     @includeIf('frontend.pages.donation.page')

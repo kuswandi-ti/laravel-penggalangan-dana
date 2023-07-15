@@ -78,8 +78,6 @@ class DonationController extends Controller
                 ),
             );
 
-            // $snapToken = \Midtrans\Snap::getSnapToken($params);
-
             $snapService = new CreateSnapTokenService();
             $snapToken = $snapService->getSnapToken($params);
 
