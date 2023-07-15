@@ -3,8 +3,8 @@
         <div class="row">
             <div class="mb-4 col-lg-2 col-12">
                 @if (!empty($setting))
-                    <img src="{{ url('storage' . $setting->path_image_logo ?? '') }}" class="logo img-fluid"
-                        alt="">
+                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_logo ?? '') }}"
+                        class="logo img-fluid" alt="">
                 @else
                     <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="logo img-fluid">
                 @endif

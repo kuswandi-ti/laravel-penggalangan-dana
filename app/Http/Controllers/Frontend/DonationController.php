@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
+use App\Models\Payment;
 use App\Models\Campaign;
 use App\Models\Donation;
 use Illuminate\Http\Request;
@@ -56,29 +57,20 @@ class DonationController extends Controller
         $donation = Donation::create($data);
 
         if ($donation) {
-            // // Set your Merchant Server Key
-            // \Midtrans\Config::$serverKey = config('midtrans.midtrans_server_key');
-            // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-            // \Midtrans\Config::$isProduction = config('midtrans.is_production');
-            // // Set sanitization on (default)
-            // \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
-            // // Set 3DS transaction for credit card to true
-            // \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
-
             $params = array(
                 'transaction_details' => array(
                     'order_id' => $donation->id,
                     'order_number' => $donation->order_number,
                     'gross_amount' => $donation->nominal,
                 ),
-                'item_details' => [
-                    [
-                        'id' => $donation->id,
-                        'price' => $donation->nominal,
-                        'quantity' => 1,
-                        'name' => $donation->order_number,
-                    ],
-                ],
+                // 'item_details' => [
+                //     [
+                //         'id' => $donation->id,
+                //         'price' => $donation->nominal,
+                //         'quantity' => 1,
+                //         'name' => $donation->order_number,
+                //     ],
+                // ],
                 'customer_details' => array(
                     'first_name' => $donation->user->name,
                     'email' => $donation->user->email,
@@ -116,19 +108,56 @@ class DonationController extends Controller
         return view('frontend.pages.donation.payment', compact('campaign', 'donation'));
     }
 
-    public function callback_payment(Request $request)
+    public function callback_donation()
     {
-        $serverKey = config('midtrans.midtrans_server_key');
-        $hash = hash('SHA512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        \Midtrans\Config::$isProduction = config('midtrans.is_production');
+        \Midtrans\Config::$serverKey = config('midtrans.midtrans_server_key');
 
-        if ($hash == $request->signature_key) {
-            if ($request->transaction_status == 'capture') {
-                /* Update data-data di database */
-                $donation = Donation::findOrFail($request->order_id);
-                $donation->update([
-                    'status' => 'paid',
-                ]);
-            }
+        $notification = new \Midtrans\Notification();
+
+        $order_id = $notification->order_id;
+
+        $transaction_status = $notification->transaction_status;
+        $payment_time = $notification->transaction_time;
+        $payment_type = $notification->payment_type;
+        $payment_currency = $notification->currency;
+        $fraud_status = $notification->fraud_status;
+        $gross_amount = $notification->gross_amount;
+
+        if (($transaction_status == 'capture' && $payment_type == 'credit_card' && $fraud_status == 'accept') ||
+            $transaction_status == 'settlement'
+        ) {
+            $donation = Donation::findOrFail($order_id);
+
+            // Update status di tabel donations            
+            $donation->update([
+                'status' => 'paid',
+            ]);
+
+            // Insert di tabel payments
+            Payment::create([
+                'user_id' => $donation->user->id,
+                'order_number' => $donation->order_number,
+                'name' => $donation->user->name,
+                'phone' => $donation->user->phone,
+                'email' => $donation->user->email,
+                'nominal' => $gross_amount,
+                'bank_id' => 1,
+                'payment_time' => $payment_time,
+                'payment_type' => $payment_type,
+                'payment_currency' => $payment_currency,
+            ]);
+
+            // Update amount di tabel campaigns
+            $campaign_id = $donation->campaign_id;
+            $campaign = Campaign::findOrFail($campaign_id);
+            Campaign::where([
+                ['id', '=', $campaign_id],
+            ])->update([
+                'amount' => $campaign->amount + $gross_amount,
+            ]);
+        } else {
+            # code...
         }
     }
 }

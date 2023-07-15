@@ -5,7 +5,7 @@ return [
     'midtrans_client_key' => env('MIDTRANS_CLIENT_KEY', ''),
     'midtrans_server_key' => env('MIDTRANS_SERVER_KEY', ''),
 
-    'is_production' => false,
+    'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
     'is_sanitized' => false,
-    'is_3ds' => false,
+    'is_3ds' => true,
 ];

@@ -17,3 +17,11 @@ TODO :
 10. Callback / hook di midtrans
 
 11. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting
+
+
+
+
+https://programmingfields.com/how-to-create-a-virtual-host-in-xampp-for-php-in-windows/
+
+php -S localhost:7000 -t laravel-penggalangan-dana
+ngrok http localhost:7000 
