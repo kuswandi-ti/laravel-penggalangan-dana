@@ -79,7 +79,7 @@
                     </div>
                     <div class="my-2 d-flex align-items-center">
                         <p class="mb-0">
-                            <strong>{{ $persen_tercapai }}%</strong>
+                            <strong>{{ amount_format_id($persen_tercapai) }}%</strong>
                             Tercapai
                         </p>
 

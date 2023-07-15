@@ -7,6 +7,10 @@
 @section('content')
     <div class="card-body">
         <p class="login-box-msg">Masukkan Email dan Password</p>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Email : </strong>kuswandi.ti@gmail.com
+            <strong>Password : </strong>rahasia
+        </div>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-3 input-group">

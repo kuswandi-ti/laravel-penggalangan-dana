@@ -25,17 +25,23 @@
                                     </a>
                                 </h5>
                                 <p class="text-justify">{{ Str::limit($item->short_description, 100, ' ...') }}</p>
+
+                                @php
+                                    $persen_tercapai = ($item->amount / $item->goal) * 100;
+                                @endphp
                                 <div class="mt-4 progress">
-                                    <div class="progress-bar w-75" role="progressbar" aria-valuenow="75"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-secondary" role="progressbar"
+                                        aria-valuenow="{{ $persen_tercapai }}" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: {{ $persen_tercapai }}%">
+                                    </div>
                                 </div>
                                 <div class="my-2 d-flex align-items-center">
                                     <p class="mb-0">
-                                        Terkumpul :
+                                        Terkumpul :<br>
                                         <strong>Rp. {{ amount_format_id($item->amount) }}</strong>
                                     </p>
                                     <p class="mb-0 ms-auto">
-                                        Goal :
+                                        Goal :<br>
                                         <strong>Rp. {{ amount_format_id($item->goal) }}</strong>
                                     </p>
                                 </div>

@@ -14,10 +14,10 @@ class SettingTableSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'email' => 'support@sko.com',
+            'email' => 'support@kitabisa.com',
             'owner_name' => 'Mr. Kuswandi',
             'company_name' => 'PT. SKO',
-            'business_name' => 'KitaBersatu',
+            'business_name' => 'KitaBisa',
             'short_description' => '-',
             'keyword' => 'sosial',
             'phone' => '081298694640',

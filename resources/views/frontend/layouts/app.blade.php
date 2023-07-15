@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        {{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
+        {{ !empty($setting->business_name) ? $setting->business_name : config('app.name') }} | @yield('title')
     </title>
 
     <!-- favicon -->

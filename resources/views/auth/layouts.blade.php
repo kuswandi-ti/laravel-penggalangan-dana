@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ !empty($setting->company_name) ? $setting->company_name : config('app.name') }} | @yield('title')
+    <title>{{ !empty($setting->business_name) ? $setting->business_name : config('app.name') }} | @yield('title')
     </title>
 
     <link rel="stylesheet"
@@ -20,7 +20,7 @@
         <div class="card card-outline card-primary">
             <div class="text-center card-header">
                 <a href="{{ route('frontend.home.index') }}" class="h2">
-                    <b>{{ config('app.name') }}</b>
+                    <b>{{ !empty($setting->business_name) ? $setting->business_name : config('app.name') }}</b>
                 </a>
             </div>
             @yield('content')
