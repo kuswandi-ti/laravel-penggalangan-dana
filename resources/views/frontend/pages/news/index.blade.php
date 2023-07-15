@@ -10,7 +10,7 @@
                     <div class="news-block">
                         <div class="news-block-top">
                             <a href="news-detail.html">
-                                <img src="{{ asset('template/frontend/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
+                                <img src="{{ asset('public/template/frontend/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
                                     class="news-image img-fluid" alt="">
                             </a>
 
@@ -64,7 +64,7 @@
                     <div class="mt-3 news-block">
                         <div class="news-block-top">
                             <a href="news-detail.html">
-                                <img src="{{ asset('template/frontend/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
+                                <img src="{{ asset('public/template/frontend/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
                                     class="news-image img-fluid" alt="">
                             </a>
 
@@ -123,7 +123,7 @@
                     <div class="news-block">
                         <div class="news-block-top">
                             <a href="news-detail.html">
-                                <img src="{{ asset('template/frontend/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
+                                <img src="{{ asset('public/template/frontend/images/news/medium-shot-volunteers-with-clothing-donations.jpg') }}"
                                     class="news-image img-fluid" alt="">
                             </a>
 
@@ -177,7 +177,7 @@
                     <div class="mt-3 news-block">
                         <div class="news-block-top">
                             <a href="news-detail.html">
-                                <img src="{{ asset('template/frontend/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
+                                <img src="{{ asset('public/template/frontend/images/news/medium-shot-people-collecting-foodstuff.jpg') }}"
                                     class="news-image img-fluid" alt="">
                             </a>
 
