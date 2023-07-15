@@ -110,13 +110,16 @@ class DonationController extends Controller
 
     public function callback_donation()
     {
+        $server_key = config('midtrans.midtrans_server_key');
+
         \Midtrans\Config::$isProduction = config('midtrans.is_production');
-        \Midtrans\Config::$serverKey = config('midtrans.midtrans_server_key');
+        \Midtrans\Config::$serverKey = $server_key;
 
         $notification = new \Midtrans\Notification();
 
         $order_id = $notification->order_id;
-
+        $status_code = $notification->status_code;
+        $signature_key = $notification->signature_key;
         $transaction_status = $notification->transaction_status;
         $payment_time = $notification->transaction_time;
         $payment_type = $notification->payment_type;
@@ -124,40 +127,49 @@ class DonationController extends Controller
         $fraud_status = $notification->fraud_status;
         $gross_amount = $notification->gross_amount;
 
-        if (($transaction_status == 'capture' && $payment_type == 'credit_card' && $fraud_status == 'accept') ||
-            $transaction_status == 'settlement'
-        ) {
-            $donation = Donation::findOrFail($order_id);
+        $hashed = hash("sha512", $order_id . $status_code . $gross_amount . $server_key);
 
-            // Update status di tabel donations            
-            $donation->update([
-                'status' => 'paid',
-            ]);
+        // return response()->json([
+        //     'hashed' => $hashed,
+        //     'signature_key' => $signature_key
+        // ], 404);
 
-            // Insert di tabel payments
-            Payment::create([
-                'user_id' => $donation->user->id,
-                'order_number' => $donation->order_number,
-                'name' => $donation->user->name,
-                'phone' => $donation->user->phone,
-                'email' => $donation->user->email,
-                'nominal' => $gross_amount,
-                'bank_id' => 1,
-                'payment_time' => $payment_time,
-                'payment_type' => $payment_type,
-                'payment_currency' => $payment_currency,
-            ]);
+        if ($hashed == $signature_key) {
+            if (($transaction_status == 'capture' && $payment_type == 'credit_card' && $fraud_status == 'accept') ||
+                $transaction_status == 'settlement'
+            ) {
+                $donation = Donation::findOrFail($order_id);
 
-            // Update amount di tabel campaigns
-            $campaign_id = $donation->campaign_id;
-            $campaign = Campaign::findOrFail($campaign_id);
-            Campaign::where([
-                ['id', '=', $campaign_id],
-            ])->update([
-                'amount' => $campaign->amount + $gross_amount,
-            ]);
-        } else {
-            # code...
+                // Update status di tabel donations            
+                $donation->update([
+                    'status' => 'paid',
+                ]);
+
+                // Insert di tabel payments
+                Payment::create([
+                    'user_id' => $donation->user->id,
+                    'order_number' => $donation->order_number,
+                    'name' => $donation->user->name,
+                    'phone' => $donation->user->phone,
+                    'email' => $donation->user->email,
+                    'nominal' => $gross_amount,
+                    'bank_id' => 1,
+                    'payment_time' => $payment_time,
+                    'payment_type' => $payment_type,
+                    'payment_currency' => $payment_currency,
+                ]);
+
+                // Update amount di tabel campaigns
+                $campaign_id = $donation->campaign_id;
+                $campaign = Campaign::findOrFail($campaign_id);
+                Campaign::where([
+                    ['id', '=', $campaign_id],
+                ])->update([
+                    'amount' => $campaign->amount + $gross_amount,
+                ]);
+            } else {
+                # code...
+            }
         }
     }
 }
