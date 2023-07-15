@@ -20,7 +20,7 @@ class BankController extends Controller
             })
             ->paginate($request->per_page ?? env('CUSTOM_PAGING'))
             ->appends($request->only('per_page', 'keyword'));
-        return view('backend.bank.index', compact('banks'));
+        return view('backend.pages.bank.index', compact('banks'));
     }
 
     /**
@@ -28,7 +28,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('backend.bank.create');
+        return view('backend.pages.bank.create');
     }
 
     /**
@@ -43,14 +43,16 @@ class BankController extends Controller
         ]);
 
         $data = $request->only('code', 'name');
-        $data['path_image'] = upload('images/bank', $request->file('path_image'), 'bank');
+        if ($request->hasFile('path_image')) {
+            $data['path_image'] = upload('images/bank', $request->file('path_image'), 'bank');
+        }
 
         $query = Bank::create($data);
 
         if ($query) {
-            return redirect()->route('bank.index')->with('success', 'Data Bank berhasil ditambahkan.');
+            return redirect()->route('backend.bank.index')->with('success', 'Data Bank berhasil ditambahkan.');
         } else {
-            return redirect()->route('bank.index')->with('error', 'Data Bank gagal ditambahkan.');
+            return redirect()->route('backend.bank.index')->with('error', 'Data Bank gagal ditambahkan.');
         }
     }
 
@@ -67,7 +69,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        return view('backend.bank.edit', compact('bank'));
+        return view('backend.pages.bank.edit', compact('bank'));
     }
 
     /**
@@ -95,9 +97,9 @@ class BankController extends Controller
         $query = $bank->update($data); // $bank didapat dari parameter di fungsi update()
 
         if ($query) {
-            return redirect()->route('bank.index')->with('success', 'Data Bank berhasil diupdate.');
+            return redirect()->route('backend.bank.index')->with('success', 'Data Bank berhasil diupdate.');
         } else {
-            return redirect()->route('bank.index')->with('error', 'Data Bank gagal diupdate.');
+            return redirect()->route('backend.bank.index')->with('error', 'Data Bank gagal diupdate.');
         }
     }
 
@@ -114,9 +116,9 @@ class BankController extends Controller
                     Storage::disk('public')->delete($bank->path_image);
                 }
             }
-            return redirect()->route('bank.index')->with('success', 'Data Bank berhasil dihapus.');
+            return redirect()->route('backend.bank.index')->with('success', 'Data Bank berhasil dihapus.');
         } else {
-            return redirect()->route('bank.index')->with('error', 'Data Bank gagal dihapus.');
+            return redirect()->route('backend.bank.index')->with('error', 'Data Bank gagal dihapus.');
         }
     }
 }

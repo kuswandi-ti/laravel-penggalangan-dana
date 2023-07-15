@@ -12,7 +12,7 @@
                             @foreach ($banners as $item)
                                 <div class="carousel-item active">
                                     @if (!empty($setting))
-                                        <img src="{{ url('storage' . $item->banner_image ?? '') }}"
+                                        <img src="{{ url(env('PATH_IMAGE_STORAGE') . $item->banner_image ?? '') }}"
                                             class="carousel-image img-fluid" alt="">
                                     @else
                                         <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="carousel-image img-fluid">
@@ -52,7 +52,7 @@
                 <div class="mb-4 col-lg-3 col-md-6 col-12 mb-lg-0">
                     <div class="featured-block d-flex justify-content-center align-items-center">
                         <a class="d-block">
-                            <img src="{{ asset('template/frontend/images/icons/hands.png') }}"
+                            <img src="{{ asset('public/template/frontend/images/icons/hands.png') }}"
                                 class="featured-block-image img-fluid" alt="">
                             <p class="featured-block-text">Penerimaan <br><strong>Relawan</strong></p>
                         </a>
@@ -62,7 +62,7 @@
                 <div class="mb-4 col-lg-3 col-md-6 col-12 mb-lg-0 mb-md-4">
                     <div class="featured-block d-flex justify-content-center align-items-center">
                         <a class="d-block">
-                            <img src="{{ asset('template/frontend/images/icons/heart.png') }}"
+                            <img src="{{ asset('public/template/frontend/images/icons/heart.png') }}"
                                 class="featured-block-image img-fluid" alt="">
                             <p class="featured-block-text">Kegiatan <br><strong>Sosial</strong></p>
                         </a>
@@ -72,7 +72,7 @@
                 <div class="mb-4 col-lg-3 col-md-6 col-12 mb-lg-0 mb-md-4">
                     <div class="featured-block d-flex justify-content-center align-items-center">
                         <a class="d-block">
-                            <img src="{{ asset('template/frontend/images/icons/receive.png') }}"
+                            <img src="{{ asset('public/template/frontend/images/icons/receive.png') }}"
                                 class="featured-block-image img-fluid" alt="">
                             <p class="featured-block-text">Penerimaan <br><strong>Donasi</strong></p>
                         </a>
@@ -82,7 +82,7 @@
                 <div class="mb-4 col-lg-3 col-md-6 col-12 mb-lg-0">
                     <div class="featured-block d-flex justify-content-center align-items-center">
                         <a class="d-block">
-                            <img src="{{ asset('template/frontend/images/icons/scholarship.png') }}"
+                            <img src="{{ asset('public/template/frontend/images/icons/scholarship.png') }}"
                                 class="featured-block-image img-fluid" alt="">
                             <p class="featured-block-text">Pondok <br><strong>Pesantren</strong></p>
                         </a>

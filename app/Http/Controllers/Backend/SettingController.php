@@ -21,7 +21,7 @@ class SettingController extends Controller
         $bank = Bank::all()->pluck('name', 'id');
         $banner = Banner::all();
         $bank_setting = DB::table('bank_settings')->get();
-        return view('backend.setting.index', compact(['setting', 'bank', 'banner', 'bank_setting']));
+        return view('backend.pages.setting.index', compact(['setting', 'bank', 'banner', 'bank_setting']));
     }
 
     /**

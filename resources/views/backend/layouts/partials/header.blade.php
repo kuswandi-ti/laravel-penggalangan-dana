@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('frontend.home') }}" target="_blank" role="button">
+            <a class="nav-link" href="{{ route('frontend.home.index') }}" target="_blank" role="button">
                 <i class="fas fa-globe"></i> View Website
             </a>
         </li>

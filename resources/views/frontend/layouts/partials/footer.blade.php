@@ -13,12 +13,12 @@
             <div class="col-lg-2 col-md-6 col-12">
                 <h5 class="mb-3 site-footer-title">Link</h5>
                 <p class="mb-2 text-white d-flex">
-                    <a href="{{ route('frontend.about') }}" class="site-footer-link">
+                    <a href="{{ route('frontend.about.index') }}" class="site-footer-link">
                         Tentang Kami
                     </a>
                 </p>
                 <p class="mb-2 text-white d-flex">
-                    <a href="{{ route('frontend.donation') }}" class="site-footer-link">
+                    <a href="{{ route('frontend.donation.index') }}" class="site-footer-link">
                         Donasi Program
                     </a>
                 </p>
@@ -32,7 +32,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="custom-form" action="{{ route('frontend.subscribe') }}" id="newsletter-form">
+                <form class="custom-form" action="{{ route('frontend.subscriber.store') }}" id="newsletter-form">
                     @csrf
                     <div class="form-group">
                         <input type="email" class="form-control" name="email_subscribe" id="email_subscribe"

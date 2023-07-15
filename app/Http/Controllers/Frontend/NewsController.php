@@ -9,6 +9,6 @@ class NewsController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.news');
+        return view('frontend.pages.news.index');
     }
 }

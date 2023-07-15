@@ -76,7 +76,7 @@ class DonationController extends Controller
                         'id' => $donation->id,
                         'price' => $donation->nominal,
                         'quantity' => 1,
-                        'name' => $donation->campaign->title,
+                        'name' => $donation->order_number,
                     ],
                 ],
                 'customer_details' => array(

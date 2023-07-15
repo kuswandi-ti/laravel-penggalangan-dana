@@ -10,8 +10,8 @@
                     <div class="news-block">
                         <div class="news-block-top">
                             @if (!empty($campaign->path_image))
-                                <img src="{{ url('storage' . $campaign->path_image ?? '') }}" class="news-image img-fluid"
-                                    alt="" style="width: 100%; max-height: 100%">
+                                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image ?? '') }}"
+                                    class="news-image img-fluid" alt="" style="width: 100%; max-height: 100%">
                             @else
                                 <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="news-image img-fluid" alt=""
                                     style="width: 100%; max-height: 100%">
@@ -30,7 +30,9 @@
 
                         <form class="custom-form subscribe-form" style="padding: 0px;">
                             <div class="col-lg-12 col-12">
-                                <button type="button" class="btn btn-block custom-btn">Donasi Sekarang</button>
+                                <a class="btn btn-block custom-btn"
+                                    href="{{ route('frontend.donation.create', $campaign->id) }}">Donasi
+                                    Sekarang</a>
                             </div>
                         </form>
 

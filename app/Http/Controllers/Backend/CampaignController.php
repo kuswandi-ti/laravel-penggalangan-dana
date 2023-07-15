@@ -23,9 +23,9 @@ class CampaignController extends Controller
 
         if (auth()->user()->hasRole('donatur')) {
             return view('frontend.pages.campaign.index', compact('categories'));
+        } else {
+            return view('backend.pages.campaign.index', compact('categories'));
         }
-
-        return view('backend.campaign.index', compact('categories'));
     }
 
     public function data(Request $request)
@@ -48,7 +48,7 @@ class CampaignController extends Controller
         return datatables($query)
             ->addIndexColumn()
             ->editColumn('path_image', function ($query) {
-                return '<img src="' . Storage::disk('public')->url($query->path_image) . '" class="img-thumbnail">';
+                return '<img src="' . url(env('PATH_IMAGE_STORAGE') . $query->path_image) . '" class="img-thumbnail">';
             })
             ->editColumn('short_description', function ($query) {
                 return '<strong>' . $query->title . '</strong>' . '<br><small>' . $query->short_description . '</small>';
@@ -61,14 +61,14 @@ class CampaignController extends Controller
             })
             ->addColumn('action', function ($query) {
                 return '
-                    <a href="' . route('campaign.detail', $query->id) . '" class="btn btn-link text-dark">
+                    <a href="' . route('backend.campaign.detail', $query->id) . '" class="btn btn-link text-dark">
                         <i class="fas fa-search-plus"></i>
                     </a>
-                    <a href="' . route('campaign.edit', $query->id) . '" class="btn btn-link text-primary">
+                    <a href="' . route('backend.campaign.edit', $query->id) . '" class="btn btn-link text-primary">
                         <i class="fas fa-edit"></i>
                     </a>
                     <button class="btn btn-link text-danger"
-                        onclick="deleteData(`' . route('campaign.destroy', $query->id) . '`)">
+                        onclick="deleteData(`' . route('backend.campaign.destroy', $query->id) . '`)">
                         <i class="fas fa-trash"></i>
                     </button>
                 ';
@@ -84,7 +84,7 @@ class CampaignController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name')->get()->pluck('name', 'id');
-        return view('backend.campaign.create', compact('categories'));
+        return view('backend.pages.campaign.create', compact('categories'));
     }
 
     /**
@@ -117,9 +117,9 @@ class CampaignController extends Controller
         if ($campaign) {
             $campaign = Campaign::orderBy('id', 'DESC')->first();
             $campaign->category_campaign()->attach($request->categories);
-            return redirect()->route('campaign.index')->with('success', 'Data Program berhasil ditambahkan.');
+            return redirect()->route('backend.campaign.index')->with('success', 'Data Program berhasil ditambahkan.');
         } else {
-            return redirect()->route('campaign.index')->with('error', 'Data Program gagal ditambahkan.');
+            return redirect()->route('backend.campaign.index')->with('error', 'Data Program gagal ditambahkan.');
         }
         // } catch (Exception $e) {
         //     return back()->withError($e->getMessage())->withInput();
@@ -146,7 +146,7 @@ class CampaignController extends Controller
     {
         $campaign = Campaign::findOrFail($id);
 
-        return view('backend.campaign.detail', compact(['campaign']));
+        return view('backend.pages.campaign.detail', compact(['campaign']));
     }
 
     /**
@@ -155,7 +155,7 @@ class CampaignController extends Controller
     public function edit(Campaign $campaign)
     {
         $categories = Category::orderBy('name')->get()->pluck('name', 'id');
-        return view('backend.campaign.edit', compact('campaign', 'categories'));
+        return view('backend.pages.campaign.edit', compact('campaign', 'categories'));
     }
 
     /**
@@ -195,9 +195,9 @@ class CampaignController extends Controller
 
         if ($campaign) {
             $campaign->category_campaign()->sync($request->categories);
-            return redirect()->route('campaign.index')->with('success', 'Data Program berhasil diperbaharui.');
+            return redirect()->route('backend.campaign.index')->with('success', 'Data Program berhasil diperbaharui.');
         } else {
-            return redirect()->route('campaign.index')->with('error', 'Data Program gagal diperbaharui.');
+            return redirect()->route('backend.campaign.index')->with('error', 'Data Program gagal diperbaharui.');
         }
         // } catch (Exception $e) {
         //     return back()->withError($e->getMessage())->withInput();

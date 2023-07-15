@@ -31,7 +31,7 @@ class HomeController extends Controller
         ]));
     }
 
-    public function subscribe(Request $request)
+    public function subscriber(Request $request)
     {
         $validated = Validator::make($request->only('email_subscribe'), [
             'email_subscribe' => 'required|email|unique:subscribers,email',

@@ -9,7 +9,7 @@
                     <div class="custom-block-wrap">
                         <div style="height: 250px;">
                             @if (!empty($item->path_image))
-                                <img src="{{ url('storage' . $item->path_image ?? '') }}"
+                                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $item->path_image ?? '') }}"
                                     class="custom-block-image img-fluid" alt=""
                                     style="width: 100%; max-height: 100%">
                             @else

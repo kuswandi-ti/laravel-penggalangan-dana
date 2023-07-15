@@ -24,7 +24,7 @@ class RoleMiddleware
             if (in_array($user->role->name, $roles)) {
                 return $next($request);
             }
-            return redirect()->route('dashboard');
+            return redirect()->route('backend.dashboard');
         }
     }
 }

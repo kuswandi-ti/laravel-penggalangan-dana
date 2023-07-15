@@ -13,7 +13,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('backend.contact.index');
+        return view('backend.pages.contact.index');
     }
 
     /**
@@ -87,14 +87,14 @@ class ContactController extends Controller
     public function data(Request $request)
     {
         $query = Contact::when($request->has('date') && $request->date != "", function ($query) use ($request) {
-                $query->whereDate('created_at', $request->date);
-            })
+            $query->whereDate('created_at', $request->date);
+        })
             ->orderBy('name');
 
         return datatables($query)
             ->addIndexColumn()
             ->editColumn('name', function ($query) {
-                return $query->name .'<br><a href="mailto:'. $query->email .'" target="_blank">'. $query->email .'</a>';
+                return $query->name . '<br><a href="mailto:' . $query->email . '" target="_blank">' . $query->email . '</a>';
             })
             ->editColumn('created_at', function ($query) {
                 return date_format_id($query->created_at);
@@ -102,7 +102,7 @@ class ContactController extends Controller
             ->addColumn('action', function ($query) {
                 return '
                     <button class="btn btn-link text-danger"
-                        onclick="deleteData(`' . route('contact.destroy', $query->id) . '`)">
+                        onclick="deleteData(`' . route('backend.contact.destroy', $query->id) . '`)">
                         <i class="fas fa-trash"></i>
                     </button>
                 ';

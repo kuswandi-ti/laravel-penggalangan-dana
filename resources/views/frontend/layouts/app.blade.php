@@ -44,7 +44,7 @@
     @includeIf('frontend.layouts.partials.navbar')
 
     <main>
-        @if (Route::is('frontend.home'))
+        @if (Route::is('frontend.home.index'))
             @yield('content')
         @else
             @includeIf('frontend.layouts.partials.page_title')

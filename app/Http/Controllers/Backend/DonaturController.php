@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Bank;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +12,7 @@ class DonaturController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $banks = Bank::orderBy('id', 'desc')
             ->when($request->has('keyword') && $request->keyword != "", function ($query) use ($request) {
@@ -19,7 +20,7 @@ class DonaturController extends Controller
             })
             ->paginate($request->per_page ?? env('CUSTOM_PAGING'))
             ->appends($request->only('per_page', 'keyword'));
-        return view('backend.donatur.index');
+        return view('backend.pages.donatur.index');
     }
 
     /**

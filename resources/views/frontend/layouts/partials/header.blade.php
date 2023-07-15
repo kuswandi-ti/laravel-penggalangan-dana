@@ -45,7 +45,7 @@
             <div class="flex-wrap text-right col-lg-3 col-12 d-flex justify-content-end">
                 @auth
                     <p class="mb-0 d-flex me-4">
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('backend.dashboard') }}">
                             Dashboard
                         </a>
                     </p>

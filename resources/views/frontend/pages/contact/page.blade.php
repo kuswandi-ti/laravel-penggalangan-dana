@@ -6,7 +6,7 @@
                     <h2>Informasi Kontak</h2>
                     <div class="flex-wrap contact-image-wrap d-flex">
                         @if (!empty($setting))
-                            <img src="{{ url('storage' . $setting->contact_person_path_image ?? '') }}"
+                            <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->contact_person_path_image ?? '') }}"
                                 class="img-fluid avatar-image" alt="">
                         @else
                             <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="img-fluid avatar-image">

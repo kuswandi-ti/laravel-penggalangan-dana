@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->string('business_name')->after('company_name');
             $table->string('facebook_link')->after('youtube_link')->nullable();
-            $table->string('vision')->after('short_description')->nullable();
+            $table->text('vision')->after('short_description')->nullable();
             $table->string('longitude')->after('province')->nullable();
             $table->string('latitude')->after('longitude')->nullable();
             $table->string('contact_person_name')->after('facebook_link')->nullable();

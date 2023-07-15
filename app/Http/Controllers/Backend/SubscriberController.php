@@ -13,7 +13,7 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        return view('backend.subscriber.index');
+        return view('backend.pages.subscriber.index');
     }
 
     /**
@@ -91,7 +91,7 @@ class SubscriberController extends Controller
         return datatables($query)
             ->addIndexColumn()
             ->editColumn('email', function ($query) {
-                return '<a href="mailto:'. $query->email .'" target="_blank">'. $query->email .'</a>';
+                return '<a href="mailto:' . $query->email . '" target="_blank">' . $query->email . '</a>';
             })
             ->editColumn('created_at', function ($query) {
                 return date_format_id($query->created_at);
@@ -99,7 +99,7 @@ class SubscriberController extends Controller
             ->addColumn('action', function ($query) {
                 return '
                     <button class="btn btn-link text-danger"
-                        onclick="deleteData(`' . route('admin.subscriber.destroy', $query->id) . '`)">
+                        onclick="deleteData(`' . route('backend.subscriber.destroy', $query->id) . '`)">
                         <i class="fas fa-trash"></i>
                     </button>
                 ';

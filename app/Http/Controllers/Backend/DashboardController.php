@@ -24,7 +24,7 @@ class DashboardController extends Controller
             $jumlah_donasi_sudah_dibayar = Donation::where('status', 'paid')->count();
             $total_donasi_dicairkan = Cashout::where('status', 'success')->sum('cashout_amount');
 
-            return view('backend.dashboard_admin', compact([
+            return view('backend.pages.dashboard', compact([
                 'jumlah_kategori',
                 'jumlah_program_all',
                 'jumlah_program_pending',
@@ -36,6 +36,6 @@ class DashboardController extends Controller
             ]));
         }
 
-        return view('backend.dashboard_not_admin');
+        return view('backend.pages.dashboard');
     }
 }

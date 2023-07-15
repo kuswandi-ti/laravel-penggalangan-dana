@@ -19,7 +19,7 @@
     <div class="@yield('class_box')">
         <div class="card card-outline card-primary">
             <div class="text-center card-header">
-                <a href="{{ route('frontend.home') }}" class="h2">
+                <a href="{{ route('frontend.home.index') }}" class="h2">
                     <b>{{ config('app.name') }}</b>
                 </a>
             </div>

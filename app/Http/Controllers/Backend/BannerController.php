@@ -20,7 +20,7 @@ class BannerController extends Controller
             })
             ->paginate($request->per_page ?? env('CUSTOM_PAGING'))
             ->appends($request->only('per_page', 'keyword'));
-        return view('backend.banner.index', compact('banners'));
+        return view('backend.pages.banner.index', compact('banners'));
     }
 
     /**
@@ -28,7 +28,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('backend.banner.create');
+        return view('backend.pages.banner.create');
     }
 
     /**
@@ -43,14 +43,16 @@ class BannerController extends Controller
         ]);
 
         $data = $request->only('banner_title', 'banner_description');
-        $data['banner_image'] = upload('images/banner', $request->file('banner_image'), 'banner');
+        if ($request->hasFile('banner_image')) {
+            $data['banner_image'] = upload('images/banner', $request->file('banner_image'), 'banner');
+        }
 
         $query = Banner::create($data);
 
         if ($query) {
-            return redirect()->route('banner.index')->with('success', 'Data Banner berhasil ditambahkan.');
+            return redirect()->route('backend.banner.index')->with('success', 'Data Banner berhasil ditambahkan.');
         } else {
-            return redirect()->route('banner.index')->with('error', 'Data Banner gagal ditambahkan.');
+            return redirect()->route('backend.banner.index')->with('error', 'Data Banner gagal ditambahkan.');
         }
     }
 
@@ -67,7 +69,7 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        return view('backend.banner.edit', compact('banner'));
+        return view('backend.pages.banner.edit', compact('banner'));
     }
 
     /**
@@ -95,9 +97,9 @@ class BannerController extends Controller
         $query = $banner->update($data); // $banner didapat dari parameter di fungsi update()
 
         if ($query) {
-            return redirect()->route('banner.index')->with('success', 'Data Banner berhasil diupdate.');
+            return redirect()->route('backend.banner.index')->with('success', 'Data Banner berhasil diupdate.');
         } else {
-            return redirect()->route('banner.index')->with('error', 'Data Banner gagal diupdate.');
+            return redirect()->route('backend.banner.index')->with('error', 'Data Banner gagal diupdate.');
         }
     }
 
@@ -114,9 +116,9 @@ class BannerController extends Controller
                     Storage::disk('public')->delete($banner->banner_image);
                 }
             }
-            return redirect()->route('banner.index')->with('success', 'Data Banner berhasil dihapus.');
+            return redirect()->route('backend.banner.index')->with('success', 'Data Banner berhasil dihapus.');
         } else {
-            return redirect()->route('banner.index')->with('error', 'Data Banner gagal dihapus.');
+            return redirect()->route('backend.banner.index')->with('error', 'Data Banner gagal dihapus.');
         }
     }
 }

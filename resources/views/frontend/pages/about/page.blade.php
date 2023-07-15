@@ -3,7 +3,7 @@
         <div class="row">
             <div class="mb-3 col-lg-6 col-12 mb-lg-0">
                 @if (!empty($setting))
-                    <img src="{{ url('storage' . $setting->path_image_business ?? '') }}"
+                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_business ?? '') }}"
                         class="custom-text-box-image img-fluid" alt="">
                 @else
                     <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="custom-text-box-image img-fluid">
@@ -20,7 +20,7 @@
                         {!! $setting->about ?? '' !!}
                     </p>
 
-                    <h5 class="mb-2 mt-5">Misi {{ $setting->business_name ?? '' }}</h5>
+                    <h5 class="mt-5 mb-2">Misi {{ $setting->business_name ?? '' }}</h5>
                     <p class="mb-0">
                         {!! $setting->vision ?? '' !!}
                     </p>

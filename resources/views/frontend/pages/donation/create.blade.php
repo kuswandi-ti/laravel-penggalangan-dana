@@ -13,7 +13,7 @@
                         @csrf
                         <div class="flex-wrap contact-image-wrap d-flex">
                             @if (!empty($campaign->path_image))
-                                <img src="{{ url('storage' . $campaign->path_image ?? '') }}"
+                                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image ?? '') }}"
                                     class="mb-3 custom-text-box-image img-fluid" alt=""
                                     style="width: 100%; max-height: 100%">
                             @else
