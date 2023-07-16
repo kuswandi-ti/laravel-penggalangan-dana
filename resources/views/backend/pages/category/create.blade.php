@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <x-slot name="footer">
-                        <a href="/category" class="btn btn-default">
+                        <a href="{{ route('backend.category.index') }}" class="btn btn-default">
                             <i class="fas fa-chevron-circle-left"></i> Kembali
                         </a>
                         <button type="reset" class="btn btn-warning">

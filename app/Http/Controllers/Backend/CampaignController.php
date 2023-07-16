@@ -21,11 +21,7 @@ class CampaignController extends Controller
     {
         $categories = Category::orderBy('name')->get()->pluck('name', 'id');
 
-        if (auth()->user()->hasRole('donatur')) {
-            return view('frontend.pages.campaign.index', compact('categories'));
-        } else {
-            return view('backend.pages.campaign.index', compact('categories'));
-        }
+        return view('backend.pages.campaign.index', compact('categories'));
     }
 
     public function data(Request $request)

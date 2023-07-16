@@ -27,6 +27,14 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div class="text-center alert alert-warning">
+                                    Minimal Donasi Rp. 1000
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-lg-2 col-md-6 col-12">
                                 <p class="text-light" style="font-size: 30pt"><strong>Rp. </strong></p>
                             </div>

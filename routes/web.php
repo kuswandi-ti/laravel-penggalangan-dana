@@ -55,6 +55,26 @@ Route::post('/subscriber', [HomeController::class, 'subscriber'])->name('fronten
 /* ========================================================================================= */
 
 /* ========================================================================================= */
+/* BACKEND - ADMIN, DONATUR */
+/* ========================================================================================= */
+
+Route::group([
+    'middleware' => ['auth', 'role:admin,donatur']
+], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+    Route::resource('/campaign', FrontendCampaignController::class, ['as' => 'frontend'])
+        ->only('index'); // frontend.campaign.index
+    Route::get('/campaign/data', [BackendCampaignController::class, 'data'])->name('backend.campaign.data');
+    Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('backend.profile.show');
+    Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('backend.profile.bank.destroy');
+    Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
+    Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
+    Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
+});
+
+/* ========================================================================================= */
+
+/* ========================================================================================= */
 /* BACKEND - ADMIN */
 /* ========================================================================================= */
 
@@ -91,26 +111,6 @@ Route::group([
 Route::group([
     'middleware' => ['auth', 'role:donatur']
 ], function () {
-});
-
-/* ========================================================================================= */
-
-/* ========================================================================================= */
-/* BACKEND - ADMIN, DONATUR */
-/* ========================================================================================= */
-
-Route::group([
-    'middleware' => ['auth', 'role:admin,donatur']
-], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
-    Route::resource('/campaign', FrontendCampaignController::class, ['as' => 'frontend'])
-        ->only('index', 'create', 'edit'); // frontend.campaign.index
-    Route::get('/campaign/data', [BackendCampaignController::class, 'data'])->name('backend.campaign.data');
-    Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('backend.profile.show');
-    Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('backend.profile.bank.destroy');
-    Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
-    Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
-    Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
 });
 
 /* ========================================================================================= */

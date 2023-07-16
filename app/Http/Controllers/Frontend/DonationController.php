@@ -38,8 +38,8 @@ class DonationController extends Controller
     public function checkout(Request $request, $id)
     {
         $this->validate($request, [
-            'nominal' => 'required',
-            'user_id' => 'required',
+            'nominal' => 'required|integer|min:1000',
+            'user_id' => 'required|exists:users,id',
             'anonim' => 'nullable|in:1,0',
             'support' => 'nullable',
         ]);

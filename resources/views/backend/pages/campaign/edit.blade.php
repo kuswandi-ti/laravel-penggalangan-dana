@@ -240,7 +240,7 @@
                     </div>
 
                     <x-slot name="footer">
-                        <a href="/campaign" class="btn btn-default">
+                        <a href="{{ route('backend.campaign.index') }}" class="btn btn-default">
                             <i class="fas fa-chevron-circle-left"></i> Kembali
                         </a>
                         <button type="reset" class="btn btn-warning">

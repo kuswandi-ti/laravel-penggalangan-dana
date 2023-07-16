@@ -10,13 +10,13 @@ TODO :
 7. Edit create campaign menjadi 3 bagian. Detail, Foto, Konfirmasi (OK)
 
 8. Create snap midtrans di halaman konfirmasi pembayaran (OK)
-9. Jika pembayaran berhasil :
+9. Jika pembayaran berhasil : (OK)
    - update tabel donations, field status = 'not paid' menjadi status = 'paid'
    - insert tabel payments
    - update tabel campaigns, field amount = menambahkan nominal dari payment
-10. Callback / hook di midtrans
-
-11. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting
+10. Callback / hook di midtrans (OK)
+11. Kirim email saat berhasil bayar midtrans
+12. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting (OK)
 
 
 

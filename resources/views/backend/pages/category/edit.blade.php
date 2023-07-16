@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <form action="{{ route('backend.category.update', $category->id) }}" method="POST">
+            <form action="{{ route('backend.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <x-slot name="footer">
-                        <a href="/category" class="btn btn-warning">
+                        <a href="{{ route('backend.category.index') }}" class="btn btn-default">
                             <i class="fas fa-chevron-circle-left"></i> Kembali
                         </a>
                         <button type="reset" class="btn btn-dark">

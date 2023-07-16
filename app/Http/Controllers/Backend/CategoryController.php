@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 
@@ -85,31 +86,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        try {
-            $this->validate($request, [
-                'name' => 'required|unique:categories,name,' . $category->id,
-                'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
-            ]);
+        // try {
+        $this->validate($request, [
+            'name' => 'required|unique:categories,name,' . $category->id,
+            'path_image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+        ]);
 
-            $data = $request->only('name');
-            $data['slug'] = Str::slug($request->name);
-            if ($request->hasFile('path_image')) {
-                if (!empty($category->path_image)) {
-                    if (Storage::disk('public')->exists($category->path_image)) {
-                        Storage::disk('public')->delete($category->path_image);
-                    }
+        $data = $request->only('name');
+        $data['slug'] = Str::slug($request->name);
+        if ($request->hasFile('path_image')) {
+            if (!empty($category->path_image)) {
+                if (Storage::disk('public')->exists($category->path_image)) {
+                    Storage::disk('public')->delete($category->path_image);
                 }
-                $data['path_image'] = upload('images/category', $request->file('path_image'), 'category');
             }
-
-            $category->update($data); // $category didapat dari parameter di fungsi update()
-
-            return redirect()->route('backend.category.index')->with('success', 'Data Kategori berhasil diupdate.');
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage)->withInput();
-        } catch (QueryException $qe) {
-            return back()->withError($qe->getMessage());
+            $data['path_image'] = upload('images/category', $request->file('path_image'), 'category');
         }
+
+        $category->update($data); // $category didapat dari parameter di fungsi update()
+
+        return redirect()->route('backend.category.index')->with('success', 'Data Kategori berhasil diupdate.');
+        // } catch (Exception $e) {
+        //     return back()->withError($e->getMessage)->withInput();
+        // } catch (QueryException $qe) {
+        //     return back()->withError($qe->getMessage());
+        // }
     }
 
     /**
@@ -117,14 +118,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        try {
-            $category->delete();
+        //    try {
+        $category->delete();
 
-            return redirect()->route('backend.category.index')->with('success', 'Data Kategori berhasil dihapus.');
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage)->withInput();
-        } catch (QueryException $qe) {
-            return back()->withError($qe->getMessage());
-        }
+        return redirect()->route('backend.category.index')->with('success', 'Data Kategori berhasil dihapus.');
+        // } catch (Exception $e) {
+        //     return back()->withError($e->getMessage)->withInput();
+        // } catch (QueryException $qe) {
+        //     return back()->withError($qe->getMessage());
+        // }
     }
 }

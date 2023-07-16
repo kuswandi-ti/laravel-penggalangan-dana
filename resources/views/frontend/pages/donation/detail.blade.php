@@ -85,6 +85,7 @@
 
                         <p class="mb-0 ms-auto">
                             <strong>{{ now()->diff(new DateTime($campaign->end_date))->days }}</strong> hari lagi
+                            ({{ now()->parse($campaign->end_date)->diffForHumans() }})
                         </p>
                     </div>
                     <form class="custom-form subscribe-form" style="padding: 0px;">

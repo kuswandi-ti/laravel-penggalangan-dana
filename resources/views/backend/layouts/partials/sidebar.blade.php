@@ -52,13 +52,23 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a href="{{ route('backend.campaign.index') }}"
-                        class="nav-link {{ request()->is('admin/campaign*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th-large"></i>
-                        <p>
-                            Program
-                        </p>
-                    </a>
+                    @if (auth()->user()->hasRole('admin'))
+                        <a href="{{ route('backend.campaign.index') }}"
+                            class="nav-link {{ request()->is('admin/campaign*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th-large"></i>
+                            <p>
+                                Program
+                            </p>
+                        </a>
+                    @else
+                        <a href="{{ route('frontend.campaign.index') }}"
+                            class="nav-link {{ request()->is('campaign*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th-large"></i>
+                            <p>
+                                Program
+                            </p>
+                        </a>
+                    @endif
                 </li>
 
                 <li class="nav-header">REFERENSI</li>
