@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\Campaign;
+use App\Models\Category;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,6 +34,15 @@ class DonationController extends Controller
     {
         $campaign = Campaign::findOrFail($id);
         return view('frontend.pages.donation.detail', compact('campaign'));
+    }
+
+    public function edit($id)
+    {
+        $campaign = Campaign::findOrFail($id);
+        $donatur = User::with('role')
+            ->whereRelation('role', 'name', '=', 'donatur')
+            ->get();
+        return view('frontend.pages.donation.edit', compact('campaign', 'donatur'));
     }
 
     public function checkout(Request $request, $id)

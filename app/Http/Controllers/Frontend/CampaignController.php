@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Campaign;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CampaignController extends Controller
 {
@@ -12,7 +14,10 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        return view('frontend.pages.campaign.index');
+        $categories = Category::orderBy('name')->get()->pluck('name', 'id');
+        $campaign = Campaign::where('id', '=', 0);
+
+        return view('frontend.pages.campaign.index', compact('campaign', 'categories'));
     }
 
     /**
@@ -42,9 +47,11 @@ class CampaignController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Campaign $campaign)
     {
-        //
+        $categories = Category::orderBy('name')->get()->pluck('name', 'id');
+
+        return view('frontend.pages.campaign.index', compact('campaign', 'categories'));
     }
 
     /**

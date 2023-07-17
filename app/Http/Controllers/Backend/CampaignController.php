@@ -88,7 +88,6 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
         $this->validate($request, [
             'title' => 'required|min:8',
             'categories' => 'required|array',
@@ -113,15 +112,13 @@ class CampaignController extends Controller
         if ($campaign) {
             $campaign = Campaign::orderBy('id', 'DESC')->first();
             $campaign->category_campaign()->attach($request->categories);
+            if (auth()->user()->hasRole('donatur')) {
+                return redirect()->route('frontend.donation.index')->with('success', 'Data Program berhasil ditambahkan.');
+            }
             return redirect()->route('backend.campaign.index')->with('success', 'Data Program berhasil ditambahkan.');
         } else {
-            return redirect()->route('backend.campaign.index')->with('error', 'Data Program gagal ditambahkan.');
+            return redirect()->back()->with('error', 'Data Program gagal ditambahkan.');
         }
-        // } catch (Exception $e) {
-        //     return back()->withError($e->getMessage())->withInput();
-        // } catch (QueryException $qe) {
-        //     return back()->withError($qe->getMessage());
-        // }
     }
 
     /**
@@ -191,6 +188,9 @@ class CampaignController extends Controller
 
         if ($campaign) {
             $campaign->category_campaign()->sync($request->categories);
+            if (auth()->user()->hasRole('donatur')) {
+                return redirect()->route('frontend.donation.index')->with('success', 'Data Program berhasil diperbaharui.');
+            }
             return redirect()->route('backend.campaign.index')->with('success', 'Data Program berhasil diperbaharui.');
         } else {
             return redirect()->route('backend.campaign.index')->with('error', 'Data Program gagal diperbaharui.');

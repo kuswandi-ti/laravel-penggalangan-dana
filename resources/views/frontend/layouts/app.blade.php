@@ -56,6 +56,7 @@
 
     <!-- JAVASCRIPT FILES -->
     <script src="{{ asset('public/template/frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('public/template/frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/template/frontend/js/jquery.sticky.js') }}"></script>
     <script src="{{ asset('public/template/frontend/js/counter.js') }}"></script>

@@ -22,8 +22,8 @@ return new class extends Migration
             $table->longtext('body')->nullable();
             $table->integer('view_cont')->default(0);
             $table->enum('status', ['publish', 'pending', 'archieve'])->default('pending');
-            $table->integer('amount')->default(0);
-            $table->integer('goal')->default(0);
+            $table->double('amount')->default(0);
+            $table->double('goal')->default(0);
             $table->datetime('end_date')->nullable();
             $table->text('note')->nullable();
             $table->string('receiver')->nullable();

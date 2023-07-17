@@ -51,19 +51,17 @@ Route::get('/news', [NewsController::class, 'index'])->name('frontend.news.index
 Route::get('/contact', [FrontendContactController::class, 'index'])->name('frontend.contact.index');
 Route::post('/contact', [FrontendContactController::class, 'store'])->name('frontend.contact.store');
 Route::post('/subscriber', [HomeController::class, 'subscriber'])->name('frontend.subscriber.store');
-
 /* ========================================================================================= */
 
 /* ========================================================================================= */
 /* BACKEND - ADMIN, DONATUR */
 /* ========================================================================================= */
-
 Route::group([
     'middleware' => ['auth', 'role:admin,donatur']
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
-    Route::resource('/campaign', FrontendCampaignController::class, ['as' => 'frontend'])
-        ->only('index'); // frontend.campaign.index
+    Route::resource('/campaigns', FrontendCampaignController::class, ['as' => 'frontend']); // frontend.campaign.index
+    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->only('store');
     Route::get('/campaign/data', [BackendCampaignController::class, 'data'])->name('backend.campaign.data');
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('backend.profile.show');
     Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('backend.profile.bank.destroy');
@@ -71,13 +69,11 @@ Route::group([
     Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
     Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
 });
-
 /* ========================================================================================= */
 
 /* ========================================================================================= */
 /* BACKEND - ADMIN */
 /* ========================================================================================= */
-
 Route::group([
     'middleware' => ['auth', 'role:admin'],
     'prefix' => 'admin',
@@ -85,7 +81,7 @@ Route::group([
     // Master
     Route::resource('/bank', BankController::class, ['as' => 'backend']);
     Route::resource('/category', CategoryController::class, ['as' => 'backend']);
-    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend']);
+    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->except('store');
     Route::get('/campaign/detail/{id}', [BackendCampaignController::class, 'detail'])->name('backend.campaign.detail');
 
     // Referensi
@@ -107,12 +103,10 @@ Route::group([
 /* ========================================================================================= */
 /* BACKEND - DONATUR */
 /* ========================================================================================= */
-
 Route::group([
     'middleware' => ['auth', 'role:donatur']
 ], function () {
 });
-
 /* ========================================================================================= */
 
 

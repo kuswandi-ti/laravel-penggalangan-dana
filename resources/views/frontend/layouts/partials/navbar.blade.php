@@ -41,7 +41,7 @@
                 </li>
                 <li class="nav-item ms-3">
                     <a class="nav-link custom-btn custom-border-btn btn"
-                        href="{{ route('frontend.campaign.index') }}">Galang Dana</a>
+                        href="{{ route('frontend.campaigns.index') }}">Galang Dana</a>
                 </li>
             </ul>
         </div>

@@ -21,8 +21,11 @@
                             <div class="custom-block-body">
                                 <h5 class="mb-3">
                                     <a href="{{ url('/donation/' . $item->id) }}" class="text-justify">
-                                        {{ Str::limit($item->title, 47, ' ...') }}
+                                        {{ Str::limit($item->title, 20, ' ...') }}
                                     </a>
+                                    @if (auth()->user()->hasRole('donatur'))
+                                        <a href="{{ route('frontend.campaigns.edit', $item->id) }}">(edit)</a>
+                                    @endif
                                 </h5>
                                 <p class="text-justify">{{ Str::limit($item->short_description, 100, ' ...') }}</p>
 

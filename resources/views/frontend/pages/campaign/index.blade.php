@@ -39,19 +39,29 @@
                                 </div>
                             </div>
                             <div class="bs-stepper-content">
-                                <form onsubmit="return false">
-                                    <div id="detail-part" role="tabpanel" class="bs-stepper-pane active dstepper-block"
-                                        aria-labelledby="detail-part-trigger">
-                                        @includeIf('frontend.pages.campaign.step.detail')
-                                    </div>
-                                    <div id="foto-part" role="tabpanel" class="bs-stepper-pane"
-                                        aria-labelledby="foto-part-trigger">
-                                        @includeIf('frontend.pages.campaign.step.foto')
-                                    </div>
-                                    <div id="konfirmasi-part" role="tabpanel" class="bs-stepper-pane"
-                                        aria-labelledby="konfirmasi-part-trigger">
-                                        @includeIf('frontend.pages.campaign.step.konfirmasi')
-                                    </div>
+                                @if (Route::is('frontend.campaigns.index'))
+                                    <form action="{{ route('backend.campaign.store') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                    @else
+                                        <form action="{{ route('backend.campaign.update', $campaign->id) }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                @endif
+                                <x-alert-message />
+                                <div id="detail-part" role="tabpanel" class="bs-stepper-pane active dstepper-block"
+                                    aria-labelledby="detail-part-trigger">
+                                    @includeIf('frontend.pages.campaign.step.detail')
+                                </div>
+                                <div id="foto-part" role="tabpanel" class="bs-stepper-pane"
+                                    aria-labelledby="foto-part-trigger">
+                                    @includeIf('frontend.pages.campaign.step.foto')
+                                </div>
+                                <div id="konfirmasi-part" role="tabpanel" class="bs-stepper-pane"
+                                    aria-labelledby="konfirmasi-part-trigger">
+                                    @includeIf('frontend.pages.campaign.step.konfirmasi')
+                                </div>
                                 </form>
                             </div>
                         </div>
@@ -63,10 +73,11 @@
 @endsection
 
 @push('scripts_vendor')
-    <script src="{{ asset('template/backend/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/moment/moment.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
 @endpush
 
+@includeIf('includes.summernote')
 @includeIf('includes.select2', ['placeholder' => 'Pilih Kategori'])
 @includeIf('includes.datepicker')
 
