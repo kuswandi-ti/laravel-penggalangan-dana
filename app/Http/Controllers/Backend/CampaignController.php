@@ -225,7 +225,7 @@ class CampaignController extends Controller
                 return '<strong>' . $query->title . '</strong>' . '<br><small>' . $query->short_description . '</small>';
             })
             ->editColumn('status', function ($query) {
-                return '<span class="bagde badge-' . $query->status_color() . '">' . $query->status . '</span>';
+                return '<span class="bagde badge-' . $query->status_color() . '">' . $query->status_text() . '</span>';
             })
             ->addColumn('author', function ($query) {
                 return $query->user->name;
@@ -247,5 +247,28 @@ class CampaignController extends Controller
             ->rawColumns(['path_image', 'short_description', 'status', 'author', 'action'])
             ->escapeColumns([])
             ->make(true);
+    }
+
+    public function update_status(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:publish,archieve,pending',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $campaign = Campaign::findOrFail($id);
+        $campaign->update($request->only('status'));
+
+        $statusText = "";
+        if ($request->status == 'publish') {
+            $statusText = 'dipublish';
+        } elseif ($request->status == 'archieve') {
+            $statusText = 'diarsipkan';
+        }
+
+        return response()->json(['data' => $campaign, 'message' => 'Data program berhasil ' . $statusText]);
     }
 }

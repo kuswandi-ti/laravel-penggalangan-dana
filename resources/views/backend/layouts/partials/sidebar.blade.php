@@ -74,7 +74,8 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('backend.donation.index') }}"
+                        class="nav-link {{ request()->is('admin/donation*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-donate"></i>
                         <p>
                             Daftar Donasi
@@ -82,7 +83,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('backend.cashout.index') }}"
+                        class="nav-link {{ request()->is('admin/cashout*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-donate"></i>
                         <p>
                             Daftar Pencairan

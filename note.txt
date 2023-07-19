@@ -17,6 +17,10 @@ TODO :
 10. Callback / hook di midtrans (OK)
 11. Kirim email saat berhasil bayar midtrans
 12. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting (OK)
+13. Backend donasi
+14. Backend pencairan
+15. Backend cashout
+15. Backend Laporan
 
 
 

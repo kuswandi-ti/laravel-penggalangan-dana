@@ -95,36 +95,6 @@
                                 Sekarang</a>
                         </div>
                     </form>
-
-                    <form class="custom-form subscribe-form">
-                        <h5 class="mb-3">Waktu</h5>
-                        <ul class="mt-2 custom-list">
-                            <li class="custom-list-item d-flex">
-                                <i class="bi-check custom-text-box-icon me-2"></i>
-                                Charity Theme
-                            </li>
-
-                            <li class="custom-list-item d-flex">
-                                <i class="bi-check custom-text-box-icon me-2"></i>
-                                Semantic HTML
-                            </li>
-                        </ul>
-                    </form>
-
-                    <form class="custom-form subscribe-form">
-                        <h5 class="mb-3">Jumlah</h5>
-                        <ul class="mt-2 custom-list">
-                            <li class="custom-list-item d-flex">
-                                <i class="bi-check custom-text-box-icon me-2"></i>
-                                Charity Theme
-                            </li>
-
-                            <li class="custom-list-item d-flex">
-                                <i class="bi-check custom-text-box-icon me-2"></i>
-                                Semantic HTML
-                            </li>
-                        </ul>
-                    </form>
                 </div>
             </div>
         </div>

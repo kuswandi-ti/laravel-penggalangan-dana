@@ -6,9 +6,11 @@ use App\Http\Controllers\Backend\{
     BankController,
     BannerController,
     CampaignController as BackendCampaignController,
+    CashoutController,
     CategoryController,
     ContactController as BackendContactController,
     DashboardController,
+    DonationController as BackendDonationController,
     DonaturController,
     SettingController,
     SubscriberController,
@@ -19,7 +21,7 @@ use App\Http\Controllers\Frontend\{
     AboutController,
     CampaignController as FrontendCampaignController,
     ContactController as FrontendContactController,
-    DonationController,
+    DonationController as FrontendDonationController,
     HomeController,
     NewsController,
 };
@@ -45,8 +47,8 @@ use App\Http\Controllers\Frontend\{
 
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about.index');
-Route::get('/donation', [DonationController::class, 'index'])->name('frontend.donation.index');
-Route::get('/donation/{id}', [DonationController::class, 'detail'])->name('frontend.donation.detail');
+Route::get('/donation', [FrontendDonationController::class, 'index'])->name('frontend.donation.index');
+Route::get('/donation/{id}', [FrontendDonationController::class, 'detail'])->name('frontend.donation.detail');
 Route::get('/news', [NewsController::class, 'index'])->name('frontend.news.index');
 Route::get('/contact', [FrontendContactController::class, 'index'])->name('frontend.contact.index');
 Route::post('/contact', [FrontendContactController::class, 'store'])->name('frontend.contact.store');
@@ -65,10 +67,10 @@ Route::group([
     Route::get('/campaign/data', [BackendCampaignController::class, 'data'])->name('backend.campaign.data');
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('backend.profile.show');
     Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('backend.profile.bank.destroy');
-    Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
-    Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
-    Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
-    Route::get('/donation/{id}/payment_confirm/{order_number}', [DonationController::class, 'payment_confirm'])->name('frontend.donation.payment_confirm');
+    Route::get('/donation/{id}/create', [FrontendDonationController::class, 'create'])->name('frontend.donation.create');
+    Route::post('/donation/{id}/checkout', [FrontendDonationController::class, 'checkout'])->name('frontend.donation.checkout');
+    Route::get('/donation/{id}/payment/{order_number}', [FrontendDonationController::class, 'payment'])->name('frontend.donation.payment');
+    Route::get('/donation/{id}/payment_confirm/{order_number}', [FrontendDonationController::class, 'payment_confirm'])->name('frontend.donation.payment_confirm');
 });
 /* ========================================================================================= */
 
@@ -84,10 +86,15 @@ Route::group([
     Route::resource('/category', CategoryController::class, ['as' => 'backend']);
     Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->except('store', 'update');
     Route::get('/campaign/detail/{id}', [BackendCampaignController::class, 'detail'])->name('backend.campaign.detail');
+    Route::put('/campaign/{id}/update_status', [BackendCampaignController::class, 'update_status'])->name('backend.campaign.update_status');
 
     // Referensi
     Route::get('/donatur/data', [DonaturController::class, 'data'])->name('backend.donatur.data');
     Route::resource('/donatur', DonaturController::class, ['as' => 'backend']);
+    Route::get('/donation/data', [BackendDonationController::class, 'data'])->name('backend.donation.data');
+    Route::resource('/donation', BackendDonationController::class, ['as' => 'backend']);
+    Route::get('/cashout/data', [CashoutController::class, 'data'])->name('backend.cashout.data');
+    Route::resource('/cashout', CashoutController::class, ['as' => 'backend']);
     Route::get('/contact/data', [BackendContactController::class, 'data'])->name('backend.contact.data');
     Route::resource('/contact', BackendContactController::class, ['as' => 'backend']);
     Route::get('/subscriber/data', [SubscriberController::class, 'data'])->name('backend.subscriber.data');

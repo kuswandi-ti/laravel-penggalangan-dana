@@ -21,6 +21,30 @@ class Campaign extends MyModel
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function donations()
+    {
+        return $this->hasMany(Donation::class, 'campaign_id', 'id');
+    }
+
+    public function status_text()
+    {
+        $text = '';
+
+        switch ($this->status) {
+            case 'publish':
+                $text = 'publish';
+                break;
+            case 'pending':
+                $text = 'pending';
+            case 'archieve':
+                $text = 'archieve';
+            default:
+                break;
+        }
+
+        return $text;
+    }
+
     public function status_color()
     {
         $color = '';
@@ -35,30 +59,6 @@ class Campaign extends MyModel
                 break;
 
             case 'archieve':
-                $color = 'dark';
-                break;
-
-            default:
-                break;
-        }
-
-        return $color;
-    }
-
-    public function type_color()
-    {
-        $color = '';
-
-        switch ($this->type) {
-            case 'general':
-                $color = 'success';
-                break;
-
-            case 'urgent':
-                $color = 'danger';
-                break;
-
-            case 'feature':
                 $color = 'dark';
                 break;
 
