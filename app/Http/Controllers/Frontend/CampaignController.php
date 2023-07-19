@@ -49,9 +49,12 @@ class CampaignController extends Controller
      */
     public function edit(Campaign $campaign)
     {
-        $categories = Category::orderBy('name')->get()->pluck('name', 'id');
+        if (auth()->user()->id == $campaign->user_id) {
+            $categories = Category::orderBy('name')->get()->pluck('name', 'id');
+            return view('frontend.pages.campaign.index', compact('campaign', 'categories'));
+        }
 
-        return view('frontend.pages.campaign.index', compact('campaign', 'categories'));
+        return response('Unauthorized', 401);
     }
 
     /**

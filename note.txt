@@ -25,3 +25,10 @@ https://programmingfields.com/how-to-create-a-virtual-host-in-xampp-for-php-in-w
 
 php -S localhost:7000 -t laravel-penggalangan-dana
 ngrok http localhost:7000 
+
+Name	Value
+Card Number	4811 1111 1111 1114
+CVV	123
+Exp Month	Any month in MM format. For example, 02.
+Exp Year	Any future year, in YYYY format. For example, 2025.
+OTP/3DS	112233

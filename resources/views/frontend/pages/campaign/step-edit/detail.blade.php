@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="title">Apa judul untuk program ini ? <span class="text-danger">*</span></label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
-                value="{{ old('title') }}" placeholder="Masukkan Judul Program">
+                value="{{ old('title') ?? $campaign->title }}" placeholder="Masukkan Judul Program">
             @error('title')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -22,8 +22,10 @@
                 id="categories" multiple>
                 @foreach ($categories as $key => $category)
                     <option value="{{ $key }}"
-                        {{ collect(old('categories'))->contains($key) ? 'selected' : '' }}>
-                        {{ $category }}</option>
+                        @foreach ($campaign->category_campaign as $r)
+                                                {{ $r->id == $key ? 'selected' : '' }} @endforeach>
+                        {{ $category }}
+                    </option>
                 @endforeach
             </select>
             @error('categories')
@@ -40,7 +42,7 @@
         <label for="short_description">Ceritakan tentang diri anda, alasan membuat program, rencana penggunaan dana
             <span class="text-danger">*</span></label>
         <textarea class="form-control @error('short_description') is-invalid @enderror" name="short_description"
-            id="short_description" rows="4" placeholder="Isikan Deskripsi Singkat Program">{{ old('short_description') }}</textarea>
+            id="short_description" rows="4" placeholder="Isikan Deskripsi Singkat Program">{{ old('short_description') ?? $campaign->short_description }}</textarea>
         @error('short_description')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -54,7 +56,7 @@
         <div class="form-group">
             <label for="body">Tulis konten secara lengkap <span class="text-danger">*</span></label>
             <textarea class="form-control summernote @error('body') is-invalid @enderror" name="body" id="body"
-                rows="3">{{ old('body') }}</textarea>
+                rows="3">{{ old('body') ?? $campaign->body }}</textarea>
             @error('body')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -72,7 +74,8 @@
                 <div class="input-group-prepend" data-target="#publish_date" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="bi bi-calendar-event-fill"></i></div>
                 </div>
-                <input type="text" name="publish_date" id="publish_date" value="{{ old('publish_date') }}"
+                <input type="text" name="publish_date" id="publish_date"
+                    value="{{ old('publish_date') ?? $campaign->publish_date }}"
                     class="form-control datetimepicker-input @error('publish_date') is-invalid @enderror"
                     data-target="#publish_date" placeholder="Pilih Tanggal Publish">
                 @error('publish_date')
@@ -92,11 +95,12 @@
             <select class="custom-select @error('status') is-invalid @enderror" name="status" id="status"
                 style="width: 100%;">
                 <option disabled selected>Pilih Status...</option>
-                <option value="publish" {{ old('status') == 'publish' ? 'selected' : '' }}>Publish
+                <option value="publish" {{ $campaign->status == 'publish' ? 'selected' : '' }}>Publish
                 </option>
-                <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending
+                <option value="pending" {{ $campaign->status == 'pending' ? 'selected' : '' }}>Pending
                 </option>
-                <option value="archieve" {{ old('status') == 'archieve' ? 'selected' : '' }}>Diarsipkan
+                <option value="archieve" {{ $campaign->status == 'archieve' ? 'selected' : '' }}>
+                    Diarsipkan
                 </option>
             </select>
             @error('status')
@@ -117,7 +121,7 @@
                     <span class="input-group-text">Rp.</span>
                 </div>
                 <input type="number" class="form-control @error('goal') is-invalid @enderror" name="goal"
-                    id="goal" value="{{ old('goal') }}" placeholder="Masukkan Target Donasi">
+                    id="goal" value="{{ old('goal') ?? $campaign->goal }}" placeholder="Masukkan Target Donasi">
             </div>
             @error('goal')
                 <div class="invalid-feedback">
@@ -136,7 +140,8 @@
                 <div class="input-group-prepend" data-target="#end_date" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="bi bi-calendar-event-fill"></i></div>
                 </div>
-                <input type="text" name="end_date" id="end_date" value="{{ old('end_date') }}"
+                <input type="text" name="end_date" id="end_date"
+                    value="{{ old('end_date') ?? $campaign->end_date }}"
                     class="form-control datetimepicker-input @error('end_date') is-invalid @enderror"
                     data-target="#end_date" placeholder="Pilih Tanggal Selesai">
                 @error('end_date')
@@ -154,7 +159,7 @@
         <div class="form-group">
             <label for="note">Tuliskan ajakan singkat untuk mengajak orang ikut program</label>
             <textarea class="form-control" name="note" id="note" rows="3"
-                placeholder="Tuliskan ajakan singkat untuk mengajak orang ikut program">{{ old('note') }}</textarea>
+                placeholder="Tuliskan ajakan singkat untuk mengajak orang ikut program">{{ old('note') ?? $campaign->note }}</textarea>
         </div>
     </div>
 </div>

@@ -20,9 +20,9 @@
                                 <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="mb-3 custom-text-box-image img-fluid"
                                     alt="" style="width: 100%; max-height: 100%">
                             @endif
-                            <div class="text-center d-flex flex-column">
+                            <div class="d-flex flex-column">
                                 <p class="mb-0 h3 text-light">Anda akan berdonasi untuk :</p>
-                                <p class="mb-0 h2 text-light"><strong>{{ $campaign->title ?? '' }}</strong></p>
+                                <p class="mb-0 h2 text-warning"><strong>{{ $campaign->title ?? '' }}</strong></p>
                             </div>
                         </div>
 
@@ -73,13 +73,13 @@
 
                                     <div class="mb-2 form-group phone" style="display: none;">
                                         <p class="h4 text-light"><strong>No. Telp.</strong></p>
-                                        <label class="h4 text-light"></label>
+                                        <label class="h4 text-warning"></label>
                                     </div>
                                 @else
-                                    <input type="hidden" name="user_id" value="{{ auth()->id }}">
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     <div class="mb-0 form-group">
                                         <p class="h4 text-light"><strong>No. Telp.</strong></p>
-                                        <label class="h4 text-light">{{ auth()->user()->phone }}</label>
+                                        <label class="h4 text-warning">{{ auth()->user()->phone }}</label>
                                     </div>
                                 @endif
 

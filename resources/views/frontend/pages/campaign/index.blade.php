@@ -52,15 +52,27 @@
                                 <x-alert-message />
                                 <div id="detail-part" role="tabpanel" class="bs-stepper-pane active dstepper-block"
                                     aria-labelledby="detail-part-trigger">
-                                    @includeIf('frontend.pages.campaign.step.detail')
+                                    @if (Route::is('frontend.campaigns.index'))
+                                        @includeIf('frontend.pages.campaign.step.detail')
+                                    @else
+                                        @includeIf('frontend.pages.campaign.step-edit.detail')
+                                    @endif
                                 </div>
                                 <div id="foto-part" role="tabpanel" class="bs-stepper-pane"
                                     aria-labelledby="foto-part-trigger">
-                                    @includeIf('frontend.pages.campaign.step.foto')
+                                    @if (Route::is('frontend.campaigns.index'))
+                                        @includeIf('frontend.pages.campaign.step.foto')
+                                    @else
+                                        @includeIf('frontend.pages.campaign.step-edit.foto')
+                                    @endif
                                 </div>
                                 <div id="konfirmasi-part" role="tabpanel" class="bs-stepper-pane"
                                     aria-labelledby="konfirmasi-part-trigger">
-                                    @includeIf('frontend.pages.campaign.step.konfirmasi')
+                                    @if (Route::is('frontend.campaigns.index'))
+                                        @includeIf('frontend.pages.campaign.step.konfirmasi')
+                                    @else
+                                        @includeIf('frontend.pages.campaign.step-edit.konfirmasi')
+                                    @endif
                                 </div>
                                 </form>
                             </div>

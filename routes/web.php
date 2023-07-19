@@ -61,13 +61,14 @@ Route::group([
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
     Route::resource('/campaigns', FrontendCampaignController::class, ['as' => 'frontend']); // frontend.campaign.index
-    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->only('store');
+    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->only('store', 'update');
     Route::get('/campaign/data', [BackendCampaignController::class, 'data'])->name('backend.campaign.data');
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])->name('backend.profile.show');
     Route::delete('/user/bank/{id}', [UserProfileInformationController::class, 'bank_destroy'])->name('backend.profile.bank.destroy');
     Route::get('/donation/{id}/create', [DonationController::class, 'create'])->name('frontend.donation.create');
     Route::post('/donation/{id}/checkout', [DonationController::class, 'checkout'])->name('frontend.donation.checkout');
     Route::get('/donation/{id}/payment/{order_number}', [DonationController::class, 'payment'])->name('frontend.donation.payment');
+    Route::get('/donation/{id}/payment_confirm/{order_number}', [DonationController::class, 'payment_confirm'])->name('frontend.donation.payment_confirm');
 });
 /* ========================================================================================= */
 
@@ -81,10 +82,11 @@ Route::group([
     // Master
     Route::resource('/bank', BankController::class, ['as' => 'backend']);
     Route::resource('/category', CategoryController::class, ['as' => 'backend']);
-    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->except('store');
+    Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->except('store', 'update');
     Route::get('/campaign/detail/{id}', [BackendCampaignController::class, 'detail'])->name('backend.campaign.detail');
 
     // Referensi
+    Route::get('/donatur/data', [DonaturController::class, 'data'])->name('backend.donatur.data');
     Route::resource('/donatur', DonaturController::class, ['as' => 'backend']);
     Route::get('/contact/data', [BackendContactController::class, 'data'])->name('backend.contact.data');
     Route::resource('/contact', BackendContactController::class, ['as' => 'backend']);

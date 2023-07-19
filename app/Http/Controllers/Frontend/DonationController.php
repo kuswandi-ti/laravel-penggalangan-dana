@@ -58,7 +58,7 @@ class DonationController extends Controller
 
         $data['campaign_id'] = $id;
         $data['user_id'] = $request->user_id;
-        $data['order_number'] = 'PX' . mt_rand(000000, 999999);
+        $data['order_number'] = 'PX-' . time(); // mt_rand(0000000000, 9999999999);
         $data['anonim'] = $request->anonim ?? 0;
         $data['nominal'] = str_replace('.', '', $request->nominal);
         $data['support'] = $request->support;
@@ -83,6 +83,7 @@ class DonationController extends Controller
                 // ],
                 'customer_details' => array(
                     'first_name' => $donation->user->name,
+                    'last_name' => '',
                     'email' => $donation->user->email,
                     'phone' => $donation->user->phone,
                 ),
@@ -176,8 +177,20 @@ class DonationController extends Controller
                     'amount' => $campaign->amount + $gross_amount,
                 ]);
             } else {
-                # code...
+                abort(403);
             }
         }
+    }
+
+    public function payment_confirm($id, $order_number)
+    {
+        $campaign = Campaign::findOrFail($id);
+        $donation = Donation::where('order_number', $order_number)->first();
+
+        if (!$donation) {
+            abort(404);
+        }
+
+        return view('frontend.pages.donation.payment_confirm', compact('campaign', 'donation'));
     }
 }

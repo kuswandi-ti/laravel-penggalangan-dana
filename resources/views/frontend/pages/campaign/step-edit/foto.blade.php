@@ -14,7 +14,13 @@
                 @enderror
             </div>
         </div>
-        <img src="" alt="" class="img-thumbnail preview-path_image" style="display: none;">
+        @if (!empty($campaign->path_image))
+            <img class="img-thumbnail preview-path_image"
+                src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image) }}">
+        @else
+            <img class="img-thumbnail preview-path_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}">
+        @endif
+        {{-- <img src="" alt="" class="img-thumbnail preview-path_image" style="display: none;"> --}}
         <p class="font-italic text-danger">Format foto harus dalam extensi .png, .jpg, atau .jpeg</p>
     </div>
 </div>
