@@ -27,7 +27,7 @@
     https://templatemo.com/tm-581-kind-heart-charity
     -->
 
-    @stack('style_vendor')
+    @stack('styles_vendor')
 
     <style>
         .select2 {

@@ -49,6 +49,7 @@
         table = $('.table').DataTable({
             processing: true,
             autoWidth: false,
+            responsive: true,
             ajax: {
                 url: '{{ route('backend.donatur.data', ['email' => request('email')]) }}'
             },

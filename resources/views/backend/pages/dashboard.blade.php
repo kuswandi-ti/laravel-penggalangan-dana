@@ -134,14 +134,14 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        <i class="fas fa-chart-line mr-1"></i>
+                        <i class="mr-1 fas fa-chart-line"></i>
                         Laporan donasi dan pencairan {{ date('Y') }}
                     </h3>
                 </div>
-                <div class="card-body text-center pb-0">
+                <div class="pb-0 text-center card-body">
                     {{ date_format_id(date('Y-01-01')) }} s/d {{ date_format_id(date('Y-12-31')) }}
                 </div>
-                <div class="card-body pt-0">
+                <div class="pt-0 card-body">
                     <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
                 </div>
             </div>
@@ -149,10 +149,10 @@
 
         <div class="col-lg-7">
             <div class="card">
-                <div class="card-header border-transparent">
+                <div class="border-transparent card-header">
                     <h3 class="card-title">10 projek populer bulan ini</h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="p-0 card-body">
                     <div class="table-responsive">
                         <table class="table m-0">
                             <thead>
@@ -167,7 +167,7 @@
                                 @forelse ($projek_populer as $key => $item)
                                     <tr>
                                         <td><a
-                                                href="{{ route('backend.campaign.show', $item->id) }}">{{ $key + 1 }}</a>
+                                                href="{{ route('backend.campaign.detail', $item->id) }}">{{ $key + 1 }}</a>
                                         </td>
                                         <td>{{ $item->title }}</td>
                                         <td style="text-align: center;"><span
@@ -187,10 +187,10 @@
             </div>
 
             <div class="card">
-                <div class="card-header border-transparent">
+                <div class="border-transparent card-header">
                     <h3 class="card-title">Top 10 donatur bulan ini</h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="p-0 card-body">
                     <div class="table-responsive">
                         <table class="table m-0">
                             <thead>
@@ -231,7 +231,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        <i class="fas fa-chart-pie mr-1"></i>
+                        <i class="mr-1 fas fa-chart-pie"></i>
                         Pengguna bulan ini
                     </h3>
                 </div>
@@ -241,7 +241,7 @@
                             <canvas id="sales-chart-canvas" height="150" style="height: 150px;"></canvas>
                         </div>
                         <div class="col-md-6">
-                            <ul class="chart-legend clearfix">
+                            <ul class="clearfix chart-legend">
                                 <li><i class="far fa-circle text-danger"></i> Donatur</li>
                                 <li><i class="far fa-circle text-success"></i> Subscriber</li>
                             </ul>
@@ -255,12 +255,12 @@
                     <h3 class="card-title">Notifikasi terbaru <span
                             class="badge badge-danger">{{ $count_notifikasi }}</span></h3>
                 </div>
-                <div class="card-body p-0">
-                    <ul class="products-list product-list-in-card pl-2 pr-2">
+                <div class="p-0 card-body">
+                    <ul class="pl-2 pr-2 products-list product-list-in-card">
                         @foreach ($list_notifikasi as $key => $notifikasi)
                             @foreach ($notifikasi as $item)
                                 <li class="item">
-                                    <div class="product-info ml-1">
+                                    <div class="ml-1 product-info">
                                         <a href="{{ route("backend.$key.index") }}" class="product-title">
                                             {{ $item->name ?? ($item->email ?? ($item->user->name ?? '')) }}
                                             <span

@@ -1,4 +1,4 @@
-@push('style_vendor')
+@push('styles_vendor')
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
         href="{{ asset('public/template/backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">

@@ -51,6 +51,7 @@
         table = $('.table').DataTable({
             processing: true,
             autoWidth: false,
+            responsive: true,
             ajax: {
                 url: '{{ route('backend.cashout.data', ['status' => request('status')]) }}'
             },

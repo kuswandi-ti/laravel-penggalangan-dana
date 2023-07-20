@@ -1,4 +1,4 @@
-@push('style_vendor')
+@push('styles_vendor')
     <!-- DataTables -->
     <link rel="stylesheet"
         href="{{ asset('public/template/backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">

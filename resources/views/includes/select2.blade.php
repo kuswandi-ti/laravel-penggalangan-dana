@@ -1,4 +1,4 @@
-@push('style_vendor')
+@push('styles_vendor')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet"

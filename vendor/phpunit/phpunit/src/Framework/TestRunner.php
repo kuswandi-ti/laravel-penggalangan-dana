@@ -194,7 +194,8 @@ final class TestRunner
 
         ErrorHandler::instance()->disable();
 
-        if (!$incomplete &&
+        if (!$error &&
+            !$incomplete &&
             !$skipped &&
             $this->configuration->reportUselessTests() &&
             !$test->doesNotPerformAssertions() &&
@@ -210,8 +211,9 @@ final class TestRunner
             Event\Facade::emitter()->testConsideredRisky(
                 $test->valueObjectForEvents(),
                 sprintf(
-                    'This test is not expected to perform assertions but performed %d assertions',
+                    'This test is not expected to perform assertions but performed %d assertion%s',
                     $test->numberOfAssertionsPerformed(),
+                    $test->numberOfAssertionsPerformed() > 1 ? 's' : '',
                 ),
             );
         }
