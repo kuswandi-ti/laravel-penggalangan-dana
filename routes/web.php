@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\{
     DashboardController,
     DonationController as BackendDonationController,
     DonaturController,
+    ReportController,
     SettingController,
     SubscriberController,
     UserProfileInformationController,
@@ -99,6 +100,12 @@ Route::group([
     Route::resource('/contact', BackendContactController::class, ['as' => 'backend']);
     Route::get('/subscriber/data', [SubscriberController::class, 'data'])->name('backend.subscriber.data');
     Route::resource('/subscriber', SubscriberController::class, ['as' => 'backend']);
+
+    // Report
+    Route::get('/report', [ReportController::class, 'index'])->name('backend.report.index');
+    Route::get('/report/data/{start}/{end}', [ReportController::class, 'data'])->name('backend.report.data');
+    Route::get('/report/pdf/{start}/{end}', [ReportController::class, 'export_pdf'])->name('backend.report.export_pdf');
+    Route::get('/report/excel/{start}/{end}', [ReportController::class, 'export_excel'])->name('backend.report.export_excel');
 
     // Pengaturan
     Route::resource('/banner', BannerController::class, ['as' => 'backend']);
