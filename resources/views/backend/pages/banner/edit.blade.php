@@ -1,10 +1,10 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Banner')
+@section('title', 'Banner')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item"><a href="{{ route('backend.banner.index') }}">List Data Banner</a></li>
-    <li class="breadcrumb-item active">Edit</li>
+    <li class="breadcrumb-item active">Edit Data Banner</li>
 @endsection
 
 @section('content')

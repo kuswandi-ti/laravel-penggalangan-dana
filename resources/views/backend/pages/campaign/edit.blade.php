@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Data Program')
+@section('title', 'Program')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item"><a href="{{ route('backend.campaign.index') }}">List Data Program</a></li>

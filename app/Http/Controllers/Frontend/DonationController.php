@@ -56,17 +56,31 @@ class DonationController extends Controller
 
         $data = [];
 
+        $order_number = 'PX-' . time();
+
         $data['campaign_id'] = $id;
         $data['user_id'] = $request->user_id;
-        $data['order_number'] = 'PX-' . time(); // mt_rand(0000000000, 9999999999);
+        $data['order_number'] = $order_number; // mt_rand(0000000000, 9999999999);
         $data['anonim'] = $request->anonim ?? 0;
         $data['nominal'] = str_replace('.', '', $request->nominal);
         $data['support'] = $request->support;
-        $data['status'] = 'not paid';
+        $data['status'] = env('STATUS_DONATION_NOT_PAID');
 
         $donation = Donation::create($data);
 
         if ($donation) {
+            // // Insert di tabel payments
+            // Payment::create([
+            //     'user_id' => $request->user_id,
+            //     'order_number' => $order_number,
+            //     'name' => $donation->user->name,
+            //     'phone' => $donation->user->phone,
+            //     'email' => $donation->user->email,
+            //     'nominal' => $donation->nominal,
+            //     'bank_id' => 1,
+            //     'payment_status' => env('STATUS_PAYMENT_PENDING'),
+            // ]);
+
             $params = array(
                 'transaction_details' => array(
                     'order_id' => $donation->id,
@@ -143,29 +157,62 @@ class DonationController extends Controller
         //     'signature_key' => $signature_key
         // ], 404);
 
+        $payment_status = '';
+        if ($transaction_status == 'capture' || $transaction_status == 'settlement') {
+            $payment_status = 'success';
+        } else if ($transaction_status == 'pending' || $transaction_status == 'authorize') {
+            $payment_status = 'pending';
+        } else if ($transaction_status == 'cancel' || $transaction_status == 'deny' || $transaction_status == 'expire' || $transaction_status == 'failure') {
+            $payment_status = 'cancel';
+        } else if ($transaction_status == 'refund' || $transaction_status == 'partial_refund') {
+            $payment_status = 'refund';
+        }
+
         if ($hashed == $signature_key) {
+            // Insert di tabel payments
+            $payment = Payment::create([
+                'user_id' => $donation->user->id,
+                'order_number' => $donation->order_number,
+                'name' => $donation->user->name,
+                'phone' => $donation->user->phone,
+                'email' => $donation->user->email,
+                'nominal' => $gross_amount,
+                'bank_id' => 1,
+                'payment_time' => $payment_time,
+                'payment_type' => $payment_type,
+                'payment_currency' => $payment_currency,
+                'payment_status' => $payment_status,
+            ]);
+
             if (($transaction_status == 'capture' && $payment_type == 'credit_card' && $fraud_status == 'accept') ||
                 $transaction_status == 'settlement'
             ) {
                 $donation = Donation::findOrFail($order_id);
 
-                // Update status di tabel donations            
+                // Update status di tabel donations
                 $donation->update([
-                    'status' => 'paid',
+                    'status' => env('STATUS_DONATION_PAID'),
                 ]);
 
                 // Insert di tabel payments
-                Payment::create([
-                    'user_id' => $donation->user->id,
-                    'order_number' => $donation->order_number,
-                    'name' => $donation->user->name,
-                    'phone' => $donation->user->phone,
-                    'email' => $donation->user->email,
-                    'nominal' => $gross_amount,
-                    'bank_id' => 1,
-                    'payment_time' => $payment_time,
-                    'payment_type' => $payment_type,
-                    'payment_currency' => $payment_currency,
+                // Payment::create([
+                //     'user_id' => $donation->user->id,
+                //     'order_number' => $donation->order_number,
+                //     'name' => $donation->user->name,
+                //     'phone' => $donation->user->phone,
+                //     'email' => $donation->user->email,
+                //     'nominal' => $gross_amount,
+                //     'bank_id' => 1,
+                //     'payment_time' => $payment_time,
+                //     'payment_type' => $payment_type,
+                //     'payment_currency' => $payment_currency,
+                //     'payment_status' => $payment_status,
+                // ]);
+                // Update tabel payments
+                Payment::where([
+                    ['id', '=', $payment->id],
+                ])->update([
+                    'amount' => $campaign->amount + $gross_amount,
                 ]);
 
                 // Update amount di tabel campaigns
@@ -174,7 +221,7 @@ class DonationController extends Controller
                 Campaign::where([
                     ['id', '=', $campaign_id],
                 ])->update([
-                    'amount' => $campaign->amount + $gross_amount,
+                    'payment_status' => 'success',
                 ]);
             } else {
                 abort(403);
@@ -190,6 +237,9 @@ class DonationController extends Controller
         if (!$donation) {
             abort(404);
         }
+
+        $donation_email = Donation::with('campaign', 'user', 'payment')->findOrFail($donation->id);
+        Mail::to($donation->user->email)->send(new PaymentDonationConfirm($donation_email));
 
         return view('frontend.pages.donation.payment_confirm', compact('campaign', 'donation'));
     }

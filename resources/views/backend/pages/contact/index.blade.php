@@ -1,9 +1,9 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Kontak')
+@section('title', 'Kontak Masuk')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">List Data Kontak</li>
+    <li class="breadcrumb-item active">List Data Kontak Masuk</li>
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <x-card>
                 <x-slot name="header">
-                    <h3 class="card-title">List Data Kontak</h3>
+                    <h3 class="card-title">List Data Kontak Masuk</h3>
                 </x-slot>
                 <x-table>
                     <x-slot name="thead">

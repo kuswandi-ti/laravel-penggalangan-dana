@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'List Data Donatur')
+@section('title', 'Donatur')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">List Data Donatur</li>

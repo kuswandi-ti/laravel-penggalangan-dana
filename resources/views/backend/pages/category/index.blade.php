@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Kategori')
+@section('title', 'List Data Kategori')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">List Data Kategori</li>

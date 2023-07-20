@@ -97,6 +97,8 @@ class CashoutController extends Controller
         $cashout = Cashout::findOrFail($id);
         $cashout->delete();
 
+        // TODO : balikin lagi amount cancel ke tabel campaigns
+
         return response()->json(['data' => null, 'message' => 'Data pencairan dana berhasil dihapus']);
     }
 
@@ -123,15 +125,15 @@ class CashoutController extends Controller
                 return amount_format_id($query->cashout_amount);
             })
             ->editColumn('status', function ($query) {
-                return '<span class="badge badge-' . $query->statusColor() . '">' . $query->statusText() . '</span>';
+                return '<span class="badge badge-' . $query->status_color() . '">' . $query->status_text() . '</span>';
             })
             ->editColumn('created_at', function ($query) {
                 return date_format_id($query->created_at);
             })
             ->addColumn('action', function ($query) {
                 return '
-                    <a href="' . route('cashout.show', $query->id) . '" class="btn btn-link text-dark"><i class="fas fa-edit"></i></a>
-                    <button class="btn btn-link text-danger" onclick="deleteData(`' . route('cashout.destroy', $query->id) . '`)"><i class="fas fa-trash"></i></button>
+                    <a href="' . route('backend.cashout.show', $query->id) . '" class="btn btn-link text-dark"><i class="fas fa-edit"></i></a>
+                    <button class="btn btn-link text-danger" onclick="deleteData(`' . route('backend.cashout.destroy', $query->id) . '`)"><i class="fas fa-trash"></i></button>
                 ';
             })
             ->escapeColumns([])

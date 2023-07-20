@@ -3,8 +3,8 @@
 @section('title', 'Program')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('backend.campaign.index') }}">Program</a></li>
-    <li class="breadcrumb-item active">Detail</li>
+    <li class="breadcrumb-item"><a href="{{ route('backend.campaign.index') }}">List Data Program</a></li>
+    <li class="breadcrumb-item active">Detail Data Program</li>
 @endsection
 
 @section('content')

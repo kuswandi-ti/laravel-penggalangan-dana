@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Payment;
+use App\Models\Campaign;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentDonationConfirm;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class DonationController extends Controller
 {
@@ -35,9 +40,15 @@ class DonationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+        $donation = Donation::with('campaign', 'user', 'payment')->findOrFail($id);
+
+        if (! $request->ajax()) {
+            return view('backend.pages.donation.show', compact('donation'));
+        }
+
+        return response()->json(['data' => $donation]);
     }
 
     /**
@@ -53,7 +64,38 @@ class DonationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'status' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+
+        $donation = Donation::findOrFail($id);
+        $donation->update([
+            'status' => $request->status
+        ]);
+
+        $donation->campaign->update([
+            'amount' => $donation->campaign->amount + $donation->nominal
+        ]);
+
+        $donation->payment->update([
+            'payment_status' => env('STATUS_PAYMENT_SUCCESS')
+        ]);
+
+        $statusText = "";
+        if ($request->status == 'paid') {
+            $statusText = 'sudah dibayar';
+        } elseif ($request->status == 'cancel') {
+            $statusText = 'dibatalkan';
+        }
+
+        $donation_email = Donation::with('campaign', 'user', 'payment')->findOrFail($id);
+        Mail::to($donation->user->email)->send(new PaymentDonationConfirm($donation_email));
+
+        return response()->json(['data' => $donation, 'message' => 'Data donasi berhasil '. $statusText]);
     }
 
     /**
@@ -61,7 +103,23 @@ class DonationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $donation = Donation::findOrFail($id);
+
+        // Update amount di tabel campaigns
+        Campaign::where([
+            ['id', '=', $donation->campaign_id],
+        ])->update([
+            'amount' => $donation->campaign->amount - $donation->nominal,
+        ]);
+
+        // Delete di tabel payments
+        $payment = Payment::where('id', '=', $donation->payment->id);
+        $donation->delete();
+
+        // Delete di tabel donations
+        $donation->delete();
+
+        return response()->json(['data' => null, 'message' => 'Data donasi berhasil dihapus']);
     }
 
     public function data(Request $request)
@@ -99,7 +157,7 @@ class DonationController extends Controller
                     <a href="' . route('backend.donation.show', $query->id) . '" class="btn btn-link text-dark"><i class="fas fa-search-plus"></i></a>
                 ';
 
-                if ($query->status != 'confirmed') {
+                if ($query->status != 'paid') {
                     $action .= '
                         <button class="btn btn-link text-danger" onclick="deleteData(`' . route('backend.donation.destroy', $query->id) . '`)"><i class="fas fa-trash-alt"></i></button>
                     ';

@@ -34,10 +34,13 @@ class Donation extends Model
 
         switch ($this->status) {
             case 'paid':
-                $text = 'dibayar';
+                $text = 'sudah dibayar';
                 break;
             case 'not paid':
                 $text = 'belum dibayar';
+                break;
+            case 'cancel':
+                $text = 'dibatalkan';
             default:
                 break;
         }
@@ -55,6 +58,9 @@ class Donation extends Model
                 break;
             case 'not paid':
                 $color = 'dark';
+                break;
+            case 'cancel':
+                $color = 'danger';
                 break;
             default:
                 break;

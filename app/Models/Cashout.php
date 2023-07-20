@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cashout extends Model
 {
@@ -24,7 +26,7 @@ class Cashout extends Model
         return $query->where('user_id', auth()->id());
     }
 
-    public function statusText()
+    public function status_text()
     {
         $text = '';
 
@@ -48,7 +50,7 @@ class Cashout extends Model
         return $text;
     }
 
-    public function statusColor()
+    public function status_color()
     {
         $color = '';
 

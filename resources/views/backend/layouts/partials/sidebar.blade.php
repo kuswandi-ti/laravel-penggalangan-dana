@@ -59,10 +59,8 @@
                             </p>
                         </a>
                     </li>
-                @endif
 
-                <li class="nav-header">REFERENSI</li>
-                @if (auth()->user()->hasRole('admin'))
+                    <li class="nav-header">REFERENSI</li>
                     <li class="nav-item">
                         <a href="{{ route('backend.donatur.index') }}"
                             class="nav-link {{ request()->is('admin/donatur*') ? 'active' : '' }}">
@@ -72,26 +70,24 @@
                             </p>
                         </a>
                     </li>
-                @endif
-                <li class="nav-item">
-                    <a href="{{ route('backend.donation.index') }}"
-                        class="nav-link {{ request()->is('admin/donation*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-donate"></i>
-                        <p>
-                            Daftar Donasi
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('backend.cashout.index') }}"
-                        class="nav-link {{ request()->is('admin/cashout*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-donate"></i>
-                        <p>
-                            Daftar Pencairan
-                        </p>
-                    </a>
-                </li>
-                @if (auth()->user()->hasRole('admin'))
+                    <li class="nav-item">
+                        <a href="{{ route('backend.donation.index') }}"
+                            class="nav-link {{ request()->is('admin/donation*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-donate"></i>
+                            <p>
+                                Daftar Donasi
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.cashout.index') }}"
+                            class="nav-link {{ request()->is('admin/cashout*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-donate"></i>
+                            <p>
+                                Daftar Pencairan
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('backend.contact.index') }}"
                             class="nav-link {{ request()->is('admin/contact*') ? 'active' : '' }}">

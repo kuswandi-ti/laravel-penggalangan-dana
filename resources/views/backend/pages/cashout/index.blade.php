@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'List Data Pencairan Dana')
+@section('title', 'Pencairan Dana')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">List Data Pencairan Dana</li>
@@ -13,8 +13,9 @@
                 <x-slot name="header">
                     <h3 class="card-title">List Data Pencairan Dana</h3>
                     <div class="card-tools">
-                        <button onclick="addForm(`{{ route('backend.cashout.store') }}`)" class="btn btn-primary"><i
-                                class="fas fa-plus-circle"></i> Tambah Data Pencairan Dana</button>
+                        <button onclick="addForm(`{{ route('backend.cashout.store') }}`)" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Tambah Data Pencairan Dana
+                        </button>
                     </div>
                 </x-slot>
 
@@ -25,7 +26,7 @@
                         @if (auth()->user()->hasRole('admin'))
                             <th style="text-align: center;">Donatur</th>
                         @endif
-                        <th>Jumlah</th>
+                        <th style="text-align: right;">Jumlah</th>
                         <th style="text-align: center;">Status</th>
                         <th style="text-align: center;">Tgl Cashout</th>
                         <th width="15%" style="text-align: center;"><i class="fas fa-cog"></i></th>
@@ -88,7 +89,7 @@
                 targets: [0, 2, 4, 5, 6]
             }, {
                 className: 'dt-right',
-                targets: []
+                targets: [3]
             }],
         });
 
