@@ -26,6 +26,11 @@
     <!-- SweetAlert2 -->
     <link rel="stylesheet"
         href="{{ asset('public/template/backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('public/template/backend/plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+        href="{{ asset('public/template/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
     @stack('style_vendor')
 
@@ -112,6 +117,15 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('public/template/backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- ChartJS -->
+    <script src="{{ asset('public/template/backend/plugins/chart.js/Chart.min.js') }}"></script>
+    <!-- Sparkline -->
+    <script src="{{ asset('public/template/backend/plugins/sparklines/sparkline.js') }}"></script>
+    <!-- JQVMap -->
+    <script src="{{ asset('public/template/backend/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('public/template/backend/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{{ asset('public/template/backend/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('public/template/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}">
     </script>

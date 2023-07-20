@@ -61,3 +61,14 @@ if (!function_exists('date_format_id')) {
         return $text;
     }
 }
+
+if (! function_exists('mounth_format_id')) {
+    function mounth_format_id($bulan)
+    {
+        $nama_bulan = array(1 =>
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        );
+
+        return $nama_bulan[(int) $bulan];
+    }
+}

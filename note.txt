@@ -19,8 +19,8 @@ TODO :
 12. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting (OK)
 13. Backend donasi (OK)
 14. Backend pencairan
-15. Backend cashout
 15. Backend Laporan
+
 
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
