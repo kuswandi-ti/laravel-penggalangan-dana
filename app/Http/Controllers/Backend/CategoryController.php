@@ -17,12 +17,27 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::orderBy('id', 'desc')
+        // $top_donatur = User::withCount('donations', 'campaigns')
+        //         ->donatur()
+        //         ->orderByDesc('donations_count')
+        //         ->orderByDesc('campaigns_count')
+        //         ->limit(10)
+        //         ->get();
+
+        $categories = Category::withCount('campaigns')
+            ->orderByDesc('campaigns_count')
             ->when($request->has('keyword') && $request->keyword != "", function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->keyword . '%');
             })
             ->paginate($request->per_page ?? env('CUSTOM_PAGING'))
             ->appends($request->only('per_page', 'keyword'));
+
+        // $categories = Category::orderBy('id', 'desc')
+        //     ->when($request->has('keyword') && $request->keyword != "", function ($query) use ($request) {
+        //         $query->where('name', 'LIKE', '%' . $request->keyword . '%');
+        //     })
+        //     ->paginate($request->per_page ?? env('CUSTOM_PAGING'))
+        //     ->appends($request->only('per_page', 'keyword'));
         return view('backend.pages.category.index', compact('categories'));
     }
 

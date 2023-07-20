@@ -159,8 +159,8 @@
                                 <tr>
                                     <th width="5%">#</th>
                                     <th>Judul</th>
-                                    <th>Status</th>
-                                    <th>Jumlah Donasi</th>
+                                    <th style="text-align: center;">Status</th>
+                                    <th style="text-align: center;">Jumlah Donasi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,10 +170,10 @@
                                                 href="{{ route('backend.campaign.show', $item->id) }}">{{ $key + 1 }}</a>
                                         </td>
                                         <td>{{ $item->title }}</td>
-                                        <td><span
+                                        <td style="text-align: center;"><span
                                                 class="badge badge-{{ $item->status_color() }}">{{ $item->status }}</span>
                                         </td>
-                                        <td>{{ $item->donations_count }}x</td>
+                                        <td style="text-align: center;">{{ $item->donations_count }}x</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -197,8 +197,8 @@
                                 <tr>
                                     <th width="5%">#</th>
                                     <th>Nama</th>
-                                    <th>Jumlah Donasi</th>
-                                    <th>Jumlah Projek</th>
+                                    <th style="text-align: center;">Jumlah Donasi</th>
+                                    <th style="text-align: center;">Jumlah Projek</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -212,8 +212,8 @@
                                             <br>
                                             <a href="mailto:{{ $item->email }}" target="_blank">{{ $item->email }}</a>
                                         </td>
-                                        <td>{{ $item->donations_count }}x</td>
-                                        <td>{{ $item->campaigns_count }}x</td>
+                                        <td style="text-align: center;">{{ $item->donations_count }}x</td>
+                                        <td style="text-align: center;">{{ $item->campaigns_count }}x</td>
                                     </tr>
                                 @empty
                                     <tr>

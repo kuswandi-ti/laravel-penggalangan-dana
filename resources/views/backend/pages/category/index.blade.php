@@ -41,7 +41,7 @@
                                     <x-row-number-table :key="$key" :model="$categories" />
                                 </td>
                                 <td>{{ $category->name }}</td>
-                                <td style="text-align:center;">0</td>
+                                <td style="text-align:center;">{{ $category->campaigns_count }}</td>
                                 <td style="text-align:center;">
                                     <form action="{{ route('backend.category.destroy', $category->id) }}" method="POST">
                                         @csrf
