@@ -12,11 +12,6 @@
             <x-card>
                 <x-slot name="header">
                     <h3 class="card-title">List Data Pencairan Dana</h3>
-                    <div class="card-tools">
-                        <button onclick="addForm(`{{ route('backend.cashout.store') }}`)" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> Tambah Data Pencairan Dana
-                        </button>
-                    </div>
                 </x-slot>
 
                 <x-table>
