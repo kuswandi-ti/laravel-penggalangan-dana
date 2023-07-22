@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Cashout;
 use App\Models\MyModel;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +25,22 @@ class Campaign extends MyModel
     public function donations()
     {
         return $this->hasMany(Donation::class, 'campaign_id', 'id');
+    }
+
+    public function cashouts()
+    {
+        return $this->hasMany(Cashout::class, 'campaign_id', 'id');
+    }
+
+    public function cashout_latest()
+    {
+        return $this->hasOne(Cashout::class, 'campaign_id', 'id')
+            ->latestOfMany();
+    }
+
+    public function scopeDonatur($query)
+    {
+        return $query->where('user_id', auth()->id());
     }
 
     public function status_text()

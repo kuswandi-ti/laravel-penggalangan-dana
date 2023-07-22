@@ -49,6 +49,14 @@
                             Dashboard
                         </a>
                     </p>
+                    <p class="mb-0 d-flex me-4">
+                        <a href="#" onclick="document.querySelector('#form-logout').submit()" role="button">
+                            Logout
+                        </a>
+                    <form action="{{ route('logout') }}" method="post" id="form-logout">
+                        @csrf
+                    </form>
+                    </p>
                 @else
                     <p class="mb-0 d-flex me-4">
                         <a href="{{ route('login') }}">

@@ -87,28 +87,5 @@
             bInfo: false,
             order: []
         });
-
-        function showAlert(message, type) {
-            Toast.fire({
-                icon: `${type}`,
-                title: `${message}`,
-            })
-        }
-
-        function deleteData(url) {
-            if (confirm('Yakin data akan dihapus?')) {
-                $.post(url, {
-                        '_method': 'delete'
-                    })
-                    .done(response => {
-                        showAlert(response.message, 'success');
-                        table.ajax.reload();
-                    })
-                    .fail(errors => {
-                        showAlert('Tidak dapat menghapus data', 'error');
-                        return;
-                    });
-            }
-        }
     </script>
 @endpush

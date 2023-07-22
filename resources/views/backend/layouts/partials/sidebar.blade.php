@@ -82,7 +82,7 @@
                     <li class="nav-item">
                         <a href="{{ route('backend.cashout.index') }}"
                             class="nav-link {{ request()->is('admin/cashout*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-donate"></i>
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
                             <p>
                                 Daftar Pencairan
                             </p>
@@ -117,19 +117,7 @@
                             </p>
                         </a>
                     </li>
-                @endif
 
-                <li class="nav-header">LOG</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-info-circle"></i>
-                        <p>
-                            Log Aktifitas
-                        </p>
-                    </a>
-                </li>
-
-                @if (auth()->user()->hasRole('admin'))
                     <li class="nav-header">PENGATURAN</li>
                     <li class="nav-item">
                         <a href="{{ route('backend.banner.index') }}"

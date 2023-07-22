@@ -44,7 +44,7 @@ class DonationController extends Controller
     {
         $donation = Donation::with('campaign', 'user', 'payment')->findOrFail($id);
 
-        if (! $request->ajax()) {
+        if (!$request->ajax()) {
             return view('backend.pages.donation.show', compact('donation'));
         }
 
@@ -92,10 +92,10 @@ class DonationController extends Controller
             $statusText = 'dibatalkan';
         }
 
-        $donation_email = Donation::with('campaign', 'user', 'payment')->findOrFail($id);
-        Mail::to($donation->user->email)->send(new PaymentDonationConfirm($donation_email));
+        // $donation_email = Donation::with('campaign', 'user', 'payment')->findOrFail($id);
+        // Mail::to($donation->user->email)->send(new PaymentDonationConfirm($donation_email));
 
-        return response()->json(['data' => $donation, 'message' => 'Data donasi berhasil '. $statusText]);
+        return response()->json(['data' => $donation, 'message' => 'Data donasi berhasil ' . $statusText]);
     }
 
     /**

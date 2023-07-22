@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Exception;
+use App\Models\Cashout;
 use App\Models\Campaign;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -270,5 +271,49 @@ class CampaignController extends Controller
         }
 
         return response()->json(['data' => $campaign, 'message' => 'Data program berhasil ' . $statusText]);
+    }
+
+    public function cashout($id)
+    {
+        $campaign = Campaign::findOrFail($id)->load('donations', 'cashouts');
+
+        if ($campaign->user_id != auth()->id()) {
+            abort(404);
+        }
+
+        return view('backend.pages.campaign.cashout', compact('campaign'));
+    }
+
+    public function cashout_store(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'campaign_id' => 'required|exists:campaigns,id',
+            'user_id' => 'required|exists:users,id',
+            'bank_id' => 'required|exists:banks,id',
+            'total' => 'required|integer',
+            'cashout_amount' => 'required|regex:/^[0-9.]+$/',
+            'cashout_fee' => 'required|regex:/^[0-9.]+$/',
+            'amount_received' => 'required|regex:/^[0-9.]+$/',
+            'remaining_amount' => 'required|regex:/^[0-9.]+$/'
+        ], [
+            'bank_id.required' => 'Silahkan lengkapi rekening tujuan terlebih dahulu.'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $attributes = $request->only('campaign_id', 'user_id', 'bank_id', 'total');
+        $attributes['status'] = 'pending';
+        foreach ($request->only('cashout_amount', 'cashout_fee', 'amount_received', 'remaining_amount') as $key => $value) {
+            $attributes[$key] = str_replace('.', '', $value);
+        }
+
+        $cashout = Cashout::create($attributes);
+
+        return response()->json([
+            'data' => $cashout,
+            'message' => 'Cashout berhasil dikirimkan, silahkan konfirmasi Admin untuk segera memproses request Anda.'
+        ]);
     }
 }

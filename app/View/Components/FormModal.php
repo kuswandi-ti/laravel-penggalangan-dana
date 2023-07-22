@@ -9,13 +9,15 @@ use Illuminate\View\Component;
 class FormModal extends Component
 {
     public $modal_size;
+    public $method_form;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($modalSize = 'modal-md')
+    public function __construct($modalSize = 'modal-md', $method = 'post')
     {
         $this->modal_size = $modalSize;
+        $this->method_form = $method;
     }
 
     /**

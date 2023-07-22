@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Cashout;
 use App\Models\Donation;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ReportExport;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -35,7 +34,7 @@ class ReportController extends Controller
 
         while (strtotime($start) <= strtotime($end)) {
             $donation = Donation::whereHas('payment')
-                ->where('status', 'confirmed')
+                ->where('status', 'paid')
                 ->where('created_at', 'LIKE', "%$start%")
                 ->sum('nominal');
             $cashout_received = Cashout::whereHas('campaign')
@@ -70,8 +69,8 @@ class ReportController extends Controller
             'DT_RowIndex' => '',
             'tanggal' => '',
             'pemasukan' => '',
-            'pengeluaran' => ! $escape ? '<strong>Total Kas</strong>' : 'Total Kas',
-            'sisa' => ! $escape ? '<strong>'. amount_format_id($total_sisa_kas) .'</strong>' : amount_format_id($total_sisa_kas) . $separate
+            'pengeluaran' => !$escape ? '<strong>Total Kas</strong>' : 'Total Kas',
+            'sisa' => !$escape ? '<strong>' . amount_format_id($total_sisa_kas) . '</strong>' : amount_format_id($total_sisa_kas) . $separate
         ];
 
         return $data;
@@ -91,7 +90,7 @@ class ReportController extends Controller
         $data = $this->get_data($start, $end);
         $pdf = PDF::loadView('backend.pages.report.pdf', compact('start', 'end', 'data'));
 
-        return $pdf->stream('laporan-penggalangan-dana-'. date('Y-m-d-his'). '.pdf');
+        return $pdf->stream('laporan-penggalangan-dana-' . date('Y-m-d-his') . '.pdf');
     }
 
     public function export_excel($start, $end)
@@ -99,6 +98,6 @@ class ReportController extends Controller
         $data = $this->get_data($start, $end, true);
         $excel = new ReportExport($start, $end, $data);
 
-        return Excel::download($excel, 'laporan-penggalangan-dana-'. date('Y-m-d-his'). '.xlsx');
+        return Excel::download($excel, 'laporan-penggalangan-dana-' . date('Y-m-d-his') . '.xlsx');
     }
 }

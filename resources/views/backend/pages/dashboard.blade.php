@@ -21,7 +21,8 @@
                 <div class="icon">
                     <i class="fas fa-cube"></i>
                 </div>
-                <a href="{{ route('backend.category.index') }}" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.category.index'): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -35,7 +36,8 @@
                 <div class="icon">
                     <i class="fas fa-th-large"></i>
                 </div>
-                <a href="{{ route('backend.campaign.index') }}" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.campaign.index'): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -49,7 +51,8 @@
                 <div class="icon">
                     <i class="fas fa-th-large"></i>
                 </div>
-                <a href="{{ route('backend.campaign.index', ['status' => 'pending']) }}" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.campaign.index', ['status' => 'pending']): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -63,7 +66,8 @@
                 <div class="icon">
                     <i class="fas fa-envelope-open-text"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.contact.index'): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -80,7 +84,8 @@
                 <div class="icon">
                     <i class="fas fa-donate"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.donation.index'): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -94,7 +99,8 @@
                 <div class="icon">
                     <i class="fas fa-th-large"></i>
                 </div>
-                <a href="{{ route('backend.donation.index', ['status' => 'not paid']) }}" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.donation.index', ['status' => 'not paid']): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -108,7 +114,8 @@
                 <div class="icon">
                     <i class="fas fa-th-large"></i>
                 </div>
-                <a href="{{ route('backend.donation.index', ['status' => 'paid']) }}" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.donation.index', ['status' => 'paid']): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -122,7 +129,8 @@
                 <div class="icon">
                     <i class="fas fa-envelope-open-text"></i>
                 </div>
-                <a href="{{ route('backend.cashout.index', ['status' => 'success']) }}" class="small-box-footer">
+                <a href="{{ auth()->user()->hasRole('admin')? route('backend.cashout.index', ['status' => 'success']): '' }}"
+                    class="small-box-footer">
                     Lihat <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -164,10 +172,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($projek_populer as $key => $item)
+                                @forelse ($program_populer as $key => $item)
                                     <tr>
                                         <td><a
-                                                href="{{ route('backend.campaign.detail', $item->id) }}">{{ $key + 1 }}</a>
+                                                href="{{ auth()->user()->hasRole('admin')? route('backend.campaign.detail', $item->id): '' }}">{{ $key + 1 }}</a>
                                         </td>
                                         <td>{{ $item->title }}</td>
                                         <td style="text-align: center;"><span
@@ -205,7 +213,7 @@
                                 @forelse ($top_donatur as $key => $item)
                                     <tr>
                                         <td><a
-                                                href="{{ route('backend.donatur.index', ['email' => $item->email]) }}">{{ $key + 1 }}</a>
+                                                href="{{ auth()->user()->hasRole('admin')? route('backend.donatur.index', ['email' => $item->email]): '' }}">{{ $key + 1 }}</a>
                                         </td>
                                         <td>
                                             {{ $item->name }}
@@ -261,7 +269,8 @@
                             @foreach ($notifikasi as $item)
                                 <li class="item">
                                     <div class="ml-1 product-info">
-                                        <a href="{{ route("backend.$key.index") }}" class="product-title">
+                                        <a href="{{ auth()->user()->hasRole('admin')? route("backend.$key.index"): '' }}"
+                                            class="product-title">
                                             {{ $item->name ?? ($item->email ?? ($item->user->name ?? '')) }}
                                             <span
                                                 class="badge

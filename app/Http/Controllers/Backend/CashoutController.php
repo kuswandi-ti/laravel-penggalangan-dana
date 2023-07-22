@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Cashout;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -44,7 +45,7 @@ class CashoutController extends Controller
         }
 
         $campaign = $cashout->campaign;
-        $bank = $cashout->user->bank_user->find($cashout->bank_id);
+        $bank = $cashout->user->bank_users->find($cashout->bank_id);
 
         return view('backend.pages.cashout.show', compact('cashout', 'campaign', 'bank'));
     }
@@ -84,6 +85,13 @@ class CashoutController extends Controller
             $statusText = 'dibatalkan';
         } elseif ($request->status == 'rejected') {
             $statusText = 'ditolak';
+        }
+
+        $campaign = Campaign::findOrFail($request->campaign_id);
+        if ($request->status == 'success') {
+            $campaign->update([
+                'amount' => $campaign->amount - $cashout->cashout_amount,
+            ]);
         }
 
         return response()->json(['data' => $cashout, 'message' => 'Data pencairan dana berhasil ' . $statusText]);
@@ -132,7 +140,7 @@ class CashoutController extends Controller
             })
             ->addColumn('action', function ($query) {
                 return '
-                    <a href="' . route('backend.cashout.show', $query->id) . '" class="btn btn-link text-dark"><i class="fas fa-edit"></i></a>
+                    <a href="' . route('backend.cashout.show', $query->id) . '" class="btn btn-link text-dark"><i class="fas fa-search-plus"></i></a>
                     <button class="btn btn-link text-danger" onclick="deleteData(`' . route('backend.cashout.destroy', $query->id) . '`)"><i class="fas fa-trash"></i></button>
                 ';
             })

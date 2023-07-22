@@ -11,6 +11,8 @@ class Cashout extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function campaign()
     {
         return $this->belongsTo(Campaign::class, 'campaign_id', 'id');

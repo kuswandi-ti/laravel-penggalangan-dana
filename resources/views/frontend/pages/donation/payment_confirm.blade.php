@@ -53,7 +53,7 @@
                             <div class="col-lg-12 col-12">
                                 <p class="h4 text-light"><strong>Donatur</strong></p>
                                 <p class="text-warning" style="font-size: 30pt; font-weight: bold;">
-                                    <strong>{{ $donation->anonim == 1 ? 'Anomim' : $donation->user->name }}</strong>
+                                    <strong>{{ $donation->anonim == 1 ? 'Anonim' : $donation->user->name }}</strong>
                                 </p>
                                 <p class="text-warning" style="font-size: 20pt; font-weight: bold;">
                                     <strong>{{ $donation->anonim == 1 ? '' : $donation->user->phone }}</strong>

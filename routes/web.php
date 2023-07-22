@@ -88,6 +88,8 @@ Route::group([
     Route::resource('/campaign', BackendCampaignController::class, ['as' => 'backend'])->except('store', 'update');
     Route::get('/campaign/detail/{id}', [BackendCampaignController::class, 'detail'])->name('backend.campaign.detail');
     Route::put('/campaign/{id}/update_status', [BackendCampaignController::class, 'update_status'])->name('backend.campaign.update_status');
+    Route::get('/campaign/{id}/cashout', [BackendCampaignController::class, 'cashout'])->name('backend.campaign.cashout');
+    Route::post('/campaign/{id}/cashout', [BackendCampaignController::class, 'cashout_store'])->name('backend.campaign.cashout.store');
 
     // Referensi
     Route::get('/donatur/data', [DonaturController::class, 'data'])->name('backend.donatur.data');
@@ -125,4 +127,7 @@ Route::group([
 });
 /* ========================================================================================= */
 
-// Route::get('/payment_donation_confirm', [BackendDonationController::class, 'payment_donation_confirm']);
+// Route::get('/testemail', [BackendDonationController::class, 'payment_donation_confirm']);
+// Route::get('/testemail', function () {
+//     return view('emails.payment_donation_confirm');
+// });
