@@ -1,11 +1,17 @@
 <nav class="shadow-lg navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ route('frontend.home.index') }}">
-            @if (!empty($setting))
-                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_logo ?? '') }}" class="logo img-fluid">
-            @else
+            @if ($setting->count() == 0)
                 <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="logo img-fluid">
+            @else
+                @if (!empty($setting->path_image_logo))
+                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_logo ?? '') }}"
+                        class="logo img-fluid">
+                @else
+                    <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="logo img-fluid">
+                @endif
             @endif
+
             <span>
                 {{ $setting->business_name ?? '' }}
                 <small>{{ $setting->short_description ?? '' }}</small>

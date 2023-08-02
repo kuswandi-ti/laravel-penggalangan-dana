@@ -44,7 +44,7 @@ class CashoutController extends Controller
         }
 
         $campaign = $cashout->campaign;
-        $bank = $cashout->user->bank_user->find($cashout->bank_id);
+        $bank = $cashout->user->bank_users->find($cashout->bank_id);
 
         return view('backend.pages.cashout.show', compact('cashout', 'campaign', 'bank'));
     }

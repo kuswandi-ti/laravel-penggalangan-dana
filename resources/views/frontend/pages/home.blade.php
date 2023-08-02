@@ -9,20 +9,30 @@
                 <div class="p-0 col-lg-12 col-12">
                     <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                            @foreach ($banners as $item)
+                            @if ($banners->count() == 0)
                                 <div class="carousel-item active">
-                                    @if (!empty($setting))
-                                        <img src="{{ url(env('PATH_IMAGE_STORAGE') . $item->banner_image ?? '') }}"
-                                            class="carousel-image img-fluid" alt="">
-                                    @else
-                                        <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="carousel-image img-fluid">
-                                    @endif
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>{{ $item->banner_title ?? '' }}</h1>
-                                        <p>{{ $item->banner_description ?? '' }}</p>
-                                    </div>
+                                    <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="carousel-image img-fluid">
                                 </div>
-                            @endforeach
+                                <div class="carousel-caption d-flex flex-column justify-content-end">
+                                    <h1>-</h1>
+                                    <p>-</p>
+                                </div>
+                            @else
+                                @foreach ($banners as $item)
+                                    <div class="carousel-item active">
+                                        @if (!empty($item->banner_image))
+                                            <img src="{{ url(env('PATH_IMAGE_STORAGE') . $item->banner_image ?? '') }}"
+                                                class="carousel-image img-fluid" alt="">
+                                        @else
+                                            <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="carousel-image img-fluid">
+                                        @endif
+                                        <div class="carousel-caption d-flex flex-column justify-content-end">
+                                            <h1>{{ $item->banner_title ?? '' }}</h1>
+                                            <p>{{ $item->banner_description ?? '' }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
 
                         <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"

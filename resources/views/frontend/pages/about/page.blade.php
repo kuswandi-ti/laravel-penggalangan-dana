@@ -2,11 +2,15 @@
     <div class="container">
         <div class="row">
             <div class="mb-3 col-lg-6 col-12 mb-lg-0">
-                @if (!empty($setting))
-                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_business ?? '') }}"
-                        class="custom-text-box-image img-fluid" alt="">
-                @else
+                @if ($setting->count() == 0)
                     <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="custom-text-box-image img-fluid">
+                @else
+                    @if (!empty($setting->path_image_business))
+                        <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_business ?? '') }}"
+                            class="custom-text-box-image img-fluid" alt="">
+                    @else
+                        <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="custom-text-box-image img-fluid">
+                    @endif
                 @endif
             </div>
 

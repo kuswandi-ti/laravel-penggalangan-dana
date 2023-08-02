@@ -1,7 +1,15 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <a href="{{ route('backend.dashboard') }}" class="brand-link bg-dark">
-        <img src="{{ url(env('PATH_IMAGE_STORAGE') . (!empty($setting->path_image_logo) ? $setting->path_image_logo : '')) ?? '' }}"
-            alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        @if ($setting->count() == 0)
+            <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="brand-image elevation-3" style="opacity: .8">
+        @else
+            @if (!empty($setting->path_image_logo))
+                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $setting->path_image_logo ?? '') }}"
+                    class="brand-image elevation-3" style="opacity: .8">
+            @else
+                <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="brand-image elevation-3" style="opacity: .8">
+            @endif
+        @endif
         <span
             class="brand-text font-weight-light">{{ !empty($setting->business_name) ? $setting->business_name : config('app.name') }}</span>
     </a>
@@ -9,8 +17,12 @@
     <div class="sidebar">
         <div class="pb-3 mt-3 mb-3 user-panel d-flex">
             <div class="image">
-                <img src="{{ url(env('PATH_IMAGE_STORAGE') . auth()->user()->path_image ?? '') }}"
-                    class="img-circle elevation-2" alt="User Image">
+                @if (!empty(auth()->user()->path_image))
+                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . auth()->user()->path_image ?? '') }}"
+                        class="img-circle elevation-2" alt="User Image">
+                @else
+                    <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="img-circle elevation-2" alt="User Image">
+                @endif
             </div>
             <div class="info">
                 <a href="{{ route('backend.profile.show') }}?tab=profil" class="d-block">{{ auth()->user()->name }}</a>

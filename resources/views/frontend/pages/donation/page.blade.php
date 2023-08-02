@@ -8,13 +8,18 @@
                 <div class="mb-4 col-lg-4 col-md-6 col-12 mb-lg-0">
                     <div class="custom-block-wrap">
                         <div style="height: 250px;">
-                            @if (!empty($item->path_image))
-                                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $item->path_image ?? '') }}"
-                                    class="custom-block-image img-fluid" alt=""
-                                    style="width: 100%; max-height: 100%">
-                            @else
+                            @if ($item->count() == 0)
                                 <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="custom-block-image img-fluid"
                                     alt="" style="width: 100%; max-height: 100%">
+                            @else
+                                @if (!empty($item->path_image))
+                                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $item->path_image ?? '') }}"
+                                        class="custom-block-image img-fluid" alt=""
+                                        style="width: 100%; max-height: 100%">
+                                @else
+                                    <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" class="custom-block-image img-fluid"
+                                        alt="" style="width: 100%; max-height: 100%">
+                                @endif
                             @endif
                         </div>
                         <div class="custom-block">

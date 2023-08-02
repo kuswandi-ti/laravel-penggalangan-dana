@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="news-block-body">
+                            <div class="text-justify news-block-body">
                                 {!! $campaign->body ?? '' !!}
                             </div>
                         </div>

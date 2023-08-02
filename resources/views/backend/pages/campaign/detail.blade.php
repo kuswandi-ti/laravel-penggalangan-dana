@@ -23,7 +23,9 @@
                     </p>
                 </x-slot>
 
-                {!! $campaign->body !!}
+                <div class="text-justify news-block-body">
+                    {!! $campaign->body ?? '' !!}
+                </div>
 
                 @if ($campaign->status == 'pending')
                     <x-slot name="footer">
@@ -59,8 +61,16 @@
                 <x-slot name="header">
                     <h5 class="card-title">Gambar Unggulan</h5>
                 </x-slot>
-                <img src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image) }}" alt=""
-                    class="img-thumbnail">
+                @if ($campaign->count() == 0)
+                    <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="img-thumbnail">
+                @else
+                    @if (!empty($campaign->path_image))
+                        <img src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image ?? '') }}" class="img-thumbnail"
+                            alt="">
+                    @else
+                        <img src="{{ url(env('NO_IMAGE_CIRCLE')) }}" class="img-thumbnail">
+                    @endif
+                @endif
             </x-card>
             <x-card>
                 <h3 class="font-weight-bold">Rp. {{ amount_format_id($campaign->amount) }}</h3>
