@@ -122,7 +122,7 @@
             }],
             columnDefs: [{
                 className: 'dt-center',
-                targets: [4, 5, 6]
+                targets: [0, 4, 5, 6]
             }, ],
         });
 

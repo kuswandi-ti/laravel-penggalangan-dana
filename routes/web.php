@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\{
     DashboardController,
     DonationController as BackendDonationController,
     DonaturController,
+    NewsController as BackendNewsController,
     ReportController,
     SettingController,
     SubscriberController,
@@ -23,8 +24,8 @@ use App\Http\Controllers\Frontend\{
     CampaignController as FrontendCampaignController,
     ContactController as FrontendContactController,
     DonationController as FrontendDonationController,
-    HomeController,
-    NewsController,
+    HomeController as FrontendHomeController,
+    NewsController as FrontendNewsController,
 };
 
 /*
@@ -46,14 +47,15 @@ use App\Http\Controllers\Frontend\{
 /* FRONTEND - GUEST */
 /* ========================================================================================= */
 
-Route::get('/', [HomeController::class, 'index'])->name('frontend.home.index');
+Route::get('/', [FrontendHomeController::class, 'index'])->name('frontend.home.index');
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about.index');
 Route::get('/donation', [FrontendDonationController::class, 'index'])->name('frontend.donation.index');
 Route::get('/donation/{id}', [FrontendDonationController::class, 'detail'])->name('frontend.donation.detail');
-Route::get('/news', [NewsController::class, 'index'])->name('frontend.news.index');
+Route::get('/news', [FrontendNewsController::class, 'index'])->name('frontend.news.index');
+Route::get('/news/{id}', [FrontendNewsController::class, 'show'])->name('frontend.news.show');
 Route::get('/contact', [FrontendContactController::class, 'index'])->name('frontend.contact.index');
 Route::post('/contact', [FrontendContactController::class, 'store'])->name('frontend.contact.store');
-Route::post('/subscriber', [HomeController::class, 'subscriber'])->name('frontend.subscriber.store');
+Route::post('/subscriber', [FrontendHomeController::class, 'subscriber'])->name('frontend.subscriber.store');
 /* ========================================================================================= */
 
 /* ========================================================================================= */
@@ -90,6 +92,8 @@ Route::group([
     Route::put('/campaign/{id}/update_status', [BackendCampaignController::class, 'update_status'])->name('backend.campaign.update_status');
     Route::get('/campaign/{id}/cashout', [BackendCampaignController::class, 'cashout'])->name('backend.campaign.cashout');
     Route::post('/campaign/{id}/cashout', [BackendCampaignController::class, 'cashout_store'])->name('backend.campaign.cashout.store');
+    Route::get('/news/data', [BackendNewsController::class, 'data'])->name('backend.news.data');
+    Route::resource('/news', BackendNewsController::class, ['as' => 'backend']);
 
     // Referensi
     Route::get('/donatur/data', [DonaturController::class, 'data'])->name('backend.donatur.data');

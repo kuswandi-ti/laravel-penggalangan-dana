@@ -230,11 +230,15 @@
                                     @enderror
                                 </div>
                             </div>
-                            @if (!empty($campaign->path_image))
-                                <img class="img-fluid preview-path_image"
-                                    src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image) }}">
-                            @else
+                            @if ($campaign->count() == 0)
                                 <img class="img-fluid preview-path_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}">
+                            @else
+                                @if (!empty($campaign->path_image))
+                                    <img class="img-fluid preview-path_image"
+                                        src="{{ url(env('PATH_IMAGE_STORAGE') . $campaign->path_image) }}">
+                                @else
+                                    <img class="img-fluid preview-path_image" src="{{ url(env('NO_IMAGE_SQUARE')) }}">
+                                @endif
                             @endif
                         </div>
                     </div>

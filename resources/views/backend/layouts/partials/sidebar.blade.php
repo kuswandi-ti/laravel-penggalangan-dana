@@ -71,6 +71,15 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.news.index') }}"
+                            class="nav-link {{ request()->is('admin/news*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                Berita
+                            </p>
+                        </a>
+                    </li>
 
                     <li class="nav-header">REFERENSI</li>
                     <li class="nav-item">
