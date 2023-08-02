@@ -62,7 +62,7 @@ class PaymentDonationConfirm extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.payment_donation_confirm')
+        return $this->view('emails.payment_donation_confirm')
             ->with([
                 'donation' => $this->donation
             ]);

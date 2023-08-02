@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Bank;
 use App\Models\Campaign;
 use App\Models\Donation;
 use Laravel\Sanctum\HasApiTokens;
@@ -89,5 +90,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query->whereHas('role', function ($query) {
             $query->where('name', 'donatur');
         });
+    }
+
+    public function main_account()
+    {
+        return $this->bank_users()
+            ->where('is_main', 1)
+            ->first();
     }
 }

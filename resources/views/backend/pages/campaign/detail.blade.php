@@ -89,7 +89,13 @@
                     <p><strong>{{ now()->diff(new DateTime($campaign->end_date))->days }}</strong> hari lagi
                         ({{ now()->parse($campaign->end_date)->diffForHumans() }})</p>
                 </div>
-                <h4 class="font-weight-bold">Donatur (3)</h4>
+
+                <div class="mt-2 mb-4">
+                    <a href="{{ route('backend.campaign.cashout', $campaign->id) }}"
+                        class="btn btn-success btn-lg btn-block">Cairkan Sekarang</a>
+                </div>
+
+                <h4 class="font-weight-bold">Donatur ({{ $campaign->donations->where('status', 'paid')->count() }})</h4>
                 <div class="p-0 pt-1 mt-3 card-header">
                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                         <li class="nav-item">

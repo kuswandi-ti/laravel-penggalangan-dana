@@ -13,7 +13,7 @@
             <x-card>
                 <x-slot name="header">
                     <h3>{{ $donation->campaign->title }}</h3>
-                    <p class="font-weight-bold mb-0">
+                    <p class="mb-0 font-weight-bold">
                         Diposting oleh <span class="text-primary">{{ $donation->campaign->user->name }}</span>
                         <small class="d-block">{{ date_format_id($donation->campaign->publish_date) }}
                             {{ date('H:i', strtotime($donation->campaign->publish_date)) }}</small>
@@ -23,7 +23,7 @@
                 {!! $donation->campaign->short_description !!}
 
                 <br>
-                <strong class="d-block mt-3 mb-2">Donatur</strong>
+                <strong class="mt-3 mb-2 d-block">Donatur</strong>
                 <table class="table table-sm table-bordered">
                     <tbody>
                         <tr>
@@ -51,7 +51,7 @@
                     </tbody>
                 </table>
 
-                <strong class="d-block mt-3 mb-2">Pembayaran</strong>
+                <strong class="mt-3 mb-2 d-block">Pembayaran</strong>
                 @if ($donation->payment)
                     <table class="table table-sm table-bordered">
                         <tbody>
@@ -76,12 +76,12 @@
                 @if ($donation->status == 'not paid')
                     <x-slot name="footer">
                         @if ($donation->user_id == auth()->id())
-                            <button class="btn btn-danger float-left"
+                            <button class="float-left btn btn-danger"
                                 onclick="editForm('{{ route('backend.donation.update', $donation->id) }}', 'cancel', 'Yakin ingin membatalkan pembayaran donasi terpilih?', 'danger')">Batalkan</button>
                         @endif
 
                         @if (auth()->user()->hasRole('admin'))
-                            <button class="btn btn-success float-right"
+                            <button class="float-right btn btn-success"
                                 onclick="editForm('{{ route('backend.donation.update', $donation->id) }}', 'paid', 'Yakin ingin mengkonfirmasi pembayaran donasi terpilih?', 'success')">Konfirmasi
                                 Bayar</button>
                         @endif
@@ -108,7 +108,12 @@
                     <h5 class="card-title">Gambar Unggulan</h5>
                 </x-slot>
 
-                <img src="{{ Storage::disk('public')->url($donation->campaign->path_image) }}" class="img-thumbnail">
+                @if (!empty($donation->campaign->path_image))
+                    <img src="{{ url(env('PATH_IMAGE_STORAGE') . $donation->campaign->path_image) }}" alt=""
+                        class="img-thumbnail">
+                @else
+                    <img src="{{ url(env('NO_IMAGE_SQUARE')) }}" alt="" class="img-thumbnail">
+                @endif
             </x-card>
         </div>
     </div>
@@ -120,8 +125,8 @@
 
         <input type="hidden" name="status">
 
-        <div class="alert mt-3">
-            <i class="fas fa-info-circle mr-1"></i> <span class="text-message"></span>
+        <div class="mt-3 alert">
+            <i class="mr-1 fas fa-info-circle"></i> <span class="text-message"></span>
         </div>
 
         <x-slot name="footer">

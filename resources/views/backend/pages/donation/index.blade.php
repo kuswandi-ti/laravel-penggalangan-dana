@@ -43,6 +43,7 @@
         table = $('.table').DataTable({
             processing: true,
             autoWidth: false,
+            responsive: true,
             ajax: {
                 url: '{{ route('backend.donation.data', ['status' => request('status')]) }}'
             },

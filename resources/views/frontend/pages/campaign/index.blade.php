@@ -2,7 +2,7 @@
 
 @section('title', 'Galang Dana')
 
-@push('style_vendor')
+@push('styles_vendor')
     <link href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">
 @endpush
 

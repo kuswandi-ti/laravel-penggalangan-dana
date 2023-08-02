@@ -1,4 +1,4 @@
-@push('style_vendor')
+@push('styles_vendor')
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/plugins/summernote/summernote-bs4.min.css') }}">
 @endpush

@@ -15,11 +15,12 @@ TODO :
    - insert tabel payments
    - update tabel campaigns, field amount = menambahkan nominal dari payment
 10. Callback / hook di midtrans (OK)
-11. Kirim email saat berhasil bayar midtrans
+11. Kirim email saat berhasil bayar midtrans (OK)
 12. Penambahan kolom is_main boolean default false di tabel bank_user & bank_setting (OK)
 13. Backend donasi (OK)
 14. Backend pencairan
-15. Backend Laporan
+15. Backend Laporan (Ubah Periode)
+16. Export Pdf
 
 
 MAIL_MAILER=smtp

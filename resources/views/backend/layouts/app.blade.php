@@ -32,7 +32,7 @@
     <link rel="stylesheet"
         href="{{ asset('public/template/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
-    @stack('style_vendor')
+    @stack('styles_vendor')
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('public/template/backend/dist/css/adminlte.min.css') }}">

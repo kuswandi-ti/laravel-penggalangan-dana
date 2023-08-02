@@ -11,7 +11,7 @@
     ]) }}>
     <div class='modal-dialog {{ isset($modal_size) ? $modal_size : 'modal-md' }}' role='document'>
         <div class="modal-content">
-            <form method="POST">
+            <form method="{{ isset($method_form) ? $method_form : 'post' }}">
                 @isset($title)
                     <div class="modal-header">
                         <h4 class="modal-title">{{ $title }}</h4>
